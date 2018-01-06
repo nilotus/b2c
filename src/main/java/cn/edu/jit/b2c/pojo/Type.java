@@ -3,7 +3,7 @@ package cn.edu.jit.b2c.pojo;
 public class Type {
     private int type_id;
 
-    private int name;
+    private String name;
 
     private int pid;
 
@@ -28,11 +28,11 @@ public class Type {
         this.isp = isp;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

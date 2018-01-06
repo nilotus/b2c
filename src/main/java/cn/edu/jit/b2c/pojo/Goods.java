@@ -11,29 +11,15 @@ public class Goods {
 
     private String name;
 
-    private String describe;
-
     private String img;
 
     private float price;
 
+    private int restnum;
+
+    private int totalnum;
+
     public Goods(){
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public int getShop_id() {
-        return shop_id;
-    }
-
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
     }
 
     public int getGood_id() {
@@ -44,12 +30,12 @@ public class Goods {
         this.good_id = good_id;
     }
 
-    public int getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getPrice() {
@@ -60,6 +46,22 @@ public class Goods {
         this.price = price;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(int shop_id) {
+        this.shop_id = shop_id;
+    }
+
     public int getType_id() {
         return type_id;
     }
@@ -68,19 +70,27 @@ public class Goods {
         this.type_id = type_id;
     }
 
-    public String getName() {
-        return name;
+    public String getImg() {
+        return img;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getDescribe() {
-        return describe;
+    public int getRestnum() {
+        return restnum;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setRestnum(int restnum) {
+        this.restnum = restnum;
+    }
+
+    public int getTotalnum() {
+        return totalnum;
+    }
+
+    public void setTotalnum(int totalnum) {
+        this.totalnum = totalnum;
     }
 }

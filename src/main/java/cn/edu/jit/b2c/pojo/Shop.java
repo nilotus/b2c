@@ -7,8 +7,6 @@ public class Shop {
 
     private int user_id;
 
-    private int level;
-
     private String name;
 
     private String describe;
@@ -56,14 +54,6 @@ public class Shop {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public int getUser_id() {

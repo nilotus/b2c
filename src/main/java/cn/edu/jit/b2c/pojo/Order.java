@@ -5,9 +5,13 @@ import java.sql.Timestamp;
 public class Order {
     private int order_id;
 
+    private int status;
+
     private int user_id;
 
-    private int good_id;
+    private int shop_id;
+
+    private String description;
 
     private Timestamp time;
 
@@ -24,12 +28,12 @@ public class Order {
         this.price = price;
     }
 
-    public int getGood_id() {
-        return good_id;
+    public int getShop_id() {
+        return shop_id;
     }
 
-    public void setGood_id(int good_id) {
-        this.good_id = good_id;
+    public void setShop_id(int shop_id) {
+        this.shop_id = shop_id;
     }
 
     public int getUser_id() {
@@ -54,5 +58,21 @@ public class Order {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

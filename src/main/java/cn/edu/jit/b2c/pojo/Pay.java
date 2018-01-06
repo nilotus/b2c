@@ -7,25 +7,15 @@ public class Pay {
 
     private int order_id;
 
-    private int status;
-
-    private Timestamp time;
+    private int num;
 
     private float price;
 
-    private int user_id;
-
     private int good_id;
 
+    private float total_fee;
+
     public Pay(){
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
     }
 
     public int getOrder_id() {
@@ -36,28 +26,12 @@ public class Pay {
         this.order_id = order_id;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public int getGood_id() {
         return good_id;
     }
 
     public void setGood_id(int good_id) {
         this.good_id = good_id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public int getPay_id() {
@@ -74,5 +48,21 @@ public class Pay {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public float getTotal_fee() {
+        return total_fee;
+    }
+
+    public void setTotal_fee(float total_fee) {
+        this.total_fee = total_fee;
     }
 }
