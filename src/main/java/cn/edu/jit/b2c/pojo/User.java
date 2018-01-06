@@ -17,7 +17,7 @@ public class User {
 
     private String email;
 
-    public User(){
+    public User() {
     }
 
     public int getUser_id() {
@@ -84,3 +84,5 @@ public class User {
         this.email = email;
     }
 }
+
+
