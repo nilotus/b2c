@@ -20,7 +20,4 @@ public class UserController {
     public String login(@RequestParam String phone, @RequestParam String password) throws IOException{
         return iUserService.login(phone,password);
     }
-
-
-
 }
