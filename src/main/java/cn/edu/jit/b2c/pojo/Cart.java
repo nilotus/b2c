@@ -5,46 +5,14 @@ public class Cart {
 
     private int user_id;
 
-    private int status;
-
     private float price;
-
-    private int num;
 
     private int good_id;
 
-    public Cart(){
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
+    public Cart(int cart_id, int user_id, float price, int good_id) {
+        this.cart_id = cart_id;
         this.user_id = user_id;
-    }
-
-    public int getGood_id() {
-        return good_id;
-    }
-
-    public void setGood_id(int good_id) {
+        this.price = price;
         this.good_id = good_id;
     }
 
@@ -56,11 +24,27 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    public int getNum() {
-        return num;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getGood_id() {
+        return good_id;
+    }
+
+    public void setGood_id(int good_id) {
+        this.good_id = good_id;
     }
 }

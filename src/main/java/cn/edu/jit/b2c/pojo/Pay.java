@@ -1,7 +1,5 @@
 package cn.edu.jit.b2c.pojo;
 
-import java.sql.Timestamp;
-
 public class Pay {
     private int pay_id;
 
@@ -15,23 +13,13 @@ public class Pay {
 
     private float total_fee;
 
-    public Pay(){
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(int order_id) {
+    public Pay(int pay_id, int order_id, int num, float price, int good_id, float total_fee) {
+        this.pay_id = pay_id;
         this.order_id = order_id;
-    }
-
-    public int getGood_id() {
-        return good_id;
-    }
-
-    public void setGood_id(int good_id) {
+        this.num = num;
+        this.price = price;
         this.good_id = good_id;
+        this.total_fee = total_fee;
     }
 
     public int getPay_id() {
@@ -42,12 +30,12 @@ public class Pay {
         this.pay_id = pay_id;
     }
 
-    public float getPrice() {
-        return price;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     public int getNum() {
@@ -56,6 +44,22 @@ public class Pay {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getGood_id() {
+        return good_id;
+    }
+
+    public void setGood_id(int good_id) {
+        this.good_id = good_id;
     }
 
     public float getTotal_fee() {

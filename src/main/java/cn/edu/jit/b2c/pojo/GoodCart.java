@@ -1,11 +1,11 @@
 package cn.edu.jit.b2c.pojo;
 
-public class GoodPay {
+public class GoodCart {
     private int good_id;
 
     private int goodnum;
 
-    public GoodPay(int good_id, int goodnum) {
+    public GoodCart(int good_id, int goodnum) {
         this.good_id = good_id;
         this.goodnum = goodnum;
     }
