@@ -112,15 +112,5 @@ public class UserServiceImpl implements UserService {
             return "上传头像失败";
     }
 
-    @Override
-    public String register(User user) {
-        if (user == null || user.getPhone().isEmpty() || user.getPhone() == null || user.getPassword() ==null || user.getPassword().isEmpty())
-            return new String ("-1");
-        else {
-
-        }
-        return null;
-    }
-
 
 }

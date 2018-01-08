@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+import static cn.edu.jit.b2c.util.MD5Util.getMD5;
+
 
 @RestController
 @RequestMapping("user")
@@ -22,6 +24,7 @@ public class UserController {
     @PostMapping("/login")
     //@RequestMapping(value="login", method = RequestMethod.POST)
     public String login(@RequestParam String phone, @RequestParam String password) throws IOException{
+        password = getMD5(password);
         return iUserService.login(phone,password);
     }
 
@@ -32,6 +35,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(User user) throws IOException{
+        user.setPassword(getMD5(user.getPassword()));
         return iUserService.register(user);
     }
 
@@ -74,7 +78,7 @@ public class UserController {
 
     @PutMapping("/userinfo/{user_id}")//修改信息，不包括头像
     public String userUpdate(@PathVariable("user_id") int user_id,@RequestParam String phone, @RequestParam String password, @RequestParam int role_id,@RequestParam String name,@RequestParam String address,@RequestParam String email) throws IOException{
-
+        password = getMD5(password);
         return userUpdate(user_id, phone,password,role_id, name,address,email);
     }
 
