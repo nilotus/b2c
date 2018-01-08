@@ -21,11 +21,6 @@ public class UserController {
         return iUserService.login(phone,password);
     }
 
-    @PostMapping("/register")
-    public String register() throws IOException {
-        return null;
-    }
-
 
 
 }
