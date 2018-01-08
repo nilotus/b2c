@@ -2,7 +2,8 @@ server:
     port:8080
 spring:
     datasource:
-        url: jdbc:mysql://101.132.41.141:3306/JitB2C?characterEncoding=utf8&useSSL=true
+        url: jdbc:mysql://101.132.41.141:3306/JitB2C?characterEncoding=utf8&useSSL=false
         username: cqf
         password: admin
         driver-class-name: com.mysql.jdbc.Driver
+
