@@ -6,7 +6,7 @@ package cn.edu.jit.b2c.pojo;
  */
 
 public class User {
-    private Long userId;
+    private int userId;
     private String userName;
     private String password;
     private int roleId;
@@ -15,7 +15,7 @@ public class User {
     private String address;
     private String email;
 
-    public User(Long userId, String userName, String password, int roleId, String phone, String imgPath, String address, String email) {
+    public User(int userId, String userName, String password, int roleId, String phone, String imgPath, String address, String email) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -25,11 +25,11 @@ public class User {
         this.address = address;
         this.email = email;
     }
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

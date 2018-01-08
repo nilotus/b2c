@@ -25,5 +25,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public String register(User user) {
+        if (user == null || user.getPhone().isEmpty() || user.getPhone() == null || user.getPassword() ==null || user.getPassword().isEmpty())
+            return new String ("-1");
+        else {
+
+        }
+        return null;
+    }
+
 
 }

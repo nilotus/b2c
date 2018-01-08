@@ -14,5 +14,7 @@ public interface UserMapper {
     @Select("SELECT * FROM User WHERE phone =#{phone}")
     User findPhone(@Param("phone") String phone);
 
+    @Insert("INSERT INTO User(phone,password) VALUES(#{phone},#{password})")
+    int insertUser(@Param("name") String phone, @Param("age") Integer password);
 
 }
