@@ -3,23 +3,35 @@ package cn.edu.jit.b2c.pojo;
 public class Goods {
     private int good_id;
 
+    private String name;
+
+    private float price;
+
     private int status;
 
     private int shop_id;
 
     private int type_id;
 
-    private String name;
-
     private String img;
-
-    private float price;
 
     private int restnum;
 
     private int totalnum;
 
-    public Goods(){
+    private String describe;
+
+    public Goods(int good_id, String name, float price, int status, int shop_id, int type_id, String img, int restnum, int totalnum, String describe) {
+        this.good_id = good_id;
+        this.name = name;
+        this.price = price;
+        this.status = status;
+        this.shop_id = shop_id;
+        this.type_id = type_id;
+        this.img = img;
+        this.restnum = restnum;
+        this.totalnum = totalnum;
+        this.describe = describe;
     }
 
     public Goods(int good_id, int status, int shop_id, int type_id, String name, String img, float price, int restnum, int totalnum) {
@@ -104,5 +116,13 @@ public class Goods {
 
     public void setTotalnum(int totalnum) {
         this.totalnum = totalnum;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }

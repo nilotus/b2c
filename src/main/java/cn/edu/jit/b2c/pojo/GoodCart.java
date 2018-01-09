@@ -1,29 +1,24 @@
 package cn.edu.jit.b2c.pojo;
 
-public class GoodPay {
-    private int pay_id;
+public class GoodCart {
+    private int cart_id;
 
     private int good_id;
 
     private int goodnum;
 
-    public GoodPay(int pay_id,int good_id, int goodnum) {
-        this.pay_id = pay_id;
+    public GoodCart(int cart_id,int good_id, int goodnum) {
+        this.cart_id = cart_id;
         this.good_id = good_id;
         this.goodnum = goodnum;
     }
 
-    public int getPay_id() {
-        return pay_id;
+    public int getCart_id() {
+        return cart_id;
     }
 
-    public void setPay_id(int pay_id) {
-        this.pay_id = pay_id;
-    }
-
-    public GoodPay(int good_id, int goodnum) {
-        this.good_id = good_id;
-        this.goodnum = goodnum;
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
     }
 
     public int getGood_id() {

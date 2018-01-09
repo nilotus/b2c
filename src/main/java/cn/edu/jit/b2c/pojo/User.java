@@ -1,61 +1,39 @@
 package cn.edu.jit.b2c.pojo;
 
-
-/**
- * Created by ChenQF on 2018/1/5.
- */
-
 public class User {
-    private int userId;
-    private String userName;
-    private String password;
-    private int roleId;
+    private int user_id;
+
     private String phone;
-    private String imgPath;
+
+    private String password;
+
+    private int role_id;
+
+    private String name;
+
+    private String img;
+
     private String address;
+
     private String email;
 
-    public User(int userId, String userName, String password, int roleId, String phone, String imgPath, String address, String email) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.roleId = roleId;
+    public User(int user_id, String phone, String password, int role_id, String name, String img, String address, String email) {
+        this.user_id = user_id;
         this.phone = phone;
-        this.imgPath = imgPath;
+        this.password = password;
+        this.role_id = role_id;
+        this.name = name;
+        this.img = img;
         this.address = address;
         this.email = email;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getPhone() {
@@ -66,12 +44,36 @@ public class User {
         this.phone = phone;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public String getPassword() {
+        return password;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getAddress() {

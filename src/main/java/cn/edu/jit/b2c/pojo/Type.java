@@ -9,7 +9,11 @@ public class Type {
 
     private int isp;
 
-    public Type(){
+    public Type(int type_id, String name, int pid, int isp) {
+        this.type_id = type_id;
+        this.name = name;
+        this.pid = pid;
+        this.isp = isp;
     }
 
     public Type(int type_id, String name, int pid, int isp) {
@@ -27,14 +31,6 @@ public class Type {
         this.type_id = type_id;
     }
 
-    public int getIsp() {
-        return isp;
-    }
-
-    public void setIsp(int isp) {
-        this.isp = isp;
-    }
-
     public String getName() {
         return name;
     }
@@ -49,5 +45,13 @@ public class Type {
 
     public void setPid(int pid) {
         this.pid = pid;
+    }
+
+    public int getIsp() {
+        return isp;
+    }
+
+    public void setIsp(int isp) {
+        this.isp = isp;
     }
 }

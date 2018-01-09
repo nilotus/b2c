@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 public class Order {
     private int order_id;
 
-    private int status;
+    private Timestamp time;
+
+    private float price;
 
     private int user_id;
 
@@ -13,45 +15,16 @@ public class Order {
 
     private String description;
 
-    private Timestamp time;
+    private int status;
 
-    private float price;
-
-    public Order(){
-    }
-
-    public Order(int order_id, int status, int user_id, int shop_id, String description, Timestamp time, float price) {
+    public Order(int order_id, Timestamp time, float price, int user_id, int shop_id, String description, int status) {
         this.order_id = order_id;
-        this.status = status;
+        this.time = time;
+        this.price = price;
         this.user_id = user_id;
         this.shop_id = shop_id;
         this.description = description;
-        this.time = time;
-        this.price = price;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getShop_id() {
-        return shop_id;
-    }
-
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        this.status = status;
     }
 
     public int getOrder_id() {
@@ -70,12 +43,28 @@ public class Order {
         this.time = time;
     }
 
-    public int getStatus() {
-        return status;
+    public float getPrice() {
+        return price;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(int shop_id) {
+        this.shop_id = shop_id;
     }
 
     public String getDescription() {
@@ -84,5 +73,13 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
