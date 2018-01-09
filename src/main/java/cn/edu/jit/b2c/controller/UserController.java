@@ -32,13 +32,24 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 注册功能
-     * 输入phone,password,role_id, name,address,email信息
+     * 输入phone,password,role_id, name,address,email,vericode（验证码）信息
      */
 
     @PostMapping("/register")
-    public String register(User user) throws IOException{
+    public String register(User user,int vericode) throws IOException{
         user.setPassword(getMD5(user.getPassword()));
-        return iUserService.register(user);
+        return iUserService.register(user,vericode);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 发送验证码功能
+     * 输入phone信息
+     */
+
+    @PostMapping("/sendvericode")
+    public String sendVericode(@RequestParam("phone") String phone) throws IOException{
+        return iUserService.sendVericode(phone);
     }
 
     //@GetMapping("/loginOut")

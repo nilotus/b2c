@@ -39,18 +39,25 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String register(User user) {
-        //判断用户是否存在
-        if(userMapper.findPhone(user.getPhone()) == null){
+    public String register(User user,int check) {
+        //判断验证码是否正确
+        //注册
             boolean result;
             result=userMapper.setPhone(user);
             if(result)
                 return "注册成功";
             else
                 return "注册失败";
+    }
+
+    @Override
+    public String sendVericode(String phone){
+        //判断用户是否存在
+        if(userMapper.findPhone(phone) == null){
+            return "验证码已发送";
         }
         else {
-            return "手机号已存在";
+            return "用户已存在";
         }
     }
 
