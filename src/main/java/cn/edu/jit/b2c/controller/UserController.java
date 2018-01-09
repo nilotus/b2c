@@ -19,6 +19,7 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 登陆功能
+     * 输入phone,password
      */
 
     @PostMapping("/login")
@@ -31,6 +32,7 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 注册功能
+     * 输入phone,password,role_id, name,address,email信息
      */
 
     @PostMapping("/register")
@@ -44,6 +46,7 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 查看所有用户信息
+     * 信息：phone,,role_id, name,address,email
      */
 
     @GetMapping("/userinfo")//查看所有人的信息
@@ -52,8 +55,9 @@ public class UserController {
     }
 
     /**
-            * Created by SunFuRong
-     * 调出指定用户信息
+     * Created by SunFuRong
+     * 调出指定用户信息（路径上的id）
+     * 信息：phone,role_id, name,address,email
      */
 
     @GetMapping("/userinfo/{user_id}")//调出用户信息
@@ -63,7 +67,7 @@ public class UserController {
 
     /**
      * Created by SunFuRong
-     * 删除指定用户信息
+     * 删除指定用户信息（路径上的id）
      */
 
     @DeleteMapping("/userinfo/{user_id}")//删除用户
@@ -74,6 +78,7 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 修改指定用户信息（不包含头像）
+     * 信息phone,password,role_id, name,address,email
      */
 
     @PutMapping("/userinfo/{user_id}")//修改信息，不包括头像
@@ -85,6 +90,7 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 修改指定用户信息（头像）
+     * 信息：img
      */
 
     @PutMapping("/userimg/{user_id}")//修改头像

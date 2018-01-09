@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 登陆功能
+     * 输入phone,password
      */
 
     @Override
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 注册功能
+     * 输入phone,password,role_id, name,address,email信息
      */
 
     @Override
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 查看所有用户信息
+     * 信息：phone,role_id, name,address,email
      */
 
     @Override
@@ -65,6 +68,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 调出指定用户信息
+     * 信息：phone,role_id, name,address,email
      */
 
     @Override
@@ -74,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Created by SunFuRong
-     * 删除指定用户信息
+     * 删除指定用户信息（路径上的id）
      */
 
     @Override
@@ -85,6 +89,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 修改指定用户信息（不包含头像）
+     * 信息phone,password,role_id, name,address,email
      */
 
     @Override
@@ -100,6 +105,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Created by SunFuRong
      * 修改指定用户信息（头像）
+     * 信息：img
      */
 
     @Override
