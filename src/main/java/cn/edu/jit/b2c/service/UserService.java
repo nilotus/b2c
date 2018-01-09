@@ -7,6 +7,6 @@ import cn.edu.jit.b2c.pojo.User;
  */
 public interface UserService {
     String login(String phone, String password);
-    String register(User user);
+
 
 }

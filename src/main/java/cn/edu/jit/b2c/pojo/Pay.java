@@ -18,6 +18,15 @@ public class Pay {
     public Pay(){
     }
 
+    public Pay(int pay_id, int order_id, int num, float price, int good_id, float total_fee) {
+        this.pay_id = pay_id;
+        this.order_id = order_id;
+        this.num = num;
+        this.price = price;
+        this.good_id = good_id;
+        this.total_fee = total_fee;
+    }
+
     public int getOrder_id() {
         return order_id;
     }

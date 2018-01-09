@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("userShop")
 public class UserShopController {
     @Autowired
     private UserShopService userShopService;

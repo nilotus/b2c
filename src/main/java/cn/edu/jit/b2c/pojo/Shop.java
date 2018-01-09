@@ -16,6 +16,15 @@ public class Shop {
     public Shop(){
     }
 
+    public Shop(int shop_id, int type_id, int user_id, String name, String describe, String img) {
+        this.shop_id = shop_id;
+        this.type_id = type_id;
+        this.user_id = user_id;
+        this.name = name;
+        this.describe = describe;
+        this.img = img;
+    }
+
     public String getDescribe() {
         return describe;
     }

@@ -10,4 +10,9 @@ import org.apache.ibatis.annotations.Select;
 public interface GoodsMapper {
     @Select("SELECT * FROM Goods WHERE img =#{img}")
     Goods findImg(@Param("img") String img);
+
+
+
+
+
 }

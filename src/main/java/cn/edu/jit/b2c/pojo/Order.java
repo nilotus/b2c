@@ -20,6 +20,16 @@ public class Order {
     public Order(){
     }
 
+    public Order(int order_id, int status, int user_id, int shop_id, String description, Timestamp time, float price) {
+        this.order_id = order_id;
+        this.status = status;
+        this.user_id = user_id;
+        this.shop_id = shop_id;
+        this.description = description;
+        this.time = time;
+        this.price = price;
+    }
+
     public float getPrice() {
         return price;
     }

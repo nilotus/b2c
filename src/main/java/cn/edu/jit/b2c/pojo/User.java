@@ -25,6 +25,7 @@ public class User {
         this.address = address;
         this.email = email;
     }
+
     public int getUserId() {
         return userId;
     }

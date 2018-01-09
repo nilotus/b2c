@@ -7,6 +7,13 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by ChenQF on 2018/1/7.
  */
+
+/**
+ * author : Mr.Chen
+ *
+ * 实现对字符串的MD5加密
+ *
+ */
 public class MD5Util {
     public static String getMD5(String str) {
         StringBuffer strbuf = new StringBuffer();

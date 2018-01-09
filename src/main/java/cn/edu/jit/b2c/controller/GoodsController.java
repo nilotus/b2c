@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("goods")
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;

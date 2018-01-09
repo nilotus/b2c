@@ -12,6 +12,13 @@ public class Type {
     public Type(){
     }
 
+    public Type(int type_id, String name, int pid, int isp) {
+        this.type_id = type_id;
+        this.name = name;
+        this.pid = pid;
+        this.isp = isp;
+    }
+
     public int getType_id() {
         return type_id;
     }

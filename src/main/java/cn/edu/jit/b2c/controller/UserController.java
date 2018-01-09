@@ -19,7 +19,7 @@ public class UserController {
     @RequestMapping(value="login", method = RequestMethod.POST)
     public String login(@RequestParam String phone, @RequestParam String password) throws IOException{
         return iUserService.login(phone,password);
-    }
+}
 
 
 

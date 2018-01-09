@@ -1,5 +1,6 @@
 package cn.edu.jit.b2c.pojo;
 
+
 public class Cart {
     private int cart_id;
 
@@ -14,6 +15,15 @@ public class Cart {
     private int good_id;
 
     public Cart(){
+    }
+
+    public Cart(int cart_id, int user_id, int status, float price, int num, int good_id) {
+        this.cart_id = cart_id;
+        this.user_id = user_id;
+        this.status = status;
+        this.price = price;
+        this.num = num;
+        this.good_id = good_id;
     }
 
     public float getPrice() {
