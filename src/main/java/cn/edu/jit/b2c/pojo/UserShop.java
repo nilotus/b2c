@@ -5,24 +5,15 @@ public class UserShop {
 
     private int status;
 
-    private float price;
-
     private int good_id;
 
     private int shop_id;
 
-    public UserShop(int user_id, int status, float price, int good_id, int shop_id) {
+    public UserShop(int user_id, int status, int good_id, int shop_id) {
         this.user_id = user_id;
         this.status = status;
-        this.price = price;
         this.good_id = good_id;
         this.shop_id = shop_id;
-    }
-
-    public UserShop(int user_id, int shop_id, Timestamp time) {
-        this.user_id = user_id;
-        this.shop_id = shop_id;
-        this.time = time;
     }
 
     public int getUser_id() {
@@ -39,14 +30,6 @@ public class UserShop {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public int getGood_id() {
