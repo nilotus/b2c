@@ -21,6 +21,11 @@ public class GoodPay {
         this.pay_id = pay_id;
     }
 
+    public GoodPay(int good_id, int goodnum) {
+        this.good_id = good_id;
+        this.goodnum = goodnum;
+    }
+
     public int getGood_id() {
         return good_id;
     }

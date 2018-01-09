@@ -34,6 +34,18 @@ public class Goods {
         this.describe = describe;
     }
 
+    public Goods(int good_id, int status, int shop_id, int type_id, String name, String img, float price, int restnum, int totalnum) {
+        this.good_id = good_id;
+        this.status = status;
+        this.shop_id = shop_id;
+        this.type_id = type_id;
+        this.name = name;
+        this.img = img;
+        this.price = price;
+        this.restnum = restnum;
+        this.totalnum = totalnum;
+    }
+
     public int getGood_id() {
         return good_id;
     }

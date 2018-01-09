@@ -19,6 +19,12 @@ public class UserShop {
         this.shop_id = shop_id;
     }
 
+    public UserShop(int user_id, int shop_id, Timestamp time) {
+        this.user_id = user_id;
+        this.shop_id = shop_id;
+        this.time = time;
+    }
+
     public int getUser_id() {
         return user_id;
     }

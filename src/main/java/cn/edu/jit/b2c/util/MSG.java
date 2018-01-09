@@ -3,6 +3,15 @@ package cn.edu.jit.b2c.util;
 /**
  * Created by ChenQF on 2018/1/7.
  */
+
+/**
+ * author : Mr.Chen
+ *
+ * 返回消息类
+ * code : 状态信息
+ * msg : 提示信息
+ * data : 对象信息
+ */
 public class MSG {
     private int code;
     private String msg;

@@ -27,7 +27,7 @@ public class UserController {
     public String login(@RequestParam String phone, @RequestParam String password) throws IOException{
         password = getMD5(password);
         return iUserService.login(phone,password);
-    }
+}
 
     /**
      * Created by SunFuRong
