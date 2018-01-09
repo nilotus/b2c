@@ -1,13 +1,14 @@
 package cn.edu.jit.b2c.service;
 
 import cn.edu.jit.b2c.pojo.User;
+import com.aliyuncs.exceptions.ClientException;
 
 public interface UserService {
     String login(String phone, String password);
 
-    String register(User user,int vericode);
+    String register(User user,String vericode);
 
-    String sendVericode(String phone);
+    String sendVericode(String phone) throws ClientException;
 
     public User userFindAll();
 

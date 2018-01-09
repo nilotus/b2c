@@ -2,21 +2,11 @@ package cn.edu.jit.b2c.util;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsResponse;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.dysmsapi.transform.v20170525.SendSmsResponseUnmarshaller;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.FormatType;
-import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created on 17/6/7.
@@ -40,7 +30,7 @@ public class SmsDemo {
     static final String accessKeyId = "LTAIOMy7pWTykWr4";
     static final String accessKeySecret = "t3mrizkqwu3OSv7iOx5J7CTHpGB6ja";
 
-    public static SendSmsResponse sendSms(String phone, String code) throws ClientException {
+    public static String sendSms(String phone) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -62,7 +52,7 @@ public class SmsDemo {
 
         //产生6位随机的短信验证码
         Integer math=(int)(Math.random()*900000)+100000;
-        code = String.valueOf(math);
+        String code = String.valueOf(math);
 
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         request.setTemplateParam("{\"code\":\""+math+"\"}");
@@ -76,7 +66,7 @@ public class SmsDemo {
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
 
-        return sendSmsResponse;
+        return code;
     }
 
 

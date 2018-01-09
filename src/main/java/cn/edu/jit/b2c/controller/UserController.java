@@ -2,6 +2,7 @@ package cn.edu.jit.b2c.controller;
 
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
+import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class UserController {
      */
 
     @PostMapping("/register")
-    public String register(User user,int vericode) throws IOException{
+    public String register(User user,String vericode) throws IOException{
         user.setPassword(getMD5(user.getPassword()));
         return iUserService.register(user,vericode);
     }
@@ -48,7 +49,7 @@ public class UserController {
      */
 
     @PostMapping("/sendvericode")
-    public String sendVericode(@RequestParam("phone") String phone) throws IOException{
+    public String sendVericode(@RequestParam("phone") String phone) throws ClientException {
         return iUserService.sendVericode(phone);
     }
 

@@ -3,14 +3,19 @@ package cn.edu.jit.b2c.serviceImpl;
 import cn.edu.jit.b2c.mapper.UserMapper;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
-import org.apache.ibatis.jdbc.Null;
+import cn.edu.jit.b2c.util.SmsDemo;
+import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static cn.edu.jit.b2c.util.SmsDemo.sendSms;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    private SmsDemo vericode;
+    String code;
 
     /**
      * Created by SunFuRong
@@ -39,21 +44,32 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String register(User user,int check) {
+    public String register(User user,String vericode) {
         //判断验证码是否正确
-        //注册
+        if (code.equals(vericode)) {
+            //注册
             boolean result;
-            result=userMapper.setPhone(user);
-            if(result)
+            result = userMapper.setPhone(user);
+            if (result)
                 return "注册成功";
             else
                 return "注册失败";
+        }
+        else
+            return "验证码错误";
     }
 
+    /**
+     * Created by SunFuRong
+     * 发送验证码功能
+     * 输入phone信息
+     */
+
     @Override
-    public String sendVericode(String phone){
+    public String sendVericode(String phone) throws ClientException {
         //判断用户是否存在
         if(userMapper.findPhone(phone) == null){
+            code=vericode.sendSms(phone);
             return "验证码已发送";
         }
         else {
