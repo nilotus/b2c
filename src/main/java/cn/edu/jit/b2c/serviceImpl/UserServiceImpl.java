@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MSG sendVericode(String phone) throws ClientException {
-        return null;
+        code = vericode.sendSms(phone);
+        return new MSG(1,"成功",code);
     }
 
     /**
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public MSG register(User user) {
+    public MSG register(User user, String message) {
         //判断用户是否存在
         if (user == null || user.getPhone() == null || user.getPassword() == null || user.getPhone().isEmpty() || user.getPassword().isEmpty()) {
             return new MSG(-1, "用户名或密码不能为空");
@@ -62,9 +63,15 @@ public class UserServiceImpl implements UserService {
             if (userMapper.findPhone(user.getPhone()) != null)
                 return new MSG(-1, "用户已存在，请更换用户名");
             else {
-                user.setPassword(MD5Util.getMD5(user.getPassword()));
-                userMapper.addUser(user);
-                return new MSG(1, "注册成功");
+                if(code.equals(message)) {
+                    user.setPassword(MD5Util.getMD5(user.getPassword()));
+                    userMapper.addUser(user);
+                    return new MSG(1, "注册成功");
+                }
+                else{
+                    return new MSG(-1,"验证码错误");
+                }
+
             }
         }
     }
