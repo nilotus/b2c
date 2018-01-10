@@ -13,6 +13,8 @@ package cn.edu.jit.b2c.util;
  * data : 对象信息，要传的值
  */
 public class MSG {
+
+
     private int code;
     private String msg;
     private Object data;
@@ -30,7 +32,7 @@ public class MSG {
     public int getCode() {
         return code;
     }
-
+    
     public String getMsg() {
         return msg;
     }
