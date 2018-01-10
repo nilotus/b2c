@@ -13,9 +13,15 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping(value = "img", method = RequestMethod.POST)
-    public String goods(@RequestParam String img) throws IOException {
-        return goodsService.goods(img);
+    /**
+     * Created by SunFuRong
+     * 浏览商品
+     * 输入商品id，输出name，price，img，店铺名
+     */
+    @PostMapping("/browse")
+    //@RequestMapping(value = "img", method = RequestMethod.POST)
+    public String goodsBrowse(@RequestParam int good_id) throws IOException {
+        return goodsService.goodsBrowse(good_id);
     }
 
     /**

@@ -3,7 +3,7 @@ package cn.edu.jit.b2c.service;
 import cn.edu.jit.b2c.pojo.Goods;
 
 public interface GoodsService {
-      String goods(String img);
+      String goodsBrowse(int good_id);
 
       Goods goodsFindAll(String key);
 

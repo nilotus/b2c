@@ -12,10 +12,9 @@ public class GoodsServiceImpl implements GoodsService{
     private GoodsMapper goodsMapper;
 
     @Override
-    public String goods(String img) {
-        Goods goods = goodsMapper.findImg(img);
-        return goods.getGood_id()+" "+goods.getShop_id()+" "+goods.getName()+" "+goods.getPrice()+" "+goods.getRestnum()
-                +" "+goods.getTotalnum()+" "+goods.getStatus()+" "+goods.getImg();
+    public String goodsBrowse(int good_id){
+        Goods goods = goodsMapper.browse(good_id);
+        return goods.getName()+" "+goods.getPrice()+" "+goods.getImg();
     }
 
     /**

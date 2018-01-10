@@ -8,9 +8,9 @@ package cn.edu.jit.b2c.util;
  * author : Mr.Chen
  *
  * 返回消息类
- * code : 状态信息
+ * code : 状态信息，成功为1，失败为-1
  * msg : 提示信息
- * data : 对象信息
+ * data : 对象信息，要传的值
  */
 public class MSG {
     private int code;

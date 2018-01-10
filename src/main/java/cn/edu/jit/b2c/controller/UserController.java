@@ -2,6 +2,7 @@ package cn.edu.jit.b2c.controller;
 
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
+import cn.edu.jit.b2c.util.MSG;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping("/login")
     //@RequestMapping(value="login", method = RequestMethod.POST)
-    public String login(@RequestParam String phone, @RequestParam String password) throws IOException{
+    public MSG login(@RequestParam String phone, @RequestParam String password) throws IOException{
         password = getMD5(password);
         return iUserService.login(phone,password);
 }
@@ -37,7 +38,7 @@ public class UserController {
      */
 
     @PostMapping("/register")
-    public String register(User user,String vericode) throws IOException{
+    public MSG register(User user,String vericode) throws IOException{
         user.setPassword(getMD5(user.getPassword()));
         return iUserService.register(user,vericode);
     }
@@ -49,7 +50,7 @@ public class UserController {
      */
 
     @PostMapping("/sendvericode")
-    public String sendVericode(@RequestParam("phone") String phone) throws ClientException {
+    public MSG sendVericode(@RequestParam("phone") String phone) throws ClientException {
         return iUserService.sendVericode(phone);
     }
 
@@ -83,8 +84,8 @@ public class UserController {
      */
 
     @DeleteMapping("/userinfo/{user_id}")//删除用户
-    public void userDelete(@PathVariable("user_id") int user_id) throws IOException{
-        iUserService.userDelete(user_id);
+    public MSG userDelete(@PathVariable("user_id") int user_id) throws IOException{
+        return iUserService.userDelete(user_id);
     }
 
     /**
@@ -94,9 +95,9 @@ public class UserController {
      */
 
     @PutMapping("/userinfo/{user_id}")//修改信息，不包括头像
-    public String userUpdate(@PathVariable("user_id") int user_id,@RequestParam String phone, @RequestParam String password, @RequestParam int role_id,@RequestParam String name,@RequestParam String address,@RequestParam String email) throws IOException{
+    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam String phone, @RequestParam String password, @RequestParam int role_id, @RequestParam String name, @RequestParam String address, @RequestParam String email) throws IOException{
         password = getMD5(password);
-        return userUpdate(user_id, phone,password,role_id, name,address,email);
+        return iUserService.userUpdate(user_id, phone,password,role_id, name,address,email);
     }
 
     /**
@@ -106,8 +107,8 @@ public class UserController {
      */
 
     @PutMapping("/userimg/{user_id}")//修改头像
-    public String userImgUpdate(@PathVariable("user_id") int user_id,@RequestParam String img) throws IOException{
-        return userImgUpdate(user_id,img);
+    public MSG userImgUpdate(@PathVariable("user_id") int user_id,@RequestParam String img) throws IOException{
+        return iUserService.userImgUpdate(user_id,img);
     }
 
 

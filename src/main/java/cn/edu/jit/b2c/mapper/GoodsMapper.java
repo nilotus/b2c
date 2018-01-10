@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface GoodsMapper {
-    @Select("SELECT * FROM Goods WHERE img =#{img}")
-    Goods findImg(@Param("img") String img);
+    @Select("SELECT name,price,img FROM Goods WHERE good_id =#{good_id}")
+    Goods browse(@Param("good_id") int good_id);
     @Select("SELECT img FROM Goods WHERE name like '%key%'")
     Goods findAll(@Param("key") String key);
     @Select("SELECT img FROM Goods WHERE name like '%key%' WHERE shop_id =#{shop_id}")

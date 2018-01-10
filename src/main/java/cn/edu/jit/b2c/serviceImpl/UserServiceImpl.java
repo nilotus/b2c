@@ -3,6 +3,7 @@ package cn.edu.jit.b2c.serviceImpl;
 import cn.edu.jit.b2c.mapper.UserMapper;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
+import cn.edu.jit.b2c.util.MSG;
 import cn.edu.jit.b2c.util.SmsDemo;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,16 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String login(String phone, String password) {
+    public MSG login(String phone, String password) {
         User user = userMapper.findPhone(phone);
         if(user == null){
-            return "该用户不存在";
+            return new MSG(-1,"该用户不存在");
         }
         else if (!user.getPhone().equals(user.getPassword())){
-            return "密码错误";
+            return new MSG(-1,"密码错误");
         }
         else {
-            return "登陆成功";
+            return new MSG(1,"登陆成功");
         }
     }
 
@@ -44,19 +45,19 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String register(User user,String vericode) {
+    public MSG register(User user,String vericode) {
         //判断验证码是否正确
         if (code.equals(vericode)) {
             //注册
             boolean result;
             result = userMapper.setPhone(user);
             if (result)
-                return "注册成功";
+                return new MSG(1,"注册成功");
             else
-                return "注册失败";
+                return new MSG(-1,"注册失败");
         }
         else
-            return "验证码错误";
+            return new MSG(-1,"验证码错误");
     }
 
     /**
@@ -66,14 +67,14 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String sendVericode(String phone) throws ClientException {
+    public MSG sendVericode(String phone) throws ClientException {
         //判断用户是否存在
         if(userMapper.findPhone(phone) == null){
             code=vericode.sendSms(phone);
-            return "验证码已发送";
+            return new MSG(1,"验证码已发送");
         }
         else {
-            return "用户已存在";
+            return new MSG(-1,"用户已存在");
         }
     }
 
@@ -105,8 +106,14 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public void userDelete(int user_id){
-        userMapper.delete(user_id);
+    public MSG userDelete(int user_id){
+        boolean result;
+        result=userMapper.delete(user_id);
+        if(result)
+            return new MSG(1,"删除成功");
+
+        else
+            return new MSG(-1,"删除失败");
     }
 
     /**
@@ -116,13 +123,15 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String userUpdate(int user_id, String phone, String password, int role_id, String name, String address, String email){
+    public MSG userUpdate(int user_id, String phone, String password, int role_id, String name, String address, String email){
         boolean result;
         result=userMapper.update(user_id,phone,password, role_id, name,address, email);
         if(result)
-            return "修改信息成功 ";
+            return new MSG(1,"修改信息成功");
+
         else
-            return "修改信息失败";
+            return new MSG(-1,"修改信息失败");
+
     }
 
     /**
@@ -132,13 +141,13 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public String userImgUpdate(int user_id, String img){
+    public MSG userImgUpdate(int user_id, String img){
         boolean result;
         result = userMapper.setImg(user_id,img);
         if(result)
-            return "头像更换成功";
+            return new MSG(1,"头像更换成功");
         else
-            return "上传头像失败";
+            return new MSG(-1,"上传头像失败");
     }
 
 
