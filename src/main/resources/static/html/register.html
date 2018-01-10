@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <style>
+
+        h1{
+            font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+            text-align: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        label{
+            font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+        }
+        div.form-group {
+            margin-bottom: 20px;
+        }
+        div.button {
+            text-align: center;
+        }
+    </style>
+</head>
+<body >
+<div>
+   <h1>用户注册</h1>
+    <br>
+    <br>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="name">用户名</label>
+            <div class=" col-md-4 col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="请输入用户名">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="password">密码</label>
+            <div class=" col-md-4 col-sm-10">
+                <input type="password" class="form-control" id="password" placeholder="请输入密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="password2">确认密码</label>
+            <div class=" col-md-4 col-sm-10">
+                <input type="password" class="form-control" id="password2" placeholder="请再次输入密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="email">邮箱</label>
+            <div class=" col-md-4 col-sm-10">
+                <input type="email" class="form-control" id="email" placeholder="请输入邮箱">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-md-2 col-sm-2 control-label" for="address">地址</label>
+            <div class=" col-md-4 col-sm-10">
+                <input type="text" class="form-control" id="address" placeholder="请输入地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label">身份</label>
+            <div class=" col-md-2 col-sm-5">
+                <input type="radio" name="role" class="form-control" id="buy" value="1">买家
+            </div>
+            <div class=" col-md-2 col-sm-5">
+                <input type="radio" name="role" class="form-control" id="sell" value="2">卖家
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="phone">手机</label>
+            <div class="col-md-4 col-sm-10">
+                <input type="text" class="form-control" id="phone" placeholder="请输入手机">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 col-sm-0"></div>
+            <label class="col-sm-2 control-label" for="message">验证码</label>
+            <div class="col-md-3 col-sm-8">
+                <input type="text" class="form-control" id="message" placeholder="请输入验证码">
+            </div>
+            <button type="button" class="btn btn-default">获取验证码</button>
+        </div>
+        <div class="form-group">
+            <div class="button">
+                <button type="button" class="btn btn-default" onclick="userRegister()">注册</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+//    function checkSubmitEmail(str) {
+//        if ($('#email').val() === "") {
+//            alert("邮箱不能为空!");
+//            $('#email').focus();
+//            return false;
+//        }
+//        if (!$('#email').val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+//            alert("邮箱格式不正确");
+//            $('#email').focus();
+//            return false;
+//        }
+//        return true;
+//    }
+//    function checkSubmitMobil(str) {
+//        if ($('#phone').val() === "") {
+//            alert("手机号码不能为空！");
+//            $('#phone').focus();
+//            return false;
+//        }
+//
+//        if (!$('#phone').val().match(/^(((13[0-9]{1})|159|153)+\d{8})$/)) {
+//            alert("手机号码格式不正确！");
+//            $('#phone').focus();
+//            return false;
+//        }
+//        return true;
+//    }
+
+    function userRegister() {
+
+        $.ajax({
+            type:'post',
+            url:'/user/register',
+            async:true,
+            dataType:'json',
+            data:{
+                name:$('#name').val(),
+                password:$('#password').val(),
+                email:$('#email').val(),
+                address:$('#address').val(),
+                role_id:$("input[name='role']").val(),
+                phone:$('#phone').val(),
+            },
+            success:function (data) {
+                if(data.code == -1){
+                    alert(data.msg);
+                }
+                else{
+                    alert(data.msg);
+                }
+            },
+            error:function () {
+                alert("注册失败");
+            }
+        })
+
+    }
+</script>
+</html>

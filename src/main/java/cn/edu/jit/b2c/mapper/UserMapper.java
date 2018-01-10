@@ -9,7 +9,7 @@ public interface UserMapper {
     @Select("SELECT * FROM User WHERE phone =#{phone}")
     User findPhone(@Param("phone") String phone);
     @Insert("INSERT INTO User(phone,password,role_id,name,address,email) VALUES(#{phone},#{password},#{role_id},#{name},#{address},#{email})")
-    boolean setPhone( User user);
+    boolean addUser(User user);
     @Select("SELECT phonne,name,role_id,address,email FROM User")
     User findAll();
     @Select("SELECT phonne,name,role_id,address,email FROM User WHERE user_id =#{user_id}")
