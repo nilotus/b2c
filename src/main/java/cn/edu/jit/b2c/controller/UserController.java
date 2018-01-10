@@ -4,9 +4,12 @@ import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
 import com.aliyuncs.exceptions.ClientException;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 import static cn.edu.jit.b2c.util.MD5Util.getMD5;
@@ -43,9 +46,9 @@ public class UserController {
      */
 
     @PostMapping("/register")
-    public MSG register(User user) throws IOException{
+    public MSG register(User user, @RequestParam("message") String message) throws IOException{
         user.setPassword(getMD5(user.getPassword()));
-        return iUserService.register(user);
+        return iUserService.register(user,message);
     }
 
     /**
@@ -54,10 +57,12 @@ public class UserController {
      * 输入phone信息
      */
 
-    @PostMapping("/sendvericode")
+    @PostMapping("/sendVericode")
     public MSG sendVericode(@RequestParam("phone") String phone) throws ClientException {
         return iUserService.sendVericode(phone);
     }
+
+
 
     //@GetMapping("/loginOut")
 

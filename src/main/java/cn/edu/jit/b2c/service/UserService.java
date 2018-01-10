@@ -20,5 +20,5 @@ public interface UserService {
 
     MSG userImgUpdate(int user_id, String img);
 
-    MSG register(User user);
+    MSG register(User user, String message);
 }
