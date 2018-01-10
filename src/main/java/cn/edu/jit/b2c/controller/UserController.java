@@ -18,6 +18,11 @@ public class UserController {
     @Autowired
     private UserService iUserService;
 
+    @RequestMapping("init")
+    public MSG init() {
+        System.out.println("server init");
+        return new MSG(1, "server init", "data");
+    }
     /**
      * Created by SunFuRong
      * 登陆功能
@@ -38,9 +43,9 @@ public class UserController {
      */
 
     @PostMapping("/register")
-    public MSG register(User user,String vericode) throws IOException{
+    public MSG register(User user) throws IOException{
         user.setPassword(getMD5(user.getPassword()));
-        return iUserService.register(user,vericode);
+        return iUserService.register(user);
     }
 
     /**

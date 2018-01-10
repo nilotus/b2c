@@ -3,6 +3,10 @@ package cn.edu.jit.b2c.serviceImpl;
 import cn.edu.jit.b2c.mapper.UserMapper;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
+import cn.edu.jit.b2c.util.MD5Util;
+import cn.edu.jit.b2c.util.MSG;
+import cn.edu.jit.b2c.util.SmsDemo;
+import org.apache.ibatis.jdbc.Null;
 import cn.edu.jit.b2c.util.MSG;
 import cn.edu.jit.b2c.util.SmsDemo;
 import com.aliyuncs.exceptions.ClientException;
@@ -38,6 +42,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public MSG sendVericode(String phone) throws ClientException {
+        return null;
+    }
+
     /**
      * Created by SunFuRong
      * 注册功能
@@ -45,36 +54,18 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public MSG register(User user,String vericode) {
-        //判断验证码是否正确
-        if (code.equals(vericode)) {
-            //注册
-            boolean result;
-            result = userMapper.setPhone(user);
-            if (result)
-                return new MSG(1,"注册成功");
-            else
-                return new MSG(-1,"注册失败");
-        }
-        else
-            return new MSG(-1,"验证码错误");
-    }
-
-    /**
-     * Created by SunFuRong
-     * 发送验证码功能
-     * 输入phone信息
-     */
-
-    @Override
-    public MSG sendVericode(String phone) throws ClientException {
+    public MSG register(User user) {
         //判断用户是否存在
-        if(userMapper.findPhone(phone) == null){
-            code=vericode.sendSms(phone);
-            return new MSG(1,"验证码已发送");
-        }
-        else {
-            return new MSG(-1,"用户已存在");
+        if (user == null || user.getPhone() == null || user.getPassword() == null || user.getPhone().isEmpty() || user.getPassword().isEmpty()) {
+            return new MSG(-1, "用户名或密码不能为空");
+        } else {
+            if (userMapper.findPhone(user.getPhone()) != null)
+                return new MSG(-1, "用户已存在，请更换用户名");
+            else {
+                user.setPassword(MD5Util.getMD5(user.getPassword()));
+                userMapper.addUser(user);
+                return new MSG(1, "注册成功");
+            }
         }
     }
 

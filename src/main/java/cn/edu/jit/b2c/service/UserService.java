@@ -7,8 +7,6 @@ import com.aliyuncs.exceptions.ClientException;
 public interface UserService {
     MSG login(String phone, String password);
 
-    MSG register(User user,String vericode);
-
     MSG sendVericode(String phone) throws ClientException;
 
     User userFindAll();
@@ -20,4 +18,6 @@ public interface UserService {
     MSG  userUpdate(int user_id, String phone, String password, int role_id, String name, String address, String email);
 
     MSG userImgUpdate(int user_id, String img);
+
+    MSG register(User user);
 }
