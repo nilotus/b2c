@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("shop")
 public class ShopController {
     @Autowired
     private ShopService shopService;
