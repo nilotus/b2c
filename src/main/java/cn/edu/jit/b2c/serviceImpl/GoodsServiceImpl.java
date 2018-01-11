@@ -12,9 +12,30 @@ public class GoodsServiceImpl implements GoodsService{
     private GoodsMapper goodsMapper;
 
     @Override
-    public String goods(String img) {
-        Goods goods = goodsMapper.findImg(img);
-        return goods.getGood_id()+" "+goods.getShop_id()+" "+goods.getName()+" "+goods.getPrice()+" "+goods.getRestnum()
-                +" "+goods.getTotalnum()+" "+goods.getStatus()+" "+goods.getImg();
+    public String goodsBrowse(int good_id){
+        Goods goods = goodsMapper.browse(good_id);
+        return goods.getName()+" "+goods.getPrice()+" "+goods.getImg();
+    }
+
+    /**
+     * Created by SunFuRong
+     * 全局搜索功能（商品）
+     * 输入关键字跳出模糊查询的商品图片
+     */
+
+    @Override
+    public Goods goodsFindAll(String key){
+        return goodsMapper.findAll(key);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 店铺搜索功能（商品）
+     * 输入关键字跳出模糊查询的商品图片
+     */
+
+    @Override
+    public Goods goodsFindShop(int shop_id, String key){
+        return goodsMapper.findShop(shop_id,key);
     }
 }

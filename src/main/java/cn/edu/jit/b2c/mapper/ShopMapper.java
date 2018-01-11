@@ -13,4 +13,7 @@ public interface ShopMapper {
 
     @Select("SElECT * FROM Goods WHERE shop_id = #{shop_id}")
     Goods findShop_id(@Param("shop_id") Integer shop_id);
+
+    @Select("SELECT img FROM Goods WHERE name like '%key%'")
+    Shop findAll(@Param("key") String key);
 }

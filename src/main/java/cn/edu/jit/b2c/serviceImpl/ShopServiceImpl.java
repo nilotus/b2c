@@ -7,6 +7,8 @@ import cn.edu.jit.b2c.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class ShopServiceImpl implements ShopService {
     @Autowired
@@ -24,4 +26,16 @@ public class ShopServiceImpl implements ShopService {
                 +" "+goods.getTotalnum()+" "+goods.getStatus()+" "+goods.getImg()
                 +" "+goods.getShop_id()+" "+shop.getName()+" "+shop.getDescribe();
     }
+
+    /**
+     * Created by SunFuRong
+     * 全局搜索功能（店铺）
+     * 输入关键字跳出模糊查询的店铺图片
+     */
+
+    @Override
+    public Shop shopFindAll(String key) {
+        return shopMapper.findAll(key);
+    }
+
 }

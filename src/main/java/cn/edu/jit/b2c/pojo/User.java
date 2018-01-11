@@ -3,22 +3,34 @@ package cn.edu.jit.b2c.pojo;
 public class User {
     private int user_id;
 
-    private String phone;
+    private String name;
 
     private String password;
 
-    private int role_id;
-
-    private String name;
+    private String email;
 
     private String img;
 
     private String address;
 
-    private String email;
+    private int role_id;
+
+    private String phone;
+
+    public User(int user_id, String name, String password, String email, String img, String address, int role_id, String phone) {
+        this.user_id = user_id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.img = img;
+        this.address = address;
+        this.role_id = role_id;
+        this.phone = phone;
+    }
 
     public User() {
     }
+
 
     public int getUser_id() {
         return user_id;
