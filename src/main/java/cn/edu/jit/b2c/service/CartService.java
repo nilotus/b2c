@@ -1,5 +1,11 @@
 package cn.edu.jit.b2c.service;
 
+import cn.edu.jit.b2c.util.MSG;
+
 public interface CartService {
-    String cart(Integer good_id ,Integer status);
+    MSG goodsCheckOne(int user_id);
+    MSG goodsCheckTwo(int good_id);
+    MSG goodsCheckThree(int cart_id);
+    MSG goodsAdd(int good_id,int user_id,int goodnum);
+    MSG goodsDelete(int good_id);
 }
