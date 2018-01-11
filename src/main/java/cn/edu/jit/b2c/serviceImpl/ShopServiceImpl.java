@@ -4,10 +4,9 @@ import cn.edu.jit.b2c.mapper.ShopMapper;
 import cn.edu.jit.b2c.pojo.Goods;
 import cn.edu.jit.b2c.pojo.Shop;
 import cn.edu.jit.b2c.service.ShopService;
+import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -34,8 +33,9 @@ public class ShopServiceImpl implements ShopService {
      */
 
     @Override
-    public Shop shopFindAll(String key) {
-        return shopMapper.findAll(key);
+    public MSG shopFindAll(String key) {
+        Shop shop =shopMapper.findAll(key);
+        return new MSG(1,"搜索成功",shop);
     }
 
 }

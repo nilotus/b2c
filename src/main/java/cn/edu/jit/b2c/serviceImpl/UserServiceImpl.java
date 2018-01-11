@@ -83,8 +83,9 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public User userFindAll(){
-        return userMapper.findAll();
+    public MSG userFindAll(){
+        User userAll =userMapper.findAll();
+        return new MSG(1,"查询成功",userAll);
     }
 
     /**
@@ -94,8 +95,9 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public User userFindOne(int user_id){
-        return userMapper.findOne(user_id);
+    public MSG userFindOne(int user_id){
+        User userOne=userMapper.findOne(user_id);
+        return new MSG(1,"查询成功",userOne);
     }
 
     /**

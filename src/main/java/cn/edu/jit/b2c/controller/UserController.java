@@ -4,12 +4,9 @@ import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
 import com.aliyuncs.exceptions.ClientException;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 import static cn.edu.jit.b2c.util.MD5Util.getMD5;
@@ -73,7 +70,7 @@ public class UserController {
      */
 
     @GetMapping("/userinfo")//查看所有人的信息
-    public User userFindAll () throws IOException{
+    public MSG userFindAll () throws IOException{
         return iUserService.userFindAll();
     }
 
@@ -84,7 +81,7 @@ public class UserController {
      */
 
     @GetMapping("/userinfo/{user_id}")//调出用户信息
-    public User userFindOne(@PathVariable("user_id") int user_id) throws IOException {
+    public MSG userFindOne(@PathVariable("user_id") int user_id) throws IOException {
         return iUserService.userFindOne(user_id);
     }
 

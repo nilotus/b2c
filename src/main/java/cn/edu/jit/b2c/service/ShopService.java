@@ -1,8 +1,8 @@
 package cn.edu.jit.b2c.service;
 
-import cn.edu.jit.b2c.pojo.Shop;
+import cn.edu.jit.b2c.util.MSG;
 
 public interface ShopService {
         String shop(String img);
-        Shop shopFindAll(String key);
+        MSG shopFindAll(String key);
 }
