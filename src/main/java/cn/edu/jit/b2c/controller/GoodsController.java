@@ -1,7 +1,7 @@
 package cn.edu.jit.b2c.controller;
 
-import cn.edu.jit.b2c.pojo.Goods;
 import cn.edu.jit.b2c.service.GoodsService;
+import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,33 @@ public class GoodsController {
 
     /**
      * Created by SunFuRong
-     * 浏览商品
-     * 输入商品id，输出name，price，img，店铺名
+     * 浏览全部商品
+     * 输出name，price，img
      */
-    @PostMapping("/browse")
+    @PostMapping("/goodsinfo")
     //@RequestMapping(value = "img", method = RequestMethod.POST)
-    public String goodsBrowse(@RequestParam int good_id) throws IOException {
-        return goodsService.goodsBrowse(good_id);
+    public MSG goodsBrowseAll() throws IOException {
+        return goodsService.goodsBrowseAll();
+    }
+
+    /**
+     * Created by SunFuRong
+     * 详细浏览特定商品
+     * 输出name，price，img，店铺名
+     */
+    @PostMapping("/goodsinfo/{good_id}")
+    public MSG goodsBrowseOne(@PathVariable("good_id") int good_id) throws IOException{
+        return goodsService.goodsBrowseOne(good_id);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 浏览店铺内商品
+     * 输出name，price，img
+     */
+    @PostMapping("/goodsinfo/{shop_id}")
+    public MSG goodsBrowseShop(@PathVariable("shop_id") int shop_id) throws IOException{
+        return goodsService.goodsBrowseShop(shop_id);
     }
 
     /**
@@ -30,7 +50,7 @@ public class GoodsController {
      * 输入关键字跳出模糊查询的商品图片
      */
     @PostMapping("/search")
-    public Goods goodsFindAll(@RequestParam String key) throws IOException{
+    public MSG goodsFindAll(@RequestParam String key) throws IOException{
         return goodsService.goodsFindAll(key);
     }
 
@@ -41,7 +61,7 @@ public class GoodsController {
      */
 
     @PostMapping("/searchShop/{shop_id}")
-    public Goods goodsFindShop(@PathVariable("shop_id") int shop_id,@RequestParam String key) throws IOException{
+    public MSG goodsFindShop(@PathVariable("shop_id") int shop_id,@RequestParam String key) throws IOException{
         return goodsService.goodsFindShop(shop_id,key);
     }
 
