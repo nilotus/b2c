@@ -21,6 +21,8 @@ public class Shop {
         this.user_id = user_id;
         this.img = img;
     }
+    public Shop(){
+    }
 
     public int getShop_id() {
         return shop_id;
