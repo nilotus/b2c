@@ -2,13 +2,12 @@ package cn.edu.jit.b2c.pojo;
 
 public class RMessage {
     private Cart cart;
-    private GoodCart goodCart;
-    private GoodOrder goodOrder;
     private Goods goods;
     private Order order;
     private Shop shop;
     private User user;
     private UserShop userShop;
+    private Type type;
     private int a;
     private float b;
     private String c;
@@ -21,22 +20,6 @@ public class RMessage {
 
     public void setCart(Cart cart) {
         this.cart = cart;
-    }
-
-    public GoodCart getGoodCart() {
-        return goodCart;
-    }
-
-    public void setGoodCart(GoodCart goodCart) {
-        this.goodCart = goodCart;
-    }
-
-    public GoodOrder getGoodOrder() {
-        return goodOrder;
-    }
-
-    public void setGoodOrder(GoodOrder goodOrder) {
-        this.goodOrder = goodOrder;
     }
 
     public Goods getGoods() {
@@ -77,6 +60,14 @@ public class RMessage {
 
     public void setUserShop(UserShop userShop) {
         this.userShop = userShop;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getA() {
