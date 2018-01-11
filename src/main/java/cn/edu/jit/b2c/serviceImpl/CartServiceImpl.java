@@ -50,14 +50,11 @@ public class CartServiceImpl implements CartService{
     /**
      * Created by ZhouLiangWei
      * 添加购物车
-     * 将该商品good_id，用户user_id添加到Cart表中，
-     * 选择数量，将商品good_id，goodnum，cart_id添加到GoodCart表中
-     * Cart表中加入 price总金额
+     * 将商品的属性都加入cart表中
      */
     @Override
-    public MSG goodsAdd(int good_id, int user_id, int goodnum) {
-        cartMapper.insertGoodCart(goodnum,good_id);
-        cartMapper.insertCart(user_id,good_id);
+    public MSG goodsAdd(int good_id, int user_id, int good_num) {
+        cartMapper.insertCart(good_num,good_id,user_id);
         cartMapper.insertPrice(good_id);
         return new MSG(1,"添加成功");
     }
