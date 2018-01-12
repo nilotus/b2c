@@ -21,6 +21,9 @@ public class Goods {
 
     private String describe;
 
+    public Goods(){
+    }
+
     public Goods(int good_id, String name, float price, int status, int shop_id, int type_id, String img, int restnum, int totalnum, String describe) {
         this.good_id = good_id;
         this.name = name;

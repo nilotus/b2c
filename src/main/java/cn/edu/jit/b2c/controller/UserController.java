@@ -124,7 +124,7 @@ public class UserController {
      */
 
     @GetMapping("/userinfo")//查看所有人的信息
-    public User userFindAll () throws IOException{
+    public MSG userFindAll () throws IOException{
         return iUserService.userFindAll();
     }
 
@@ -135,7 +135,7 @@ public class UserController {
      */
 
     @GetMapping("/userinfo/{user_id}")//调出用户信息
-    public User userFindOne(@PathVariable("user_id") int user_id) throws IOException {
+    public MSG userFindOne(@PathVariable("user_id") int user_id) throws IOException {
         return iUserService.userFindOne(user_id);
     }
 

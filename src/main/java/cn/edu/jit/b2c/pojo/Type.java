@@ -16,6 +16,7 @@ public class Type {
         this.isp = isp;
     }
 
+    public Type(){}
 
     public int getType_id() {
         return type_id;

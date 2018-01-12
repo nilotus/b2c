@@ -1,11 +1,11 @@
 package cn.edu.jit.b2c.service;
 
-import cn.edu.jit.b2c.pojo.Goods;
+import cn.edu.jit.b2c.util.MSG;
 
 public interface GoodsService {
-      String goodsBrowse(int good_id);
-
-      Goods goodsFindAll(String key);
-
-      Goods goodsFindShop(int shop_id, String key);
+      MSG goodsBrowseAll();
+      MSG goodsBrowseOne(int good_id);
+      MSG goodsBrowseShop(int shop_id);
+      MSG goodsFindAll( String key);
+      MSG goodsFindShop(int shop_id,String key);
 }

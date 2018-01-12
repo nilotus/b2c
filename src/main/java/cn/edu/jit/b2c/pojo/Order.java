@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 public class Order {
     private int order_id;
 
-    private Timestamp time;
+    private int cart_id;
 
-    private float price;
+    private Timestamp time;
 
     private int user_id;
 
@@ -17,14 +17,29 @@ public class Order {
 
     private int status;
 
-    public Order(int order_id, Timestamp time, float price, int user_id, int shop_id, String description, int status) {
+    private int totalprice;
+
+    private int good_id;
+
+    private int good_num;
+
+    private float price;
+
+    public Order(){
+    }
+
+    public Order(int order_id, int cart_id, Timestamp time, int user_id, int shop_id, String description, int status, int totalprice, int good_id, int good_num, float price) {
         this.order_id = order_id;
+        this.cart_id = cart_id;
         this.time = time;
-        this.price = price;
         this.user_id = user_id;
         this.shop_id = shop_id;
         this.description = description;
         this.status = status;
+        this.totalprice = totalprice;
+        this.good_id = good_id;
+        this.good_num = good_num;
+        this.price = price;
     }
 
     public int getOrder_id() {
@@ -35,20 +50,20 @@ public class Order {
         this.order_id = order_id;
     }
 
+    public int getCart_id() {
+        return cart_id;
+    }
+
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
+    }
+
     public Timestamp getTime() {
         return time;
     }
 
     public void setTime(Timestamp time) {
         this.time = time;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public int getUser_id() {
@@ -81,5 +96,37 @@ public class Order {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(int totalprice) {
+        this.totalprice = totalprice;
+    }
+
+    public int getGood_id() {
+        return good_id;
+    }
+
+    public void setGood_id(int good_id) {
+        this.good_id = good_id;
+    }
+
+    public int getGood_num() {
+        return good_num;
+    }
+
+    public void setGood_num(int good_num) {
+        this.good_num = good_num;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }
