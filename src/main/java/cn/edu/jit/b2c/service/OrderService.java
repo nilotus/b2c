@@ -5,8 +5,8 @@ import cn.edu.jit.b2c.util.MSG;
 import java.sql.Timestamp;
 
 public interface OrderService {
-    MSG purchaseWait(int user_id, int shop_id, Timestamp time,int status,int num);
-    MSG payWait(int status);
+    MSG purchaseDirent(int user_id, int good_id, Timestamp time,int status,int good_num,float price);
+    MSG purchaseCart(int user_id, int good_id, Timestamp time,int status,int good_num,float price);
     MSG statusOrder(int status,String description);
     MSG afertpay(int status);
 }
