@@ -2,10 +2,13 @@ package cn.edu.jit.b2c.serviceImpl;
 
 import cn.edu.jit.b2c.mapper.GoodsMapper;
 import cn.edu.jit.b2c.pojo.Goods;
+import cn.edu.jit.b2c.pojo.RMessage;
 import cn.edu.jit.b2c.service.GoodsService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
@@ -30,8 +33,12 @@ public class GoodsServiceImpl implements GoodsService{
      */
 
     public MSG goodsBrowseOne(int good_id){
-        Goods goods =goodsMapper.browseOne(good_id);
-        return new MSG(1,"浏览成功",goods);
+        Goods goods=goodsMapper.browseOne1(good_id);
+        String name=goodsMapper.browseOne2(good_id);
+        RMessage rMessage=new RMessage();
+        rMessage.setC(name);
+        rMessage.setGoods(goods);
+        return new MSG(1,"浏览成功",rMessage);
     }
 
     /**

@@ -18,7 +18,7 @@ public class GoodsController {
      * 浏览全部商品
      * 输出name，price，img
      */
-    @PostMapping("/goodsinfo")
+    @GetMapping("/goodsinfo")
     //@RequestMapping(value = "img", method = RequestMethod.POST)
     public MSG goodsBrowseAll() throws IOException {
         return goodsService.goodsBrowseAll();
@@ -27,9 +27,9 @@ public class GoodsController {
     /**
      * Created by SunFuRong
      * 详细浏览特定商品
-     * 输出name，price，img，店铺名
+     * 输出name，price，img，describe店铺名
      */
-    @PostMapping("/goodsinfo/{good_id}")
+    @GetMapping("/goodsinfo/{good_id}")
     public MSG goodsBrowseOne(@PathVariable("good_id") int good_id) throws IOException{
         return goodsService.goodsBrowseOne(good_id);
     }
@@ -39,7 +39,7 @@ public class GoodsController {
      * 浏览店铺内商品
      * 输出name，price，img
      */
-    @PostMapping("/goodsinfo/{shop_id}")
+    @GetMapping("/goodsinfo/{shop_id}")
     public MSG goodsBrowseShop(@PathVariable("shop_id") int shop_id) throws IOException{
         return goodsService.goodsBrowseShop(shop_id);
     }
@@ -49,8 +49,8 @@ public class GoodsController {
      * 全局搜索功能（商品）
      * 输入关键字跳出模糊查询的商品图片
      */
-    @PostMapping("/search")
-    public MSG goodsFindAll(@RequestParam String key) throws IOException{
+    @GetMapping("/search")
+    public MSG goodsFindAll(@RequestParam("key") String key) throws IOException{
         return goodsService.goodsFindAll(key);
     }
 
@@ -60,8 +60,8 @@ public class GoodsController {
      * 输入关键字跳出模糊查询的商品图片
      */
 
-    @PostMapping("/searchShop/{shop_id}")
-    public MSG goodsFindShop(@PathVariable("shop_id") int shop_id,@RequestParam String key) throws IOException{
+    @GetMapping("/searchShop/{shop_id}")
+    public MSG goodsFindShop(@PathVariable("shop_id") int shop_id,@RequestParam("key") String key) throws IOException{
         return goodsService.goodsFindShop(shop_id,key);
     }
 

@@ -102,7 +102,7 @@ public class UserController {
      */
 
     @PutMapping("/userinfo/{user_id}")//修改信息，不包括头像
-    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam String phone, @RequestParam String password, @RequestParam int role_id, @RequestParam String name, @RequestParam String address, @RequestParam String email) throws IOException{
+    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam("phone")String phone, @RequestParam("password") String password, @RequestParam ("role_id")int role_id, @RequestParam ("name")String name, @RequestParam("address") String address, @RequestParam("email") String email) throws IOException{
         password = getMD5(password);
         return iUserService.userUpdate(user_id, phone,password,role_id, name,address,email);
     }
@@ -114,7 +114,7 @@ public class UserController {
      */
 
     @PutMapping("/userimg/{user_id}")//修改头像
-    public MSG userImgUpdate(@PathVariable("user_id") int user_id,@RequestParam String img) throws IOException{
+    public MSG userImgUpdate(@PathVariable("user_id") int user_id,@RequestParam("img")String img) throws IOException{
         return iUserService.userImgUpdate(user_id,img);
     }
 
