@@ -7,8 +7,7 @@ import cn.edu.jit.b2c.service.GoodsService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
@@ -75,5 +74,57 @@ public class GoodsServiceImpl implements GoodsService{
     public MSG goodsFindShop(int shop_id, String key){
         Goods goods =goodsMapper.findShop(shop_id,key);
         return new MSG(1,"搜索成功",goods);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 增加商品
+     * 输入name,price,status,shop_id,type_id,img,totalnum,describe
+     */
+    @Override
+    public MSG goodsAdd(Goods goods){
+        boolean result=goodsMapper.add(goods);
+        if(result)
+            return new MSG(1,"添加成功");
+        else
+            return new MSG(1,"添加失败");
+    }
+
+    /**
+     * Created by SunFuRong
+     * 删除商品
+     * 输入good_id
+     */
+    @Override
+    public MSG goodsDelete(int good_id){
+        boolean result=goodsMapper.delete(good_id);
+        if(result)
+            return new MSG(1,"删除成功");
+        else
+            return new MSG(1,"删除失败");
+    }
+
+    /**
+     * Created by SunFuRong
+     * 更新商品
+     * 输入name,price,status,img,describe
+     */
+    @Override
+    public MSG goodsUpdate(Goods goods){
+        boolean result=goodsMapper.update(goods);
+        if(result)
+            return new MSG(1,"更新成功");
+        else
+            return new MSG(1,"更新失败");
+    }
+
+    /**
+     * Created by SunFuRong
+     * 查询商品交易情况
+     */
+    @Override
+    public MSG goodsSaleNum(int good_id){
+        int salenum =goodsMapper.salenum(good_id);
+        return new MSG(1,"查询成功",salenum);
     }
 }

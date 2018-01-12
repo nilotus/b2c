@@ -1,5 +1,6 @@
 package cn.edu.jit.b2c.controller;
 
+import cn.edu.jit.b2c.pojo.Goods;
 import cn.edu.jit.b2c.service.GoodsService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ public class GoodsController {
      * 输出name，price，img
      */
     @GetMapping("/goodsinfo")
-    //@RequestMapping(value = "img", method = RequestMethod.POST)
     public MSG goodsBrowseAll() throws IOException {
         return goodsService.goodsBrowseAll();
     }
@@ -65,5 +65,45 @@ public class GoodsController {
         return goodsService.goodsFindShop(shop_id,key);
     }
 
+    /**
+     * Created by SunFuRong
+     * 增加商品
+     * 输入name,price,status,shop_id,type_id,img,totalnum,describe
+     */
+    @PostMapping("/add/{shop_id}")
+    public MSG goodsAdd(@PathVariable("shop_id") int shop_id,Goods goods){
+        goods.setShop_id(shop_id);
+        return goodsService.goodsAdd(goods);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 删除商品
+     * 输入good_id
+     */
+    @DeleteMapping("/delete/{good_id}")
+    public MSG goodsDelete(@PathVariable("good_id") int good_id){
+        return goodsService.goodsDelete(good_id);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 更新商品
+     * 输入name,price,status,img,describe
+     */
+    @PutMapping("/update/{good_id}")
+    public MSG goodsUpdate(@PathVariable("good_id") int good_id,Goods goods){
+        goods.setGood_id(good_id);
+        return goodsService.goodsUpdate(goods);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 查询商品交易情况
+     */
+    @GetMapping("/fan/{good_id}")
+    public MSG goodsSaleNum(@PathVariable("good_id") int good_id){
+        return goodsService.goodsSaleNum(good_id);
+    }
 
 }
