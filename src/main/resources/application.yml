@@ -7,3 +7,8 @@ spring:
         password: admin
         driver-class-name: com.mysql.jdbc.Driver
 
+qiniu:
+    accessKey: UwDMLe-DcZ6owIanBcwK77fWHJzkI-G025iHzkYc
+    secretKey: ySVZoNvAQos9bDivIxjJC3OjckrYq5mnVFdA9zR4
+    bucket: image
+    path: p2d8s9nsd.bkt.clouddn.com

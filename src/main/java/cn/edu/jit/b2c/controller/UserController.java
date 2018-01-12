@@ -3,14 +3,24 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
+import cn.edu.jit.b2c.util.QianNiuUpload;
 import com.aliyuncs.exceptions.ClientException;
-import org.apache.ibatis.annotations.Param;
+import org.assertj.core.util.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static cn.edu.jit.b2c.util.MD5Util.getMD5;
 
@@ -26,6 +36,16 @@ public class UserController {
         System.out.println("server init");
         return new MSG(1, "server init", "data");
     }
+    static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
+    @RequestMapping(value="/", method=RequestMethod.GET)
+    public List<User> getUserList() {
+        // 处理"/users/"的GET请求，用来获取用户列表
+        // 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
+        List<User> r = new ArrayList<User>(users.values());
+        return r;
+    }
+
+
     /**
      * Created by SunFuRong
      * 登陆功能
@@ -62,6 +82,37 @@ public class UserController {
         return iUserService.sendVericode(phone);
     }
 
+    /**
+     * Created by Mr.Chen
+     * 上传图片
+     */
+    @Resource
+    public UserService userService;
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public MSG upload(HttpServletRequest request,
+                  HttpServletResponse response, ModelMap model,HttpSession session) throws IOException {
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile mFile = multipartRequest.getFile("file");
+        //String path = "F:\\img\\";
+        String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+        String filename = mFile.getOriginalFilename();
+        InputStream inputStream = mFile.getInputStream();
+        byte[] b = new byte[1048576];
+        int length = inputStream.read(b);
+        Date date = new Date();
+        SimpleDateFormat F = new SimpleDateFormat("yyyyMMddHHmmss");
+        String prefix=filename.substring(filename.lastIndexOf("."));
+        filename = "123" + F.format(date) + prefix;
+        String url =path +"/"+ filename;
+        System.out.println(url);
+        FileOutputStream outputStream = new FileOutputStream(url);
+        outputStream.write(b, 0, length);
+        inputStream.close();
+        outputStream.close();
+        return new MSG(1,"success","url");
+    }
 
 
     //@GetMapping("/loginOut")

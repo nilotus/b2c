@@ -188,11 +188,17 @@
             <input type="password" placeholder="请输入密码" id="pwd">
             <button type="button" id="login-button"   onclick="user_login()">登录</button>
             <button onclick="return register()">注册</button>
+            <button onclick="return aaa()">aaa</button>
+
         </form>
     </div>
 </div>
 </div>
 <script type="text/javascript">
+    function register() {
+        window.location.href='html/upLoad.html';
+        return false;
+    }
     function register() {
         window.location.href='html/register.html';
         return false;
