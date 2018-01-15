@@ -4,15 +4,17 @@ import cn.edu.jit.b2c.pojo.Shop;
 import cn.edu.jit.b2c.pojo.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface ShopMapper {
     @Select("SELECT shop_id,name,img FROM Shop")
-    Shop browse();
+    List<Shop> browse();
     @Select("SELECT shop_id,name,img FROM Shop WHERE name like '%key%'")
-    Shop findAll(@Param("key") String key);
-    @Select("")
+    List<Shop> findAll(@Param("key") String key);
+    @Select("SELECT SUM(totalprice) FROM Orders WHERE shop_id =#{shop_id}")
     float money(@Param("shop_id") int shop_id);
-    @Select("")
+    @Select("SELECT COUNT(order_id) FROM Orders WHERE shop_id =#{shop_id}")
     int order(@Param("shop_id") int shop_id);
     @Insert("INSERT INTO Shop(name,describe,user_id,img) VALUES(#{name},#{describe},#{user_id},#{img})")
     boolean add(Shop shop);
