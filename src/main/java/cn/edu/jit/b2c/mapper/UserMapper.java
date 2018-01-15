@@ -10,11 +10,11 @@ public interface UserMapper {
     User findPhone(@Param("phone") String phone);
     @Insert("INSERT INTO User(phone,password,role_id,name,address,email) VALUES(#{phone},#{password},#{role_id},#{name},#{address},#{email})")
     boolean addUser(User user);
-    @Select("SELECT phone,name,role_id,address,email FROM User")
+    @Select("SELECT phone,role_id,name,address,email FROM User")
     User findAll();
-    @Select("SELECT phone,name,role_id,address,email FROM User WHERE user_id =#{user_id}")
+    @Select("SELECT phone,role_id,name,role_id,address,email FROM User WHERE user_id =#{user_id}")
     User findOne(@Param("user_id") int user_id);
-    @Delete("DELECT FROM User WHERE user_id =#{user_id}")
+    @Delete("DELETE FROM User WHERE user_id =#{user_id}")
     boolean delete(@Param("user_id") int user_id);
     @Update("UPDATE User set phone=#{phone},password=#{password},role_id=#{role_id},name=#{name},address=#{address},email=#{email} WHERE user_id =#{user_id}")
     boolean update(@Param("user_id") int user_id,@Param("phone") String phone,@Param("password") String password,@Param("role_id") int role_id,@Param("name") String name,@Param("address") String address,@Param("email") String email);
