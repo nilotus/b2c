@@ -3,9 +3,9 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
-import cn.edu.jit.b2c.util.QianNiuUpload;
+import cn.edu.jit.b2c.util.QiniuUtil;
 import com.aliyuncs.exceptions.ClientException;
-import org.assertj.core.util.Maps;
+import com.qiniu.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,6 +82,24 @@ public class UserController {
     public MSG sendVericode(@RequestParam("phone") String phone) throws ClientException {
         return iUserService.sendVericode(phone);
     }
+
+//    @PutMapping("/article/img/qiniu")
+//    public String uploadImgQiniu(@RequestParam("editormd-image-file") MultipartFile multipartFile) throws IOException {
+//        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
+//        User currentUser = userService.getCurrentUser();
+//        String path = QiniuUtil.uploadImg(inputStream, currentUser.getUsername()+"_"+ Constants.getUUID());
+//        return path;
+//    }
+
+//    @PutMapping("/article/img/qiniu")
+//    public String uploadImgQiniu(@RequestParam("editormd-image-file") MultipartFile multipartFile) throws IOException {
+//        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
+//        User currentUser = userService.getCurrentUser();
+//        String path = QiniuUtil.uploadImg(inputStream,  Constants.getUUID());
+//        return path;
+//    }
+
+
 
     /**
      * Created by Mr.Chen
