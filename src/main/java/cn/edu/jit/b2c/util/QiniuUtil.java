@@ -20,17 +20,17 @@ import java.io.FileInputStream;
 public class QiniuUtil {
     private static final Logger logger = LoggerFactory.getLogger(QiniuUtil.class);
 
-    @Value("${qiniu.accessKey}")
-    private static String accessKey;
+  //  @Value("${qiniu.accessKey}")
+    private static String accessKey="UwDMLe-DcZ6owIanBcwK77fWHJzkI-G025iHzkYc";
 
-    @Value("${qiniu.secretKey}")
-    private static String secretKey;
+  //  @Value("${qiniu.secretKey}")
+    private static String secretKey="ySVZoNvAQos9bDivIxjJC3OjckrYq5mnVFdA9zR4";
 
-    @Value("${qiniu.bucket}")
-    private static String bucket;
+    //@Value("${qiniu.bucket}")
+    private static String bucket="image";
 
-    @Value("${qiniu.path}")
-    private static String path;
+   // @Value("${qiniu.path}")
+    private static String path="p2d8s9nsd.bkt.clouddn.com";
 
     /**
      * 将图片上传到七牛云
@@ -40,7 +40,7 @@ public class QiniuUtil {
      */
     public static String uploadImg(FileInputStream file, String key) {
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone1());
+        Configuration cfg = new Configuration(Zone.zone0());
 //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
 //...生成上传凭证，然后准备上传
