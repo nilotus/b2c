@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/goods1.css"/>
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+
+<body>
+<div class="w">
+    <!--商品列表-->
+    <div class="container">
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<a href="./login.html"><img id="img"></a>-->
+                <!--<p id="name"></p>-->
+                <!--<p class="price" id="price">-->
+
+                <!--</p>-->
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+            <!--</li>-->
+        <!--</ul>-->
+
+    </div>
+    <!--<div class="carbox
+
+    <!--购物车">
+        <div class="left">
+            <span>加入购物车</span>
+        </div>
+        <div class="content">
+            <dl>
+                <dt>
+                    <img src="./img/30.jpg" >
+                </dt>
+                <dd class="title">汤达人</dd>
+                <dd class="money">¥20.90</dd>
+            </dl>
+        </div>
+    </div>	-->
+
+
+</div>
+</body>
+
+<script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: '/goods/goodsinfo',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                //var data = JSON.stringify(data);
+                //alert(data.data[0]);
+                var str = "<ul>";
+                $.each(data.data,function (index,val) {
+                    str += "<li><a><img src='val.img'></a>"
+                        +"<p>"+val.name+"</p><p class='price'>"+val.price+"</p></li>";
+                })
+//                $('#name').text(data.data[0].name);
+//                $('#price').text(data.data[0].price);
+//                $("#img").attr('src',data.data[0].img);
+                str += "</ul>";
+                $('.container').append(str);
+
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    })
+
+    
+
+
+
+</script>
+</html>

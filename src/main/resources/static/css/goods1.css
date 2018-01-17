@@ -1,0 +1,96 @@
+a{
+	margin: 0;
+	padding: 0;
+}
+.w{
+	width: 1190px;
+	margin: 0 auto;
+}
+.container{
+	margin:50px auto;	
+}
+.container ul{
+	width: 1190px;
+	height: 380px;
+	/*border:1px solid gray;*/
+	/*overflow: hidden;*/
+}
+
+.container ul li{
+	width: 224px;
+	height: 335px;
+	border:1px solid white;
+	background: white;
+	/*去列表原点*/
+	list-style: none;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 1px;
+}
+.container ul li p{
+	font-size: 8px;
+	color: #666;
+	padding: 20px 20px 0 20px;
+}
+.container ul li:hover{
+	padding: 1px;
+	border:1px solid red;
+}
+.container ul li p.price{
+	color: red;
+	font-size: 16px;
+	
+	
+}
+.carbox{
+	width: 260px ;
+	height: 100%;
+	top:0;
+	right:0;
+	position: fixed;
+	
+}
+.carbox .left{
+	float: left;
+	width: 40px;
+	height: 100%;
+	background: #000000;
+}
+.carbox .left span{
+	color: #fff;
+	/*文字变成竖排显示*/
+	width: 12px;
+	font-size: 12px;
+	height: 90px;
+	display: block;
+	background: red;
+	padding:10px 14px ;
+	margin-top: 260px;
+	cursor: pointer;
+}
+.carbox .content{
+	float: right;	
+	width: 220px;
+	height: 100%;
+	background: #ddd;
+	
+}
+.carbox .content dl{
+	width: 200px;
+	height: 60px;
+	border-bottom: 1px solid #fff;
+	padding: 10px;
+}
+.carbox .content dt{
+	width: 60px;
+	height: 60px;	
+	float: left;
+
+}
+.carbox .content dd{
+	width: 120px;
+	float: right;
+	font-size: 12px;
+	line-height: 20px;
+}
