@@ -25,10 +25,12 @@ public class Order {
 
     private float price;
 
+    private String img;
+
     public Order(){
     }
 
-    public Order(int order_id, int cart_id, Timestamp time, int user_id, int shop_id, String description, int status, int totalprice, int good_id, int good_num, float price) {
+    public Order(int order_id, int cart_id, Timestamp time, int user_id, int shop_id, String description, int status, int totalprice, int good_id, int good_num, float price,String img) {
         this.order_id = order_id;
         this.cart_id = cart_id;
         this.time = time;
@@ -40,6 +42,7 @@ public class Order {
         this.good_id = good_id;
         this.good_num = good_num;
         this.price = price;
+        this.img = img;
     }
 
     public int getOrder_id() {
@@ -128,5 +131,13 @@ public class Order {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
