@@ -83,58 +83,25 @@ public class UserController {
         return iUserService.sendVericode(phone);
     }
 
-//    @PutMapping("/article/img/qiniu")
-//    public String uploadImgQiniu(@RequestParam("editormd-image-file") MultipartFile multipartFile) throws IOException {
-//        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
-//        User currentUser = userService.getCurrentUser();
-//        String path = QiniuUtil.uploadImg(inputStream, currentUser.getUsername()+"_"+ Constants.getUUID());
-//        return path;
-//    }
-
-//    @PutMapping("/article/img/qiniu")
-//    public String uploadImgQiniu(@RequestParam("editormd-image-file") MultipartFile multipartFile) throws IOException {
-//        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
-//        User currentUser = userService.getCurrentUser();
-//        String path = QiniuUtil.uploadImg(inputStream,  Constants.getUUID());
-//        return path;
-//    }
-
-
-
     /**
      * Created by Mr.Chen
      * 上传图片
      */
-    @Resource
-    public UserService userService;
 
-    @PostMapping("/upload")
-    @ResponseBody
-    public MSG upload(HttpServletRequest request,
-                  HttpServletResponse response, ModelMap model,HttpSession session) throws IOException {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile mFile = multipartRequest.getFile("file");
-        //String path = "F:\\img\\";
-        String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-        String filename = mFile.getOriginalFilename();
-        InputStream inputStream = mFile.getInputStream();
-        byte[] b = new byte[1048576];
-        int length = inputStream.read(b);
-        Date date = new Date();
-        SimpleDateFormat F = new SimpleDateFormat("yyyyMMddHHmmss");
-        String prefix=filename.substring(filename.lastIndexOf("."));
-        filename = "123" + F.format(date) + prefix;
-        String url =path +"/"+ filename;
-        System.out.println(url);
-        FileOutputStream outputStream = new FileOutputStream(url);
-        outputStream.write(b, 0, length);
-        inputStream.close();
-        outputStream.close();
-        return new MSG(1,"success","url");
+    @RequestMapping("/uploadImgQiniu")
+    public String uploadImgQiniu(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+        //System.out.println("editormd-image-file");
+        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
+        //User currentUser = userService.getCurrentUser();
+        //String path = QiniuUtil.uploadImg(inputStream,  UUID.randomUUID().toString().replaceAll("-",""));
+        String path = QiniuUtil.uploadImg(inputStream, UUID.randomUUID().toString().replaceAll("-",""));
+        System.out.println(path);
+        return path;
     }
 
 
-    //@GetMapping("/loginOut")
+
+
 
     /**
      * Created by SunFuRong
