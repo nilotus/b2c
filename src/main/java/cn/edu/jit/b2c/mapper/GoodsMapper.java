@@ -3,10 +3,12 @@ package cn.edu.jit.b2c.mapper;
 import cn.edu.jit.b2c.pojo.Goods;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface GoodsMapper {
     @Select("SELECT good_id,name,price,img FROM Goods")
-    Goods browseAll();
+    List<Goods> browseAll();
     /*sql语句多表查询*/
     @Select("SELECT name,price,img,restname,describe FROM Goods WHERE good_id =#{good_id}")
     Goods browseOne1(@Param("good_id") int good_id);

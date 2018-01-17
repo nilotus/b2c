@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class B2cApplicationTests {
@@ -17,9 +19,4 @@ public class B2cApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void sqlTest(){
-		User phone = userMapper.findPhone("123");
-		System.out.println(phone);
-	}
 }

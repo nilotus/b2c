@@ -18,7 +18,7 @@ public class CartServiceImpl implements CartService{
     /**
      * Created by ZhouLiangWei
      * 查看商量功能1
-     * 输出cart_id,good_id
+     * 根据user_id输出cart_id,good_id
      */
     @Override
     public MSG goodsCheckOne(int user_id) {
@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService{
     /**
      * Created by ZhouLiangWei
      * 查看商量功能2
-     * 输出商品name,price,img,shop_id所对应的店铺名name（浏览商品功能）
+     * 根据good_id输出商品name,price,img,shop_id所对应的店铺名name（浏览商品功能）
      */
     @Override
     public MSG goodsCheckTwo(int good_id) {
@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService{
     /**
      * Created by ZhouLiangWei
      * 查看商量功能3
-     * 输出good_num ，price（总）
+     * 根据cart_id输出good_num ，price（总）
      */
     @Override
     public MSG goodsCheckThree(int cart_id) {
@@ -57,9 +57,13 @@ public class CartServiceImpl implements CartService{
      */
     @Override
     public MSG goodsAdd(int good_id, int user_id, int good_num) {
-        cartMapper.insertCart(good_num,good_id,user_id);
-        cartMapper.insertPrice(good_id);
-        cartMapper.insertCart2(good_id);
+        RMessage rMessage = new RMessage();
+        rMessage.setGoods(cartMapper.findSidP(good_id));
+
+        float price = rMessage.getGoods().getPrice() * good_num;
+        int shop_id = rMessage.getGoods().getShop_id();
+
+        cartMapper.insertCart(user_id, good_id, good_num, price, shop_id);
         return new MSG(1,"添加成功");
     }
 
