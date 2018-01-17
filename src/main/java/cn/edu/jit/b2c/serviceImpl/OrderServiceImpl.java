@@ -27,12 +27,8 @@ public class OrderServiceImpl implements OrderService{
         orderMapper.totalprice();
         return new MSG(1,"下订单成功");
     }
-    }
+}
 
-    /**
-     * Created by ZhouLiangWei
-     * 已付款
-     * 输入 总价格toatl-pee，改变状态
-     */
+
 
 
