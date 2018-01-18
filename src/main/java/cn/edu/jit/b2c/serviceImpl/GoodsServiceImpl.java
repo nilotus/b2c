@@ -126,7 +126,7 @@ public class GoodsServiceImpl implements GoodsService{
      */
     @Override
     public MSG goodsSaleNum(int good_id){
-        Goods num =goodsMapper.num(good_id);
+        Goods num =goodsMapper.salenum(good_id);
         int salenum=num.getTotalnum()-num.getRestnum();
         return new MSG(1,"查询成功",salenum);
     }

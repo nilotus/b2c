@@ -3,22 +3,15 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
+import cn.edu.jit.b2c.util.QiniuUtil;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.UUID;
 
 import static cn.edu.jit.b2c.util.MD5Util.getMD5;
 
