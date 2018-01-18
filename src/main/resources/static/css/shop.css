@@ -1,0 +1,32 @@
+.w{
+	width: 1190px;
+	margin: 0 auto;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	height:140px;
+	background-color: #F5F7F8;
+}
+.shop{
+	height: 230px;
+	width: 1150px;
+	margin: 0 auto;
+	 
+	 
+}
+.shop_left{
+	height: 230px;
+	width: 540px;
+	 
+	float:left;
+	
+}
+.shop_right{
+	height: 230px;
+	width: 540px;
+	 
+	float:right;
+}

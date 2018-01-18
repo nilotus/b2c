@@ -1,0 +1,100 @@
+ .waikuang{
+            width:1190px;
+            height:363px;
+            margin:50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+.waikuang .energy{
+            width:1292px;
+            height:353px;
+            position: absolute;
+            /*left: -172px;*/
+        }
+.waikuang .xinxi{
+            width: 465px;
+            height:344px;
+            border: 1px solid #d8d8d8;
+            position: absolute;
+            top:17px;
+            right:17px;
+            box-shadow: 0 1px 4px #c5c5c5;
+            background: white;
+        }
+.waikuang .pic{
+            position: absolute;
+            left: -1px;
+        }
+.waikuang .xinxi .time{
+            width:210px;
+            height:27px;
+            font-size: 14px;
+            line-height: 27px;
+            color: white;
+            background: #333333;
+            position: absolute;
+            left:136px;
+            top:-2px;
+        }
+.waikuang .xinxi .wenzi{
+            display: block;
+            width:385px;
+            height:137px;
+            font-size: 16px;
+            color: #767676;
+            position: absolute;
+            top:60px;
+            left: 37px;
+            text-decoration: none;
+
+        }
+.waikuang .xinxi .price{
+            position: absolute;
+            left:37px;
+            top:234px;
+            line-height: 30px;
+            font-size: 34px;
+            color: #000;
+        }
+.waikuang .xinxi .price .yuan{
+            font-size:20px;
+            position: relative;
+            top:-5px;
+            margin-right: 3px;
+        }
+.waikuang .xinxi .price .oldprice{
+            font-size: 12px;
+            color: #727272;
+            text-decoration: line-through;
+            margin-right: 6px;
+        }
+.waikuang .xinxi .jisu{
+            position: absolute;
+            left:37px;
+            top: 286px;
+        }
+.waikuang .xinxi .gouwuche{
+            width: 107px;
+            height:36px;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            background: #E81A62;
+            line-height: 36px;
+            text-decoration: none;
+            position: absolute;
+            right:40px;
+            bottom: 64px;
+
+        }
+.waikuang .xinxi .goumai{
+            position: absolute;
+            right:40px;
+            bottom:26px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+.waikuang .xinxi .goumai .renshu{
+            font-size: 18px;
+            color: #B9966A;
+        }

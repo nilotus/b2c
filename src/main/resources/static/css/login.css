@@ -1,0 +1,71 @@
+#container {
+					margin-left:auto;
+					margin-right:auto; 
+					text-align:center;
+					width:1050px;  
+	}
+#header{
+		/*float:left;*/
+		margin-bottom: 10px;
+		
+}	
+
+#main{
+	
+		float:left;
+		width:100%;	
+		margin-bottom: 10px;
+}
+
+#main #left{
+	float: left;
+	height: 500px;
+	width: 60%;
+	
+}
+
+#main #right {
+	float: right;
+	font : 30px,宋体;
+    height: 500px;
+    width: 39%;
+	/*border:solid 1px #B3B3B3;*/
+   
+}
+
+
+#footer {
+    background-color:#D2D7D3;
+    height: 30px;
+    padding:3px;
+    text-align:right;
+    overflow:hidden;
+    clear:both;
+   }
+#optionsRadios3{
+	font-size:15px;font-family: '微软雅黑';
+}
+#optionsRadios4{
+	font-size:10px;font-family: '微软雅黑';
+}
+.input-group{
+	margin:20px 1px 1px 1px ;width: 405px;
+}
+.input-group-addon{
+	width:50px;
+}
+.em{
+	font-size: 15px;float:right;margin-right: 0px;
+}
+.btn{
+	margin-left: 40px;height: 50px;width: 330px;font-size: 20px;
+}
+.form-control {
+	background-color: #FFFFFF;
+}
+#null{
+	margin-top: 20px;
+}
+.switch{
+	float: left;
+}

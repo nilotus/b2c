@@ -106,21 +106,20 @@
 .main .main_right_b{
 	width:489px;
 	height: 312px;
-	 
+	position: relative;
 	
 }
 .main .main_right_b .price{
             position: absolute;
-            left:770px;
-            top:380px;
+            right:330px;
+            top: 80px;
             line-height: 30px;
             font-size: 34px;
             color: #ff0066;
+             
 }
 .main .main_right_b .price .yuan{
-            font-size:20px;
-            position: relative;
-            top:-5px;
+            font-size:25px;
             margin-right: 3px;
 }
 .main .main_right_b .price .oldprice{
@@ -138,8 +137,8 @@
             background: #E81A62;
             line-height: 36px;
             text-decoration: none;
-            position: absolute;
-            right:420px;
+            position:absolute;
+            right:280px;
             bottom: 100px;
 
 }
@@ -153,7 +152,7 @@
             line-height: 36px;
             text-decoration: none;
             position: absolute;
-            right:180px;
+            right:60px;
             bottom: 100px;
 }
 

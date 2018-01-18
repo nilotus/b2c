@@ -1,0 +1,256 @@
+#container {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 1050px;
+}
+
+#footer {
+	background-color: #D2D7D3;
+	height: 30px;
+	padding: 3px;
+	text-align: right;
+	overflow: hidden;
+	clear: both;
+}
+
+#img {
+	width: 222px;
+	height: 222px;
+}
+
+#info {
+	border: 1px solid #000000;
+	width: 1050px;
+	height: 500px;
+	margin: 0 auto;
+}
+
+#mes {
+	width: 400px;
+	height: 400px;
+}
+
+#phone {
+	float: left;
+}
+
+#ID {
+	float: left;
+}
+
+#name {
+	float: left;
+}
+
+#email {
+	float: left;
+}
+
+#address {
+	float: left;
+}
+
+.btn {
+	position: relative;
+	bottom: 20px;
+	float: right;
+}
+#save{
+	top: 2px;
+	margin: 5px;
+}
+#cart{
+	position: relative;left: 50px;top: 140px; float: left;
+}
+#order1{
+	position: relative;left: 150px; top: -100px; float: left;
+}
+#fa{
+	position: relative;left: 250px; top: -100px; float: left;
+}
+.img{
+	vertical-align: middle; width: 250px; height: 250px;
+}
+.btn-default{
+	top: 2px;
+	margin: 5px;
+}
+.input-group {
+	margin: 20px 1px 1px 1px;
+	width: 405px;
+}
+
+.input-group-addon {
+	width: 50px;
+}
+
+.box1 {
+	width: 1050px;
+	height: 350px;
+	margin-bottom: 50px;
+}
+
+.row {
+	width: 296px;
+	height: 296px;
+	position: relative;
+	top: 50px;
+}
+
+.pic {
+	width: 296px;
+	height: 296px;
+}
+
+.panel {
+	width: 700px;
+	height: 250px;
+	float: right;
+	position: relative;
+	bottom: 240px;
+}
+
+.panel-heading {
+	text-align: left;
+	width: 698px;
+}
+
+.w {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+h1 input button {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #F6F6F6;
+}
+
+.f10 {
+	color: #EE0030;
+}
+
+a {
+	text-decoration: none;
+	color: #999999;
+	font-size: 12px;
+	margin: 8px;
+}
+
+a:hover {
+	color: #FF0033;
+}
+
+.shortcut {
+	height: 32px;
+	border-bottom: 1px solid #DDDDDD;
+	background-color: #F2F2F2;
+	font-size: 12px;
+	line-height: 30px;
+	color: #999;
+}
+
+.shortcut li {
+	float: left;
+}
+
+header {
+	height: 100px;
+	background-color: #F5F7F8;
+}
+
+.city {
+	margin-left: 200px;
+}
+
+input button {
+	border: 0;
+	outline: none;
+}
+
+.space {
+	width: 1px;
+	height: 10px;
+	background-color: #ccc;
+	margin: 10px 12px 0;
+}
+
+.middle {
+	height: 140px;
+	background-color: #F5F7F8;
+	position: relative;
+}
+
+.logo {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	box-shadow: 0px -10px 10px rgba(0, 0, 0, .3);
+}
+
+.box {
+	float: left;
+}
+
+.logo a {
+	display: block;
+	width: 190px;
+	height: 170px;
+	background: url(../img/logo.jpg) no-repeat;
+}
+
+.form {
+	width: 550px;
+	height: 35px;
+	position: absolute;
+	top: 25px;
+	left: 320px;
+}
+.col-xs-6.col-md-3{
+	width: 254px;
+	height: 254px;
+}
+
+.thumbnail{
+	width: 250px;
+	height: 250px;
+}
+.form input {
+	width: 495px;
+	height: 33px;
+	border: 1px solid #F93A60;
+	float: left;
+	font-size: 14px;
+	padding-left: 3px;
+}
+
+.form button {
+	width: 50px;
+	height: 35px;
+	background-color: #F93A60;
+	float: left;
+}
+
+.box2 {
+	width: 1050px;
+	height: 300px;
+	margin-top: 30px;
+}
