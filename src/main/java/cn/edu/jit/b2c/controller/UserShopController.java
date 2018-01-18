@@ -49,9 +49,29 @@ public class UserShopController {
      * 在收藏夹里添加商品信息
      * 输入 user_id,shop_id,good_id,status
      */
-    @PostMapping("/usadd")
-    public MSG usershopAdd(int user_id, int good_id, int shop_id, int status) throws IOException {
-        return userShopService.usershopAdd(user_id, good_id, shop_id, status);
+    @PostMapping("/usadd1")
+    public MSG usershopAdd1(int user_id,int good_id) throws IOException {
+        return userShopService.usershopAdd1(user_id, good_id);
+    }
+
+    /**
+     * Created by ZhouLiangWei
+     * 在收藏夹里添加店铺信息
+     * 输入 user_id,shop_id,good_id,status
+     */
+    @PostMapping("/usadd2")
+    public MSG usershopAdd2(int user_id,int shop_id) throws IOException {
+        return userShopService.usershopAdd2(user_id, shop_id);
+    }
+
+    /**
+     * Created by ZhouLiangWei
+     * 在收藏夹里删除店铺信息
+     * 输入 user_id,shop_id,good_id,status
+     */
+    @PostMapping("/usdel1")
+    public MSG usershopDelete1(int shop_id) {
+        return userShopService.usershopDelete1(shop_id);
     }
 
     /**
@@ -59,8 +79,8 @@ public class UserShopController {
      * 在收藏夹里删除商品信息
      * 输入 user_id,shop_id,good_id,status
      */
-    @PostMapping("/usdel")
-    public MSG usershopDelete(int shop_id) {
-        return userShopService.usershopDelete(shop_id);
+    @PostMapping("/usdel2")
+    public MSG usershopDelete2(int good_id) {
+        return userShopService.usershopDelete2(good_id);
     }
 }

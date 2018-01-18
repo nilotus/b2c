@@ -1,6 +1,7 @@
 package cn.edu.jit.b2c.serviceImpl;
 
 import cn.edu.jit.b2c.mapper.UserShopMapper;
+import cn.edu.jit.b2c.pojo.RMessage;
 import cn.edu.jit.b2c.pojo.Shop;
 import cn.edu.jit.b2c.pojo.UserShop;
 import cn.edu.jit.b2c.service.UserShopService;
@@ -33,8 +34,10 @@ public class UserShopServiceImpl implements UserShopService{
      */
     @Override
     public MSG usershopGFind(int good_id, int status) {
-        UserShop usgfind = userShopMapper.usershopFind(good_id,status);
-        return new MSG(1,"查看成功",usgfind);
+        RMessage rMessage = new RMessage();
+        rMessage.setGoods(userShopMapper.usershopGFind(good_id));
+        rMessage.setC(userShopMapper.usershopGFind1(rMessage.getGoods().getShop_id()));
+        return new MSG(1,"查看成功",rMessage);
     }
 
     /**
@@ -44,7 +47,7 @@ public class UserShopServiceImpl implements UserShopService{
      */
     @Override
     public MSG usershopSFind(int shop_id, int status) {
-        Shop ussfind  = userShopMapper.usershopSFind(shop_id,status);
+        Shop ussfind  = userShopMapper.usershopSFind(shop_id);
         return new MSG(1,"查看成功",ussfind);
     }
 
@@ -54,9 +57,31 @@ public class UserShopServiceImpl implements UserShopService{
      * 输入 user_id,shop_id,good_id,status
      */
     @Override
-    public MSG usershopAdd(int user_id, int good_id, int shop_id, int status) {
-        userShopMapper.usershopInsert(user_id,shop_id,good_id,status);
+    public MSG usershopAdd1(int user_id, int good_id) {
+        userShopMapper.usershopInsert1(user_id,good_id);
         return new MSG(1,"添加成功");
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 在收藏夹里添加店铺信息
+     * 输入 user_id,shop_id,good_id,status
+     */
+
+    @Override
+    public MSG usershopAdd2(int user_id, int shop_id) {
+        userShopMapper.usershopInsert2(user_id,shop_id);
+        return new MSG(1,"添加成功");
+    }
+
+    /**
+     * Created by ZhouLiangWei
+     * 在收藏夹里删除店铺信息
+     * 输入 user_id,shop_id,good_id,status
+     */
+    @Override
+    public MSG usershopDelete1(int shop_id) {
+        userShopMapper.delete2(shop_id);
+        return new MSG(1,"删除成功");
     }
 
     /**
@@ -65,8 +90,10 @@ public class UserShopServiceImpl implements UserShopService{
      * 输入 user_id,shop_id,good_id,status
      */
     @Override
-    public MSG usershopDelete(int shop_id) {
-        userShopMapper.delete(shop_id);
+    public MSG usershopDelete2(int good_id) {
+        userShopMapper.delete1(good_id);
         return new MSG(1,"删除成功");
     }
+
+
 }

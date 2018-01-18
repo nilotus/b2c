@@ -3,9 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>用户登录</title>
-		<link rel="stylesheet" type="text/css" href="../css/login.css" />
-		<link rel="stylesheet" type="text/css" href="../css/zui.css" />
-		<link rel="stylesheet" href="../css/bootstrap.min.css">  
+		<link rel="stylesheet" type="text/css" href="./css/login.css" />
+		<link rel="stylesheet" type="text/css" href="./dist/css/zui.lite.css" />
+		<link rel="stylesheet" type="text/css" href="./dist/css/zui.lite.min.css" />
+		<link rel="stylesheet" type="text/css" href="./dist/css/zui.min.css" />
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
 			body {
 	   	 			margin:0;
@@ -20,13 +24,13 @@
 	<body>
 		<div id="container" >
 			<div id="header" >
-					<img src="../img/5.png">
+					<img src="img/5.png">
 				
 			</div>
 			
 			<div id="main" >
 					<div id="left" >
-						<img src="../img/100.jpg">		
+						<img src="img/100.jpg">
 					</div>
 					
 					<div id="right" >
@@ -35,6 +39,29 @@
 								<fieldset>
 								<legend><h2>欢迎登录</h2></legend>
 									<br /><br />
+									<div class="input-group" style="margin:20px 1px 1px 1px ;width: 405px;">
+										<span class="input-group-addon" id="basic-addon1" style="width:50px">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>
+	 										 <input type="text" class="form-control" placeholder="由字母或数字组成" aria-describedby="basic-addon1">
+									</div>
+									<div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+										<span class="input-group-addon" style="width:50px">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+										<input type="text" class="form-control" placeholder="由6-12位数字或字母组成" aria-label="Amount (to the nearest dollar)">
+									</div>
+									<br />
+									<div class="switch switch-inline" style="float: left;">
+									  <input type="checkbox">
+									  <label>记住密码</label>
+									</div>
+									<a href="./register.html" style="font-size: 15px;float:right;margin-right: 0px;">免费注册</a><br />
+									<br />
+									<button type="button" class="btn btn-info btn-block"
+										style="margin-left: 40px;height: 50px;width: 330px;font-size: 20px;">登  录</button>
+
+								</fieldset>
+						<div style="margin-top: 20px;"></div>
+					</div>
+			</div>
+			<div id="footer" style="background-color: #FFFFFF;">
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>
 	 										 <input type="text" class="form-control" placeholder="由字母或数字组成" aria-describedby="basic-addon1">
@@ -50,8 +77,8 @@
 									</div>
 									<a href="register1.html" class="em">免费注册</a><br />
 									<br />
-									<button type="button" class="btn btn-info btn-block">登  录</button>   
-					
+									<button type="button" class="btn btn-info btn-block">登  录</button>
+
 								</fieldset>
 						<div id="null"></div>
 					</div>
