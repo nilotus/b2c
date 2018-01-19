@@ -24,9 +24,10 @@ header{
 	float:left;
 
 }
-.shop_right{
+.shop_right {
 	height: 230px;
 	width: 540px;
+}
 
 #main {
 	margin: 0 auto;
