@@ -32,70 +32,21 @@
 					<a href="../html/personal.html">个人中心</a>
 			</ul>
 		</div>
-		<div>
-			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-				</ol>
+		<div class="w">
+		<!--商品列表-->
+		<div class="container">
 
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="../img/01.jpg" usemap="milk1" class="pic">
-							<map name="milk1" id="milk1">
-								<area shape="default" href="../html/goods.html" />
-							</map>
-						<div class="carousel-caption">
-						</div>
-					</div>
-					<div class="item">
-						<img src="../img/02.jpg" usemap="milk2" class="pic">
-							<map name="milk2" id="milk2">
-								<area shape="default" href="../html/goods.html" />
-							</map>
-						<div class="carousel-caption">
-						</div>
-					</div>
-					<div class="item">
-						<img src="../img/03.jpg" usemap="milk3" class="pic">
-							<map name="milk3" id="milk3">
-								<area shape="default" href="../html/goods.html" />
-							</map>
-						<div class="carousel-caption">
-						</div>
-					</div>
-				</div>
-			</div>
-				<div id="main">
-					<div class="window">
-						<div class="row">
-							<div class="col-sm-6 col-md-4">
-								<div class="thumbnail">
-									<img src="../img/stuff.jpg">
-									<div class="caption">
-										<h3 align="center">神舟笔记本</h3>
-										<p align="center">性能超强</p>
-										<p align="center" class="price">￥<label class="price">6666</label></p>
-										<p>
-											<a href="../html/goods.html" class="btn btn-default" role="button">立即抢购</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 		</div>
+
+		</div>
+
 	</body>
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-	$('#carousel-example-generic').carousel({interval:1000});
-	});
+
 	</script>
 
 <script>
@@ -112,34 +63,28 @@ $(function(){
   	console.log('shop_id:'+shop_id);
   	$.ajax({
 	type:"get",
-	url:"/goods/goodsinfo/shop_id",
+	url:'/goods/shopinfo/'+shop_id,
 	async:true,
 	dataType:"json",
 	success :function(data){
-		var str ="<div>"
-		$.each(data.data,function(index,val){
-			str += "<div class='col-sm-6 col-md-4'>"
-                +"<div class='thumbnail'>"
-            +"<img src="+val.img+">"
-            +"<div class='caption'>"
-            +"<h3 align='center'>"+val.name+"</h3>"
-            +"<p align='center'>"+val.describe+"</p>"
-            +"<p align='center' class='price'>￥<label class='price'>"+val.price+"</label></p>"
-            +"<p>"
-            +"<a href='../html/goods.html' class='btn btn-default'role='button'>立即抢购</a>"
-            +"</p>"
-            +"</div>"
-            +"</div>"
-            +"</div>"
-		})
-		str+="</div>"
-		$('.row').append(str);
-	},
-	error:function(){
-		alert(error)
-	}
-});
+        var str = "<ul>";
+        $.each(data.data,function (index,val) {
+            str += "<li><a><img src="+val.img+"></a>"
+                +"<p>"+val.name+"</p><p class='price'>"+val.price+"</p></li>";
+
+        })
+
+        str += "</ul>";
+        $('.container').append(str);
+
+    },
+        error: function () {
+            alert("failed!");
+        }
+    })
 })
+
+
 
 </script>
 </html>

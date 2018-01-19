@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    @Select("SELECT good_id,name,price,img FROM Goods")
+    @Select("SELECT good_id,shop_id,name,price,img FROM Goods")
     List<Goods> browseAll();
     /*sql语句多表查询*/
     @Select("SELECT name,price,img,restname,describe FROM Goods WHERE good_id =#{good_id}")
