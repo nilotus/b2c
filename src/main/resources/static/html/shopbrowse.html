@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>浏览店铺</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/shopbrowse.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shop.css">
+	<style>
+		body {
+			background-color: #f7f7f7;
+		}
+	</style>
+</head>
+<body>
+	<!--快速导航栏-->
+	<div class="shortcut w">
+
+		<ul class="fl city">
+			<li>
+				<a href="#">南京</a>
+		</ul>
+		<ul class="fr">
+			<li>
+				<a href="../html/login.html">你好，请登录 </a>
+				<a href="../html/register.html" class="f10">免费注册</a>
+			<li class="space">
+			<li>
+				<a href="../html/order.html">我的订单</a>
+			<li class="space">
+			<li>
+				<a href="../html/shopping-cart2.html">我的购物车</a>
+			<li class="space">
+			<li>
+				<a href="../html/favourite1.html">我的收藏</a>
+			<li class="space">
+			<li>
+				<a href="../html/personal.html">个人中心</a>
+		</ul>
+	</div>
+	<div class="w">
+		<div class="container">
+
+		</div>
+	</div>
+		
+		
+</body>
+
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: '/shop/browse',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                var str = "<ul>";
+                $.each(data.data,function (index,val) {
+                    str += "<li><p>"+val.name+"</p><a href='shopindex.html?shop_id="+val.shop_id+"'><img src="+val.img+"></a> </li>";
+                })
+                str += "</ul>";
+                $('.container').append(str);
+
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    })
+</script>
+</html>

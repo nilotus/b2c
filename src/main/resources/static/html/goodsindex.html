@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>宝贝详情</title>
-    <link rel="stylesheet" type="text/css" href="../css/description.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/goodsindex.css"/>
     <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
     <style>
         body {
@@ -16,51 +16,11 @@
 </head>
 <body>
 
-<div id="header" class="w">
-    <img src="../img/5.jpg">
+<div id="1">
 
 </div>
 
-<!--中间部分-->
-<div class="main w">
-    <div class="main_left fl">
-        <div class="main_left_t">
-            <h2>韩国•It's skin 柔肤水1号一瓶修复水</h2>
-            <input value="131243455" id="goodsId" type="hidden"/>
-        </div>
 
-        <div class="main_left_b" id="div1">
-            <div class="small_pic">
-                <span class="mark"></span>
-                <span class="float_layer"></span>
-                <img src="../img/40.jpg">
-            </div>
-
-            <div class="big_pic">
-                <img src="../img/41.jpg">
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="main_right fr">
-        <div class="main_right_t">
-            <p>适用于全部肌肤，春夏秋冬都适用的高机能健康柔肤水！再生修复，修复血丝、淡化细纹、收缩毛孔！It‘s skin 引以为傲的蜗牛原液，
-                你永远模仿不了！it‘s skin 1号柔肤水，见证肌肤还幼真像！</p>
-        </div>
-
-        <div class="main_right_b">
-
-            <p class="price"><span class="yuan">¥</span>319<span class="oldprice">¥880</span></p>
-            <button type="button" class="gouwuche" id="button1" onclick="gouwuche();">加入购物车</button>
-            <button type="button" class="shoucang" id="button2" onclick="shoucang();">加入收藏夹</button>
-        </div>
-    </div>
-
-</div>
 
 <!--商品详情-->
 <div class=" detail w">
@@ -186,5 +146,77 @@
     }
 
 
+</script>
+
+<script>
+    $(function () {
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+        //接收URL中的参数shop_id
+        var good_id = getUrlParam('good_id');
+        console.log('good_id:' + good_id);
+        $.ajax({
+            type: "get",
+            url: '/goods/shopinfo/' + good_id,
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                var str = "<div>";
+                $.each(data.data,function (index,val) {
+                    str += "<div>"
+                    +"<div id='header' class='w' "
+                    +"<img src='"+val.img+"' "
+                    +"</div>"
+                     +"  <div class='main w'>"
+                    +" <div class='main_left fl'>"
+                    +" <div class='main_left_t'>"
+                    +" <h2>韩国•It's skin 柔肤水1号一瓶修复水</h2>"
+                       +" <input value='131243455' id='goodsId' type='hidden'/>"
+                        +"</div>"
+                        +"<div class='main_left_b' id='div1'>"
+                        +"<div class='small_pic'>"
+                        +"<span class='mark'></span>"
+                        +"<span class='float_layer'></span>"
+                        +"<img src='../img/40.jpg'>"
+                        +"</div>"
+
+                        +"<div class='big_pic'>"
+                        +"<img src='../img/41.jpg'>"
+
+                        +"</div>"
+
+                        +"</div>"
+
+                        +"</div>"
+                        +" <div class='main_right fr'>"
+                    +" <div class='main_right_t'>"
+                    +"  <p>适用于全部肌肤，春夏秋冬都适用的高机能健康柔肤水！再生修复，修复血丝、淡化细纹、收缩毛孔！It‘s skin 引以为傲的蜗牛原液，你永远模仿不了！it‘s skin 1号柔肤水，见证肌肤还幼真像！</p>"
+                    +" </div>"
+
+                    +" <div class='main_right_b'>"
+
+                    +"  <p class='price'><span class='yuan'>¥</span>319<span class='oldprice'>¥880</span></p>"
+                    +"<button type='button' class='gouwuche' id='button1' onclick='gouwuche();'>加入购物车</button>"
+                    +" <button type='button' class='shoucang' id='button2' onclick='shoucang();'>加入收藏夹</button>"
+                    +"  </div>"
+                    +"</div>"
+
+                    +"  </div>";
+                })
+
+                str += "</div>";
+                $('#1').append(str);
+
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    })
 </script>
 </html>
