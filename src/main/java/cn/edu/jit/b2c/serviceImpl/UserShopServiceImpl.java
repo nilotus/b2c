@@ -27,7 +27,7 @@ public class UserShopServiceImpl implements UserShopService{
         return new MSG(1,"查看成功",uslook);
     }
 
-    /**
+    /**TODO
      * Created by ZhouLiangWei
      * 查看用户收藏夹的商品信息
      * 输出status，good_id,shop_id

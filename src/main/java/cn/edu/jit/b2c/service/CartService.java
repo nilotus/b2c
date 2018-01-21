@@ -7,5 +7,5 @@ public interface CartService {
     MSG goodsCheckTwo(int good_id);
     MSG goodsCheckThree(int cart_id);
     MSG goodsAdd(int good_id,int user_id,int good_num);
-    MSG goodsDelete(int good_id);
+    MSG goodsDelete(int cart_id);
 }
