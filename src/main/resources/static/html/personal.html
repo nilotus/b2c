@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../css/personal.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="..css/zui.css" />
+
+	</head>
+	<style>
+		body {
+			background-image: url(../img/D.jpg);
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+
+		<link rel="stylesheet" href="./css/personal.css" />
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="dist/css/zui.css" />
+
+	</head>
+	<style>
+		body{
+			background-color: #F6F6F6;
+		}
+	</style>
+	<body>
+		<!--快速导航栏-->
+		<div class="shortcut w">
+
+			<ul class="fl city">
+				<li>
+					<a href="#">南京</a>
+			</ul>
+			<ul class="fr">
+				<li>
+					<a href="./login.html">你好，请登录 </a>
+					<a href="./register.html" class="f10">免费注册</a>
+				<li class="space">
+				<li>
+					<a href="order.html">我的订单</a>
+				<li class="space">
+				<li>
+					<a href="shopping-cart2.html">我的购物车</a>
+				<li class="space">
+				<li>
+					<a href="favourite1.html">我的收藏</a>
+				<li class="space">
+				<li>
+					<a href="personal.html">个人中心</a>
+			</ul>
+		</div>
+		<div id="container">
+			<div align="center" ; "margin-bottom: 10px;">
+				<img src="img/5.png" />
+			</div>
+			<div class="box1">
+				<div class="row" style="width: 296px;height: 296px;position: relative; top: 50px;">
+					<div class="col-xs-6 col-md-3" style="width: 296px;height: 296px;">
+						<a href="#" class="thumbnail">
+							<img src="img/timg.png">
+						</a>
+					</div>
+				</div>
+				<div class="panel" style=" width: 700px;height: 250px; float: right; position:relative; bottom: 240px;">
+					<div class="panel-heading" style="text-align: left;width: 698px;">
+						个&nbsp;人&nbsp;信&nbsp;息
+					</div>
+					<div class="panel-body">
+					<p style="float: left;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</p><p id="name" style="float: left;">123</p><br /><br />
+					<p style="float: left;">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号:</p>&nbsp;<p id="phone" style="float: left;">12345678901</p><br /><br />
+					<p style="float: left;">身&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;证:</p><p id="ide" style="float: left;">1234567890123457</p><br /><br />
+					<p style="float: left;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</p><p id="email" style="float: left;">296237028@qq.com</p><br /><br />
+					<p style="float: left;">收&nbsp;货&nbsp;地&nbsp;址:</p><p id="address" style="float: left;">北京三环王府井</p>
+					<!-- Button trigger modal -->
+						<button type="button" style=" position:relative; bottom: 20px; float: right;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+						  编辑
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">个人信息</h4>
+						      </div>
+						      <div class="modal-body">
+						        <div class="input-group" style="margin:20px 1px 1px 1px ;width: 405px;">
+									<span class="input-group-addon" id="basic-addon1" style="width:50px">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号</span>
+ 										 <input type="text" class="form-control" aria-describedby="basic-addon1">
+								</div>
+									<div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+										<span class="input-group-addon" style="width:50px">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+										<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									</div>
+									<div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+										<span class="input-group-addon" style="width:50px">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+										<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									</div>
+									<div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+										<span class="input-group-addon" style="width:50px">收&nbsp;货&nbsp;地&nbsp;址</span>
+										<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									</div>
+						    	</div>
+						    	<div class="modal-footer">
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        	<button type="button" class="btn btn-primary">Save changes</button>
+						      	</div>
+						   </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box2">
+				<div style="position: relative;left: 50px;top: 120px; float: left;">
+					<img src="img/cart.png" usemap="shopping-cart" style=" vertical-align: middle; width: 250px; height: 250px;"/>
+				</div>
+				<map name="shopping-cart" id="shopping-cart">
+					<area shape="default" href="shopping-cart.html"/>
+				</map>
+				<div style="position: relative;left: 150px; top: -100px; float: left;">
+					<img src="img/order.png" usemap="order" style="width: 250px; height: 250px;"/>
+				</div>
+				<map name="order" id="order">
+					<area shape="default" href="order.html"/>
+				</map>
+				<div style="position: relative;left: 250px; top: -100px; float: left;">
+					<img src="img/collect.png" usemap="collect" style="width: 250px; height: 250px;"/>
+				</div>
+				<map name="collect" id="collect">
+					<area shape="default" href="favourite1.html"/>
+				</map>
+			</div>
+			<div id="footer">
+				<p>联系我们：115607029@qq.com</p>
+			</div>
+	</body>
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+					<a href="register1.html" class="f10">免费注册</a>
+					<li class="space">
+						<li>
+							<a href="order1.html">我的订单</a>
+							<li class="space">
+								<li>
+									<a href="shopping-cart.html">我的购物车</a>
+									<li class="space">
+										<li>
+											<a href="favourite1.html">我的收藏</a>
+											<li class="space">
+												<li>
+													<a href="personal.html">个人中心</a>
+			</ul>
+		</div>
+		<div id="container">
+			<div align="center" ;>
+				<img src="../img/5.jpg" />
+			</div>
+			<div class="box1">
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<a href="#" class="thumbnail">
+							<img src="../img/timg.png" id="pic">
+						</a>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						个&nbsp;人&nbsp;信&nbsp;息
+					</div>
+					<div class="panel-body">
+						<p class="box">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</p>
+						<p id="name">123</p><br /><br />
+						<p class="box">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号:</p>&nbsp;
+						<p id="phone">12345678901</p><br /><br />
+						<p class="box">身&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;证:</p>
+						<p id="ID">1234567890123457</p><br /><br />
+						<p class="box">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</p>
+						<p id="email">296237028@qq.com</p><br /><br />
+						<p class="box">收&nbsp;货&nbsp;地&nbsp;址:</p>
+						<p id="address">北京三环王府井</p>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+						  编辑
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">个人信息</h4>
+									</div>
+									<div class="modal-body">
+										<div class="input-group">
+											<span class="input-group-addon" id="basic-addon1">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号</span>
+											<input type="text" class="form-control" aria-describedby="basic-addon1">
+										</div>
+										<div class="input-group">
+											<span class="input-group-addon">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+											<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+										</div>
+										<div class="input-group">
+											<span class="input-group-addon">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+											<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+										</div>
+										<div class="input-group">
+											<span class="input-group-addon">收&nbsp;货&nbsp;地&nbsp;址</span>
+											<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary" id="save">Save changes</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box2">
+					<div id="cart">
+						<img src="../img/cart.png" usemap="shopping-cart" class="img" />
+					</div>
+					<map name="shopping-cart" id="shopping-cart">
+					<area shape="default" href="shopping-cart.html"/>
+				</map>
+					<div id="order1">
+						<img src="../img/order.png" usemap="order" class="img" />
+					</div>
+					<map name="order" id="order">
+					<area shape="default" href="order1.html"/>
+				</map>
+					<div id="fa">
+						<img src="../img/collect.png" usemap="collect" class="img" />
+					</div>
+					<map name="collect" id="collect">
+					<area shape="default" href="favourite1.html"/>
+				</map>
+				</div>
+				<div id="footer">
+					<p>联系我们：115607029@qq.com</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+
+</html>

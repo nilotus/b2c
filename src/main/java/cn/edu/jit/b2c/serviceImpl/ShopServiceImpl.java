@@ -9,6 +9,8 @@ import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShopServiceImpl implements ShopService {
     @Autowired
@@ -22,7 +24,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public MSG shopBrowse(){
-        Shop shop =shopMapper.browse();
+        List<Shop> shop =shopMapper.browse();
         return new MSG(1,"浏览商品",shop);
     }
 
@@ -35,7 +37,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public MSG shopFindAll(String key) {
-        Shop shop =shopMapper.findAll(key);
+        List<Shop> shop =shopMapper.findAll(key);
         return new MSG(1,"搜索成功",shop);
     }
 

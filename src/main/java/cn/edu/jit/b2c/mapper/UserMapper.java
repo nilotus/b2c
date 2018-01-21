@@ -3,6 +3,8 @@ package cn.edu.jit.b2c.mapper;
 import cn.edu.jit.b2c.pojo.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 
 public interface UserMapper {
@@ -11,7 +13,7 @@ public interface UserMapper {
     @Insert("INSERT INTO User(phone,password,role_id,name,address,email) VALUES(#{phone},#{password},#{role_id},#{name},#{address},#{email})")
     boolean addUser(User user);
     @Select("SELECT phone,role_id,name,address,email FROM User")
-    User findAll();
+    List<User> findAll();
     @Select("SELECT phone,role_id,name,role_id,address,email FROM User WHERE user_id =#{user_id}")
     User findOne(@Param("user_id") int user_id);
     @Delete("DELETE FROM User WHERE user_id =#{user_id}")

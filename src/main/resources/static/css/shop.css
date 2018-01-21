@@ -1,0 +1,196 @@
+.w{
+	width: 1190px;
+	margin: 0 auto;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	height:140px;
+	background-color: #F5F7F8;
+}
+.shop{
+	height: 230px;
+	width: 1150px;
+	margin: 0 auto;
+
+
+}
+.shop_left{
+	height: 230px;
+	width: 540px;
+
+	float:left;
+
+}
+.shop_right {
+	height: 230px;
+	width: 540px;
+}
+
+.main {
+	margin: 0 auto;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+}
+
+#1{
+
+}
+#2{
+
+}
+
+.window {
+	width: 332px;
+	height: 520px;
+	float: left;
+	margin: 10px;
+
+
+}
+
+.pic{
+	width: 100%; height: 600px;
+}
+
+.dele{
+	position: relative;
+	width: 40px;
+	height: 20px;
+	left: 50px;
+	top:20px;
+}
+
+.cart{
+	position: relative;
+	width: 100px;
+	height: 20px;
+	left: 120px;
+	top: 0px;
+}
+
+.w{
+	width: 100%;
+	margin: 0 auto;
+}
+.fl{
+	float:left;
+
+}
+.fr{
+	float:right;
+}
+ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+}
+h1 input button {
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #F6F6F6;
+}
+.f10{
+	color: #EE0030;
+}
+a{
+	text-decoration: none;
+	color:#999999 ;
+	font-size: 12px;
+	margin: 8px;
+}
+a:hover{
+	color: #FF0033;
+}
+.shortcut{
+	height: 32px;
+	border-bottom:1px solid #DDDDDD ;
+	background-color: #F2F2F2;
+	font-size: 12px;
+	line-height: 30px;
+	color: #999;
+}
+.shortcut li{
+	float:left;
+	
+}
+header{
+	height:100px;
+	background-color: #F5F7F8;
+}
+.city{
+	margin-left: 200px;
+	
+}
+input button{
+	border: 0;
+	outline: none;
+	
+}
+
+.space{
+	width: 1px;
+	height: 10px;
+	background-color: #ccc;
+	margin: 10px 12px 0;
+	
+}
+.middle{
+	height: 140px;
+	background-color: #F5F7F8;
+	position: relative;
+}
+.logo{
+	position: absolute;
+	top: -30px;
+	left:0;
+	box-shadow: 0px -10px 10px rgba(0,0,0,.3);
+}
+.logo a{
+	display: block;
+	width: 190px;
+	height: 170px;
+	background: url(../img/logo.jpg) no-repeat;
+}
+.form{
+	width: 550px;
+	height: 35px;
+	position: absolute;
+	top:25px;
+	left:320px;
+}
+.form input{
+	width:495px;
+	height:33px;
+	border:1px solid #F93A60;
+	float: left;
+	font-size: 14px;
+	padding-left:3px;
+}
+.form button{
+	width: 50px;
+	height: 35px;
+	background-color: #F93A60;
+	float: left;
+}
+.row{
+	margin: 0 auto;  position: relative; width: 340px;height: 440px;
+}
+.col-sm-6{
+	margin: 0 auto; position: relative; width: 340px; height: 440px;
+}
+
+.price{
+	font-size: x-large;
+}
+.btn{
+	position: relative;  
+	left: 95px;
+}

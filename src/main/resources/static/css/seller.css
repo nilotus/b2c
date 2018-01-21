@@ -1,0 +1,42 @@
+.introduction{
+	padding: 15px;
+}
+.echarts1{
+	width: 1050px;
+	height: 700px;
+	margin: 50px;
+	/*border: 1px solid #C9C5C5;*/
+	 padding: 20px;
+}
+.echarts{
+	width: 950px;
+	height: 500px;
+	margin: 50px;
+	/*border: 1px solid #C9C5C5;*/
+	 padding: 20px;
+}
+.left{
+	width: 500px;
+	height: 400px;
+	margin : 30px;
+	padding: 20px;
+	border:1px solid #C9C5C5;
+	float: left;
+	
+}
+.right{
+	width: 500px;
+	height: 400px;
+	padding: 20px;
+	border:1px solid #C9C5C5;
+	margin : 30px;
+	float: right;
+}
+.style{
+	text-align: center;
+	color: #66997B;
+}
+.wid{
+	height: 35px;
+	font-size: 20px;
+}

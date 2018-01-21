@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/login111.css"/>
+    <style>
+        body {
+            margin:0;
+            background: url(../img/122.jpg);
+            background-attachment: fixed;
+
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="goods w">
+        <h1>欢迎登录</h1>
+    </div>
+
+    <div class="d">
+
+
+        <form action="" method="" onkeydown="if(event.keyCode==13)return false;">
+
+            <!--<div class="register-box">-->
+                <!--<label for="loginName" class="username_label"><span>用 户 名</span>-->
+                    <!--<input maxlength="20" id="loginName" type="text" placeholder="您的用户名和登录名">-->
+                <!--</label>-->
+                <!--<div class="tips">-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="register-box">
+                <label for="loginName" class="other_label"><span>用户名</span>
+                    <input id="loginName" maxlength="20" type="text" placeholder="建议使用常用手机">
+                </label>
+                <div class="tips">
+
+                </div>
+            </div>
+
+
+            <div class="register-box">
+                <label for="pwd" class="other_label"><span> 密 码</span>
+                    <input maxlength="20"  id="pwd" type="password" placeholder="建议使用两种字符组合">
+                </label>
+                <div class="tips">
+
+                </div>
+            </div>
+            <div class="r">
+                <a href="register111.html">立即注册</a>
+
+            </div>
+            <div class="submit_btn">
+                <button type="button" id="login-button" onclick="login()">立 即 登 录</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</body>
+
+
+<script src="../js/jquery-3.2.1.min.js" charset="utf-8"></script>
+<script src="../js/login.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+    function login() {
+        console.log(1);
+        $('#login-button').click(function () {
+            $('#form').serialize();
+        })
+
+        $.ajax({
+            type: 'post',
+            url: '/user/login',
+            async: true,
+            dataType: 'json',
+            data: {
+                phone: $('#loginName').val(),
+                password: $('#pwd').val()
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == -1) {
+                    alert(data.msg);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function () {
+                alert("failed!");
+
+            }
+
+        })
+    }
+</script>
+
+</html>

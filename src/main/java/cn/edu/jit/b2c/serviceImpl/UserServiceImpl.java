@@ -13,6 +13,8 @@ import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static cn.edu.jit.b2c.util.SmsDemo.sendSms;
 
 @Service
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MSG userFindAll(){
-        User userAll =userMapper.findAll();
+        List<User> userAll =userMapper.findAll();
         return new MSG(1,"查询成功",userAll);
     }
 

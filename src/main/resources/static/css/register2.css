@@ -1,0 +1,58 @@
+#container {
+					margin-left:auto;
+					margin-right:auto; 
+					text-align:center;
+					width:1050px;  
+	}
+#header{
+		/*float:left;*/
+		margin-bottom: 10px;
+		
+}	
+
+#main{
+	
+		float:left;
+		width:100%;	
+		margin-bottom: 10px;
+}
+
+#main #left{
+	float: left;
+	height: 600px;
+	width: 60%;
+	
+}
+
+#main #right {
+	float: right;
+	font-size : 25px;
+    height: 600px;
+    width: 40%;
+
+}
+
+.form{
+	font-size: 16px;
+	font-family: Tahoma;
+}
+
+#footer {
+    background-color:#D2D7D3;
+    height: 30px;
+    padding:3px;
+    text-align:right;
+    overflow:hidden;
+    clear:both;
+   }
+
+.button{
+	font-size: 15px;
+	float:right;
+	margin-right: 60px;
+}
+.button1{
+	margin-left: 30px;
+	width:300px;
+
+}

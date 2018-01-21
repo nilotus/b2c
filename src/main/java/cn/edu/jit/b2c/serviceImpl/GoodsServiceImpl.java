@@ -49,7 +49,7 @@ public class GoodsServiceImpl implements GoodsService{
      */
 
     public MSG goodsBrowseShop(int shop_id){
-        Goods goods =goodsMapper.browseShop(shop_id);
+        List<Goods> goods =goodsMapper.browseShop(shop_id);
         return new MSG(1,"浏览成功",goods);
     }
 
@@ -62,7 +62,7 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public MSG goodsFindAll(String key){
-        Goods goods =goodsMapper.findAll(key);
+        List<Goods> goods =goodsMapper.findAll(key);
         return new MSG(1,"搜索成功",goods);
     }
 
@@ -74,7 +74,7 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public MSG goodsFindShop(int shop_id, String key){
-        Goods goods =goodsMapper.findShop(shop_id,key);
+        List<Goods> goods =goodsMapper.findShop(shop_id,key);
         return new MSG(1,"搜索成功",goods);
     }
 
@@ -126,7 +126,8 @@ public class GoodsServiceImpl implements GoodsService{
      */
     @Override
     public MSG goodsSaleNum(int good_id){
-        int salenum =goodsMapper.salenum(good_id);
+        Goods num =goodsMapper.salenum(good_id);
+        int salenum=num.getTotalnum()-num.getRestnum();
         return new MSG(1,"查询成功",salenum);
     }
 }
