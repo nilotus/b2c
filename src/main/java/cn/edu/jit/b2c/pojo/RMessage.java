@@ -1,5 +1,7 @@
 package cn.edu.jit.b2c.pojo;
 
+import java.util.List;
+
 public class RMessage {
     private Cart cart;
     private Goods goods;

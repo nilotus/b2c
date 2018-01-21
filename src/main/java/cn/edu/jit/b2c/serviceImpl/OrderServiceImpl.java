@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private UserMapper userMapper;
 
-    /**
+    /**TODO
      * Created by ZhouLiangWei
      * 直接下订单
      * 输入 user_id, good_id, time, status, good_num, price ，shop_id和 totalprice
@@ -32,7 +32,6 @@ public class OrderServiceImpl implements OrderService{
         rMessage.setGoods(orderMapper.findPSid(good_id));
         float price = rMessage.getGoods().getPrice();
         int shop_id = rMessage.getGoods().getShop_id();
-
         Goods g_img = orderMapper.findimg(good_id);
         String img = g_img.getImg();
         orderMapper.insertimg(img);
@@ -55,14 +54,10 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
-
-
     /**
      * Created by ZhouLiangWei
      * 付款（未完成）
      */
-
-
 
 
     /**
@@ -100,7 +95,9 @@ public class OrderServiceImpl implements OrderService{
         return new MSG(1,"已确认收货");
     }
 
-    /**
+
+
+    /**TODO
      * Created by ZhouLiangWei
      * 取消订单
      * 申请退款，申请退货
@@ -141,15 +138,20 @@ public class OrderServiceImpl implements OrderService{
         }
         return new MSG(1,"查看成功",jsonOrderList);
     }
-
     public JsonOrder Order2JsonOrder(Order order){
         //TODO
         JsonOrder jsonOrder = new JsonOrder();
         User user = userMapper.findOne(order.getUser_id());
         jsonOrder.setUsername(user.getName());
         switch (order.getStatus()){
+            case 1:
+                jsonOrder.setStatus("待付款");
+                break;
+            case 2:
+                jsonOrder.setStatus("待发货");
+                break;
             case 3:
-                jsonOrder.setStatus("已付款");
+                jsonOrder.setStatus("配送中");
                 break;
             case 4:
                 jsonOrder.setStatus("已收货");

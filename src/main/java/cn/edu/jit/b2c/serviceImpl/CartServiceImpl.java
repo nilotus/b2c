@@ -3,27 +3,46 @@ package cn.edu.jit.b2c.serviceImpl;
 import cn.edu.jit.b2c.mapper.CartMapper;
 import cn.edu.jit.b2c.pojo.Cart;
 import cn.edu.jit.b2c.pojo.Goods;
+import cn.edu.jit.b2c.pojo.JsonCart;
 import cn.edu.jit.b2c.pojo.RMessage;
 import cn.edu.jit.b2c.service.CartService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService{
     @Autowired
     private CartMapper cartMapper;
+
     /**
      * Created by ZhouLiangWei
      * 查看商量功能1
-     * 根据user_id输出cart_id,good_id
+     * 根据user_id输出商品的name,price,img
      */
     @Override
     public MSG goodsCheckOne(int user_id) {
-        Goods goods1 = cartMapper.checkone(user_id);
-        return new MSG(1,"查看成功",goods1);
+        List<Cart> cart = cartMapper.checkone(user_id);
+        List<JsonCart> jsonCartList = new ArrayList<>();
+        for(int i= 0 ;i< cart.size();i++)
+        {
+            jsonCartList.add(Cart2JsonOrder(cart.get(i)));
+        }
+        return new MSG(1,"查看成功",jsonCartList);
+    }
+
+    public JsonCart Cart2JsonOrder(Cart cart){
+        JsonCart jsonCart = new JsonCart();
+        Goods goods = cartMapper.checktwo1(cart.getGood_id());
+        jsonCart.setGood_name(goods.getName());
+        jsonCart.setImg(goods.getImg());
+        jsonCart.setPrice(goods.getPrice());
+        jsonCart.setGood_id(goods.getGood_id());
+        jsonCart.setCart_id(cart.getCart_id());
+        return  jsonCart;
     }
 
     /**
@@ -35,9 +54,10 @@ public class CartServiceImpl implements CartService{
     public MSG goodsCheckTwo(int good_id) {
         RMessage  rMessage = new RMessage();
         rMessage.setGoods(cartMapper.checktwo1(good_id));
-        rMessage.setC(cartMapper.checktwo2(good_id));
+        rMessage.setC(cartMapper.checktwo2(rMessage.getGoods().getShop_id()));
         return new MSG(1,"浏览成功",rMessage);
     }
+
 
     /**
      * Created by ZhouLiangWei
@@ -50,10 +70,12 @@ public class CartServiceImpl implements CartService{
         return new MSG(1,"查看成功",goods3);
     }
 
-    /**
+
+
+    /**TODO
      * Created by ZhouLiangWei
      * 添加购物车
-     * 将商品的属性都加入cart表中
+     * 根据good_id,user_id,good_num将商品的属性都加入cart表中
      */
     @Override
     public MSG goodsAdd(int good_id, int user_id, int good_num) {
@@ -62,7 +84,6 @@ public class CartServiceImpl implements CartService{
 
         float price = rMessage.getGoods().getPrice() * good_num;
         int shop_id = rMessage.getGoods().getShop_id();
-
         cartMapper.insertCart(user_id, good_id, good_num, price, shop_id);
         return new MSG(1,"添加成功");
     }
@@ -73,8 +94,9 @@ public class CartServiceImpl implements CartService{
      * 将该商品good_id的删除
      */
     @Override
-    public MSG goodsDelete(int good_id) {
-        cartMapper.delete(good_id);
+    public MSG goodsDelete(int cart_id) {
+        cartMapper.delete(cart_id);
         return new MSG(1,"删除成功");
     }
+
 }

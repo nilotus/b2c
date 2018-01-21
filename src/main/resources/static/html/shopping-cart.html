@@ -4,12 +4,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>我的购物车</title>
-
 		<link href="../css/shopping-cart2.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="../css/shopping-cart.css">
+		<link href="../css/shopping-cart.css" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-
+		<script type="text/javascript" src="../js/jquery.1.4.2-min.js"></script>
+<!--		<script type="text/javascript" src="../js/Calculation.js"></script>-->
 		<script type="text/javascript">
 			$(document).ready(function() {
 
@@ -21,6 +20,7 @@
 							$(this).attr("checked", true);
 						});
 						GetCount();
+						setTotal();
 
 					} else {
 						$(".gwc_tb2 input[name=newslist]").each(function() {
@@ -31,6 +31,7 @@
 							}
 						});
 						GetCount();
+						setTotal();
 
 					}
 
@@ -39,58 +40,49 @@
 				// 输出
 				$(".gwc_tb2 input[name=newslist]").click(function() {
 					GetCount();
+                    setTotal();
 				});
 			});
+
+            function setTotal() {
+                var s = 0;
+                $(".gwc_tb2 tr").each(function() {
+                    if($(this).find('input[type=checkbox]').is(":checked")) {
+                        s += parseInt($(this).find('input[class*=text_box]').val()) *
+                            parseFloat($(this).find('label[class*=price]').text());
+                    }
+                });
+                $("#total").html(s.toFixed(2));
+
+            }
+			//******************
 			function GetCount() {
 				var conts = 0;
 				var aa = 0;
 				$(".gwc_tb2 input[name=newslist]").each(function() {
 					if($(this).attr("checked")) {
 						for(var i = 0; i < $(this).length; i++) {
-							conts += parseInt($(this).val());
 							aa += 1;
 						}
 					}
 				});
 				$("#shuliang").text(aa);
-				$("#zong1").html((conts).toFixed(2));
-				$("#jz1").css("display", "none");
-				$("#jz2").css("display", "block");
+				debugger
+				if(aa==0){
+                    $("#jz1").css("display", "block");
+                    $("#jz2").css("display", "none");
+				}else{
+                    $("#jz1").css("display", "none");
+                    $("#jz2").css("display", "block");
+				}
+//				$("#total").html((conts).toFixed(2));
+
 			}
 		</script>
 
 	</head>
 
 	<body>
-		<!--快速导航栏-->
-		<div class="shortcut w">
-
-			<ul class="fl city">
-				<li>
-					<a href="#">南京</a>
-			</ul>
-			<ul class="fr">
-				<li>
-					<a href="./login.html">你好，请登录 </a>
-					<a href="register1.html" class="f10">免费注册</a>
-				<li class="space">
-				<li>
-					<a href="order1.html">我的订单</a>
-				<li class="space">
-				<li>
-					<a href="shopping-cart2.html">我的购物车</a>
-				<li class="space">
-				<li>
-					<a href="favourite1.html">我的收藏</a>
-				<li class="space">
-				<li>
-					<a href="personal.html">个人中心</a>
-			</ul>
-		</div>
-		
-		<div align="center" ; "margin-bottom: 10px;">
-			<img src="../img/5.jpg" />
-		</div>
 
 		<div class="gwc" style=" margin:auto;">
 			<table cellpadding="0" cellspacing="0" class="gwc_tb1">
@@ -98,181 +90,150 @@
 					<td class="tb1_td1"><input id="Checkbox1" type="checkbox" class="allselect" /></td>
 					<td class="tb1_td1">全选</td>
 					<td class="tb1_td3">商品</td>
+					<td class="tb1_td4">商品信息</td>
 					<td class="tb1_td5">数量</td>
-					<td class="tb1_td6">价格</td>
+					<td class="tb1_td6">单价</td>
 					<td class="tb1_td7">操作</td>
 				</tr>
 			</table>
 
 			<!---商品加减算总数---->
-			<script type="text/javascript">
-				$(function() {
-					var t = $("#text_box1");
-					$("#add1").click(function() {
-						t.val(parseInt(t.val()) + 1)
-						setTotal();
-						GetCount();
-					})
-					$("#min1").click(function() {
-						if(t.val() > 0) {
-							t.val(parseInt(t.val()) - 1)
-							setTotal();
-							GetCount();
-						}
-					})
+		<script type="text/javascript">
+		function  bindClick() {
+            $(".add").click(function() {
+                var t = $(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val()) + 1)
+                setTotal();
+            })
+            $(".min").click(function() {
+                var t = $(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val()) - 1)
+                if(parseInt(t.val()) < 0) {
+                    t.val(0);
+                }
+                setTotal();
+            })
 
-					function setTotal() {
+        }
 
-						$("#total1").html((parseInt(t.val()) * 9).toFixed(2));
-						$("#newslist-1").val(parseInt(t.val()) * 9);
+        function setTotal() {
+            var s = 0;
+            $(".gwc_tb2 tr").each(function() {
+                if($(this).find('input[type=checkbox]').is(":checked")) {
+                    s += parseInt($(this).find('input[class*=text_box]').val()) *
+                        parseFloat($(this).find('label[class*=price]').text());
+                }
+            });
+            $("#total").html(s.toFixed(2));
+
+        }
+           $(function() {
+
+               $.ajax({
+                   type: "post",
+                   url: "/cart/userlook",
+                   data: {user_id: 22},
+                   async: true,
+                   dataType: "json",
+                   success: function (data) {
+                       if (data.code == 1) {
+                           var result = data.data;
+                           for (var i = 0; i < result.length; i++) {
+                               var str = '' +
+                                   '<tr id="'+result[i].cart_id+'">\n' +
+                                   '<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist1" /></td>\n' +
+                                   '<td class="tb2_td2">\n' +
+                                   '<a href="#"><img src="'+result[i].img+'" /></a>\n' +
+                                   '</td>\n' +
+                                   '<td class="tb2_td3">\n' +
+                                   '<a href="#">'+result[i].good_name+'</a>\n' +
+                                   '</td>\n' +
+                                   '<td class="tb1_td4">一件</td>\n' +
+                                   '<td class="tb1_td5">\n' +
+                                   '<input class="min" name="" type="button" value="-" />\n' +
+                                   '<input class="text_box" name="" type="text" value="0"/>\n' +
+                                   '<input class="add" name="" type="button" value="+" />\n' +
+                                   '</td>\n' +
+                                   '<td class="tb1_td6"><label class="price">'+result[i].price+'</label></td>\n' +
+                                   '<td class="tb1_td7">\n' +
+                                   '<button type="button" onclick="deleteCart('+result[i].cart_id+')">删除</button>\n' +
+                                   '</td>\n' +
+                                   '</tr>'
+
+                               $('.gwc_tb2').append(str);
+                           }
+                       }
+                       bindClick();
+                   }
+               });
+
+				//setTotal();
+			});
+
+			function deleteCart(id) {
+				$.ajax({
+					type: "delete",
+					url: "/cart/delgoods/"+id,
+					async: true,
+					dataType: "json",
+					success:function(){
+						$('tr[id='+id+']').remove();
 					}
-					setTotal();
-				})
-			</script>
+				});
+			}
+
+		</script>
 
 			<table cellpadding="0" cellspacing="0" class="gwc_tb2">
 				<tr>
-					<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-1" /></td>
+					<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist1" /></td>
 					<td class="tb2_td2">
-						<a href="goods.html"><img src="../img/img1.jpg" /></a>
+						<a href="#"><img src="../img/img2.jpg" /></a>
 					</td>
 					<td class="tb2_td3">
-						<a href="goods.html">旺仔小馒头</a>
+						<a href="#">产品标题</a>
 					</td>
+					<td class="tb1_td4">一件</td>
 					<td class="tb1_td5">
-						<input id="min1" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="-" />
-						<input id="text_box1" name="" type="text" value="1" style=" width:30px; text-align:center; border:1px solid #ccc;" />
-						<input id="add1" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="+" />
+						<input class="min" name="" type="button" value="-" />
+						<input class="text_box" name="" type="text" value="0"/>
+						<input class="add" name="" type="button" value="+" />
 					</td>
-					<td class="tb1_td6"><label id="total1" class="tot" style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
+					<td class="tb1_td6"><label class="price">9.00</label></td>
+					<td class="tb1_td7">
+						<a href="#">删除</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist2" /></td>
+					<td class="tb2_td2">
+						<a href="#"><img src="../img/img2.jpg" /></a>
+					</td>
+					<td class="tb2_td3">
+						<a href="#">产品标题</a>
+					</td>
+					<td class="tb1_td4">一件</td>
+					<td class="tb1_td5">
+						<input class="min" name="" type="button" value="-" />
+						<input class="text_box" name="" type="text" value="0"/>
+						<input class="add" name="" type="button" value="+" />
+					</td>
+					<td class="tb1_td6"><label class="price">9.00</label></td>
 					<td class="tb1_td7">
 						<a href="#">删除</a>
 					</td>
 				</tr>
 			</table>
 
-			<!--商品加减算总数-->
-			<script type="text/javascript">
-				$(function() {
-					var t = $("#text_box2");
-					$("#add2").click(function() {
-						t.val(parseInt(t.val()) + 1)
-						setTotal();
-						GetCount();
-					})
-					$("#min2").click(function() {
-						if(t.val() > 0) {
-							t.val(parseInt(t.val()) - 1)
-							setTotal();
-							GetCount();
-						}
-					})
-
-					function setTotal() {
-
-						$("#total2").html((parseInt(t.val()) * 8).toFixed(2));
-						$("#newslist-2").val(parseInt(t.val()) * 8);
-					}
-					setTotal();
-				})
-			</script>
-			
-			<table cellpadding="0" cellspacing="0" class="gwc_tb2">
-				<tr>
-					<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-2" /></td>
-					<td class="tb2_td2">
-						<a href="goods.html"><img src="../img/img1.jpg" /></a>
-					</td>
-					<td class="tb2_td3">
-						<a href="goods.html">旺仔小馒头</a>
-					</td>
-					<td class="tb1_td5">
-						<input id="min2" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="-" />
-						<input id="text_box2" name="" type="text" value="1" style=" width:30px; text-align:center; border:1px solid #ccc;" />
-						<input id="add2" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="+" />
-					</td>
-					<td class="tb1_td6"><label id="total2" class="tot" style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
-					<td class="tb1_td7">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-			</table>
-			
-			<script type="text/javascript">
-				$(function() {
-					var t = $("#text_box3");
-					$("#add3").click(function() {
-						t.val(parseInt(t.val()) + 1)
-						setTotal();
-						GetCount();
-					})
-					$("#min3").click(function() {
-						if(t.val() > 0) {
-							t.val(parseInt(t.val()) - 1)
-							setTotal();
-							GetCount();
-						}
-					})
-
-					function setTotal() {
-
-						$("#total3").html((parseInt(t.val()) * 10).toFixed(2));
-						$("#newslist-3").val(parseInt(t.val()) * 10);
-					}
-					setTotal();
-				})
-			</script>
-			
-			<table cellpadding="0" cellspacing="0" class="gwc_tb2">
-				<tr>
-					<td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-3" /></td>
-					<td class="tb2_td2">
-						<a href="goods.html"><img src="../img/img1.jpg" /></a>
-					</td>
-					<td class="tb2_td3">
-						<a href="goods.html">旺仔小馒头</a>
-					</td>
-					<td class="tb1_td5">
-						<input id="min3" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="-" />
-						<input id="text_box3" name="" type="text" value="1" style=" width:30px; text-align:center; border:1px solid #ccc;" />
-						<input id="add3" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="+" />
-					</td>
-					<td class="tb1_td6"><label id="total3" class="tot" style="color:#ff5500;font-size:14px; font-weight:bold;"></label></td>
-					<td class="tb1_td7">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-			</table>
-
-			<!--总数-->
-			<script type="text/javascript">
-				$(function() {
-					$(".quanxun").click(function() {
-						setTotal();
-					});
-
-					function setTotal() {
-						var len = $(".tot");
-						var num = 0;
-						for(var i = 0; i < len.length; i++) {
-							num = parseInt(num) + parseInt($(len[i]).text());
-
-						}
-						$("#zong1").text(parseInt(num).toFixed(2));
-						$("#shuliang").text(len.length);
-					}
-				})
-			</script>
 			<table cellpadding="0" cellspacing="0" class="gwc_tb3">
 				<tr>
 					<td class="tb1_td1">&nbsp;</td>
 					<td class="tb1_td1">&nbsp;</td>
 					<td class="tb3_td1">&nbsp;</td>
-					<td class="tb3_td2">已选 <label id="shuliang" style="color:#ff5500;font-size:14px; font-weight:bold;">0</label>种商品 </td>
-					<td class="tb3_td3">合计(不含运费):<span>￥</span><span style=" color:#ff5500;"><label id="zong1" style="color:#ff5500;font-size:14px; font-weight:bold;"></label></span></td>
-					<td class="tb3_td4">
-						<span id="jz1">结算</span>
-						<a href="order1.html" style=" display:none;" class="jz2" id="jz2">结算</a>
+					<td class="tb3_td2">已选<label id="shuliang">0</label>种商品</td>
+					<td class="tb3_td3">合计(不含运费):<span>￥</span><span id="num"><label id="total"></label></span></td>
+					<td class="tb3_td4"><span id="jz1">结算</span>
+						<a href="#" style=" display:none;" class="jz2" id="jz2">结算</a>
 					</td>
 				</tr>
 			</table>
