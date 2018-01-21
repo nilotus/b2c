@@ -29,7 +29,7 @@ public class GoodsController {
      * 详细浏览特定商品
      * 输出name，price，img，describe店铺名
      */
-    @GetMapping("/goodsinfo/{good_id}")
+    @GetMapping("/info/{good_id}")
     public MSG goodsBrowseOne(@PathVariable("good_id") int good_id) throws IOException{
         return goodsService.goodsBrowseOne(good_id);
     }

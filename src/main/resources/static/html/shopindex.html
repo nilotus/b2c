@@ -81,7 +81,7 @@
             success: function (data) {
                 var str = "<ul>";
                 $.each(data.data,function (index,val) {
-                    str += "<li><a><img src="+val.img+"></a>"
+                    str +=  "<li><a href='goodsindex.html?good_id="+val.good_id+"'><img src="+val.img+"></a>"
                         +"<p>"+val.name+"</p><p class='price'>"+val.price+"</p></li>";
                 })
 

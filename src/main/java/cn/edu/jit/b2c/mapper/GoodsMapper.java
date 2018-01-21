@@ -10,7 +10,7 @@ public interface GoodsMapper {
     @Select("SELECT good_id,shop_id,name,price,img FROM Goods")
     List<Goods> browseAll();
     /*sql语句多表查询*/
-    @Select("SELECT name,price,img,restname,describe FROM Goods WHERE good_id =#{good_id}")
+    @Select("SELECT good_id,name,price,img,`describe`  FROM Goods WHERE good_id =#{good_id}")
     Goods browseOne1(@Param("good_id") int good_id);
     @Select("SELECT Shop.name FROM Goods,Shop WHERE Goods.good_id=#{good_id} AND Shop.shop_id=Goods.shop_id")
     String browseOne2(@Param("good_id") int good_id);

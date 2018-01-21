@@ -35,11 +35,11 @@ public class GoodsServiceImpl implements GoodsService{
 
     public MSG goodsBrowseOne(int good_id){
         Goods goods=goodsMapper.browseOne1(good_id);
-        String name=goodsMapper.browseOne2(good_id);
-        RMessage rMessage=new RMessage();
-        rMessage.setC(name);
-        rMessage.setGoods(goods);
-        return new MSG(1,"浏览成功",rMessage);
+       // String name=goodsMapper.browseOne2(good_id);
+        //RMessage rMessage=new RMessage();
+       // rMessage.setC(name);
+       // rMessage.setGoods(goods);
+        return new MSG(1,"浏览成功",goods);
     }
 
     /**
