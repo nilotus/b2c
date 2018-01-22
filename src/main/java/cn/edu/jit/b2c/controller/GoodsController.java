@@ -49,7 +49,7 @@ public class GoodsController {
      * 全局搜索功能（商品）
      * 输入关键字跳出模糊查询的商品图片
      */
-    @GetMapping("/search")
+    @RequestMapping("/searchGoods")
     public MSG goodsFindAll(@RequestParam("key") String key) throws IOException{
         return goodsService.goodsFindAll(key);
     }

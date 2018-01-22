@@ -62,7 +62,11 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public MSG goodsFindAll(String key){
-        List<Goods> goods =goodsMapper.findAll(key);
+        List<Goods> goods = goodsMapper.findAll(key);
+        if (goods.size() == 0) {
+            return new MSG(-1,"没有商品");
+        }
+        System.out.println(goods);
         return new MSG(1,"搜索成功",goods);
     }
 
