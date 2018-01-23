@@ -125,9 +125,9 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public MSG userUpdate(int user_id, String phone, String password, int role_id, String name, String address, String email){
+    public MSG userUpdate(int user_id,String name, String address, String email){
         boolean result;
-        result=userMapper.update(user_id,phone,password, role_id, name,address, email);
+        result=userMapper.update(user_id,name,address, email);
         if(result)
             return new MSG(1,"修改信息成功");
 

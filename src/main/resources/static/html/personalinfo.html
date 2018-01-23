@@ -16,6 +16,12 @@
 		width: 100%;
 		height: 100%;
 	}
+	.input-group{
+		width: 450px;
+	}
+	.input-group-addon{
+		width:100px;
+	}
 </style>
 
 <body>
@@ -32,7 +38,7 @@
 			<a href="./register.html" class="f10">免费注册</a>
 		<li class="space">
 		<li>
-			<a href="order.html">我的订单</a>
+			<a href="order1.html">我的订单</a>
 		<li class="space">
 		<li>
 			<a href="shopping-cart.html">我的购物车</a>
@@ -45,38 +51,25 @@
 	</ul>
 </div>
 <div id="container">
-	<div align="center" ;>
+	<div align="center" >
 		<img src="../img/5.png" />
 	</div>
 	<div class="box1">
+		<!-- 头像 -->
 		<div class="row">
-			<img src="../img/img2.jpg" id="pic">
-			<button type="button" id="ed" class="btn btn-primary" data-toggle="button" autocomplete="off">
-				编辑头像
-			</button>
+			<button type='button' id='ed' class='btn btn-primary' data-toggle='button' autocomplete='off'> 编辑头像 </button>
 		</div>
-
+		<!-- 展示信息 -->
 		<div class="panel">
-			<div class="panel-heading">
-				个人信息
-			</div>
-			<div class="panel-body">
-				<div class="box">昵称:</div>
-				<p id="name">123</p><br /><br />
-				<div class="box">手机号:</div>
-				<p id="phone">12345678901</p><br /><br />
-				<div class="box">身份证:</div>
-				<p id="ID">1234567890123457</p><br /><br />
-				<div class="box">邮箱:</div>
-				<p id="email">296237028@qq.com</p><br /><br />
-				<div class="box">收货地址:</div>
-				<p id="address">北京三环王府井</p>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-					编辑
-				</button>
+			<div class="panel-heading">个人信息</div>
 
-				<!-- Modal -->
+			<div class="panel-body">
+
+			</div>
+				<!-- 编辑信息按钮 -->
+				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >编辑</button>
+
+				<!-- 编辑信息-->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -84,33 +77,31 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<h4 class="modal-title" id="myModalLabel">个人信息</h4>
 							</div>
-							<div class="modal-body">
-								<div class="input-group">
-									<div class="input-group-addon" id="basic-addon1">手机号</div>
-									<input type="text" class="form-control" aria-describedby="basic-addon1">
-								</div>
-								<div class="input-group">
+							<form action="">
+								<div class="modal-body">
+									<div class="input-group">
 									<div class="input-group-addon">昵称</div>
-									<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									<input type="text" id="1" class="form-control" aria-label="Amount (to the nearest dollar)">
 								</div>
-								<div class="input-group">
+									<div class="input-group">
 									<div class="input-group-addon">邮箱</div>
-									<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									<input type="text" id="2" class="form-control" aria-label="Amount (to the nearest dollar)">
 								</div>
-								<div class="input-group">
+									<div class="input-group">
 									<div class="input-group-addon">收货地址</div>
-									<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+									<input type="text" id="3" class="form-control" aria-label="Amount (to the nearest dollar)">
 								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="save">Save changes</button>
-							</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" id="save" onclick="update()">Save changes</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
+		<!-- 购物车收藏夹订单 -->
 		<div class="box2">
 			<div id="cart">
 				<img src="../img/cart1.png" usemap="shopping-cart" class="img" />
@@ -139,5 +130,81 @@
 </body>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<!-- 展示信息ajax -->
+<script>
+    //获取cookie中的id
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    $(function () {
 
+        //接收URL中的参数user_id
+        var user_id='22';
+        console.log('user_id:' + user_id);
+        $.ajax({
+            type: "get",
+            url: '/user/selectInfo/' + user_id,
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                var str1="<img src='"+data.data.img+"' id='pic'> ";
+				var str2="<div class='box'>昵称:</div>"
+                +"<p id='name'>"+data.data.name+"</p><br /><br />"
+                +" <div class='box'>手机号:</div>"
+                +" <p id='phone'>"+data.data.phone+"</p><br /><br />"
+                +"  <div class='box'>邮箱:</div>"
+                +"<p id='email'>"+data.data.email+"</p><br /><br />"
+                +" <div class='box'>收货地址:</div>"
+                +"<p id='address'>"+data.data.address+"</p>";
+                $('.row').append(str1);
+				$('.panel-body').append(str2);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    })
+</script>
+<!-- 编辑信息ajax -->
+<script>
+    //获取cookie中的id
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    function update() {
+
+        //接收URL中的参数user_id
+        var user_id='22';
+        console.log('user_id:' + user_id);
+        $.ajax({
+            type: "post",
+            url: '/user/updataInfo/' + user_id,
+            async: true,
+            dataType: "json",
+			data:{
+                name:$('#1').val(),
+				email:$('#2').val(),
+				address:$('#3').val()
+			},
+            success: function (data) {
+                if(data.code == -1){
+                    alert(data.msg);
+                }
+                else {
+                    alert(data.msg);
+				}
+            },
+            error: function () {
+                alert("修改信息失败!");
+            }
+        })
+    }
+
+</script>
 </html>

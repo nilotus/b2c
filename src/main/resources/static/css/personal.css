@@ -58,7 +58,7 @@
 	padding-bottom: 20px;
 	padding-top: 20px;
 	height: 40px;
-	bottom: 20px;
+	bottom: -30px;
 	float: right;
 }
 #save{
@@ -106,8 +106,8 @@
 
 #ed{
 	position: relative;
-	top: 150px;
-	right: 95px;
+	top: 196px;
+	right: -60px;
 }
 
 .box{
@@ -119,8 +119,8 @@
 }
 
 #pic {
-	width: 120px;
-	height: 120px;
+	width: 210px;
+	height: 210px;
 	position: relative;
 	left: 50px;
 }
