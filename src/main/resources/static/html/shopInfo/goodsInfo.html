@@ -163,7 +163,7 @@
                     id: 'goods'
                     , elem: '#demo'
                     , height: 500
-                    , url: '/goods/goodsinfoshop/'+shop_id //数据接口
+                    , url: '/goods/shopinfo/'+shop_id //数据接口
                     , page: true //开启分页
                     , cols: [[ //表头
                         {field: 'shop_id', title: '商品ID', width: 80, sort: true, type: 'checkbox'}
@@ -210,7 +210,7 @@
                             layer.alert(d.msg, {icon: 1});
                             layui.layer.close(index);
                             layui.table.reload('goods', {
-                                url: '/goods/goodsinfoshop/'+shop_id,
+                                url: '/goods/shopinfo/'+shop_id,
                                 where: {}
                             });
                         }

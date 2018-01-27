@@ -138,7 +138,7 @@
                     id: 'shop'
                     , elem: '#demo'
                     , height: 500
-                    , url: '/shop/browse' //数据接口
+                    , url: '/shop/browseByUser' //数据接口
                     , page: false //开启分页
                     , cols: [[ //表头
                         {field: 'shop_id', title: '店铺ID', width: 80, sort: true, type: 'checkbox'}
@@ -171,7 +171,7 @@
                             layer.alert(d.msg, {icon: 1});
                             layui.layer.close(index);
                             layui.table.reload('shop', {
-                                url: '/shop/browse',
+                                url: '/shop/browseByUser',
                                 where: {}
                             });
                         }

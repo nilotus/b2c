@@ -25,7 +25,9 @@ public class ShopController {
         return shopService.shopBrowse();
     }
 
-    @GetMapping("/browse")
+
+
+    @GetMapping("/browseByUser")
     public MSG shopBrowseByUser(HttpServletRequest request) throws  IOException{
         return shopService.shopBrowseByUser(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
     }

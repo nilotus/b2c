@@ -34,6 +34,8 @@ public class GoodsController {
         return goodsService.goodsBrowseOne(good_id);
     }
 
+
+
     /**
      * Created by SunFuRong
      * 浏览店铺内商品

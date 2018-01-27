@@ -39,7 +39,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public MSG shopBrowseByUser(int user_id){
-        List<Shop> shopList = (List<Shop>) shopMapper.browseOne(user_id);
+        List<Shop> shopList =shopMapper.browseByUser(user_id);
         return new MSG(0,"浏览商品",shopList, shopList.size());
     }
     /**

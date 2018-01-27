@@ -10,6 +10,8 @@ import java.util.List;
 public interface ShopMapper {
     @Select("SELECT shop_id,name,img FROM Shop")
     List<Shop> browse();
+    @Select("SELECT shop_id,`name`,img,`describe` FROM Shop WHERE user_id =#{user_id}")
+    List<Shop> browseByUser(@Param("user_id") int user_id);
     @Select("SELECT shop_id,`name`,img,`describe` FROM Shop WHERE shop_id =#{shop_id}")
     Shop browseOne(@Param("shop_id") int shop_id);
     @Select("SELECT shop_id,name,img FROM Shop WHERE name like CONCAT(CONCAT('%', #{key}), '%')")
