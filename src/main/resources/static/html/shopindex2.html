@@ -68,7 +68,8 @@
 					</div>
 					<!-- 收藏-->
 					<div class="col-md-1 but">
-						<button type="button" class="btn btn-info">收藏</button>
+						<button type="button" class="btn btn-info" onclick='shoucang();'>收藏</button>
+
 					</div>
 					<!-- 搜索-->
 					<div class="col-md-4">
@@ -408,6 +409,41 @@
             }
         })
     })
+
+
+	/*添加收藏夹*/
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    function shoucang() {
+        //接收URL中的参数shop_id TODO
+        var shop_id = getUrlParam('shop_id');
+        console.log('shop_id:' + shop_id);
+        $.ajax({
+            type: 'get',
+            url: '/usershop/user_add2',
+            async: true,
+            dataType: 'json',
+            data: {
+                user_id:22,
+                shop_id:shop_id,
+            },
+            success: function(data) {
+                console.log(data);
+                if(data.original == 0) {
+                    alert(data.info);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function() {
+                alert("failed!");
+            }
+        });
+    }
 
 </script>
 </html>

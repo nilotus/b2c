@@ -1,5 +1,6 @@
 package cn.edu.jit.b2c.controller;
 
+import cn.edu.jit.b2c.pojo.PushOrder;
 import cn.edu.jit.b2c.service.OrderService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping("order")
@@ -16,12 +18,13 @@ public class OrderController {
 
     /**
      * Created by ZhouLiangWei
-     * 直接下订单
+     * 下订单
      * 输入 user_id, good_id, time, status, good_num, price ，shop_id和 totalprice
      */
-    @GetMapping("/dirent")
-    public MSG purchaseDirent(int user_id, int good_id, Timestamp time, int status, int good_num) throws IOException{
-        return orderService.purchaseDirent(user_id,good_id,time,status,good_num);
+    @PostMapping("/dirent")
+    public MSG purchaseDirent(@RequestBody PushOrder pushOrder) throws IOException{
+        System.out.println(pushOrder);
+         return orderService.purchaseDirent(pushOrder.getUser_id(),pushOrder.getGood_id(),pushOrder.getGood_num());
     }
 
     /**
@@ -31,17 +34,6 @@ public class OrderController {
     @PostMapping("/lookall")
     public  MSG lookall() throws IOException{
         return orderService.ordersBrowseAll();
-    }
-
-    /**
-     * Created by ZhouLiangWei
-     * 购物车下订单
-     * 输入 总价格toatl-pee，改变状态
-     */
-    @GetMapping("/pcart")
-    public MSG purchaseCart(int user_id, int good_id, Timestamp time, int status,
-                            int good_num, float price, int shop_id, int cart_id)  throws IOException{
-        return orderService.purchaseCart(user_id,good_id,time,status,good_num,price,shop_id,cart_id);
     }
 
 
@@ -71,44 +63,101 @@ public class OrderController {
      * 改变状态为4
      */
     @PostMapping("/confirmrece")
-    public MSG confirmrece(int status, int order_id) throws IOException {
-        return orderService.confirmrece(status,order_id);
+    public MSG confirmrece( int order_id) throws IOException {
+        return orderService.confirmrece(order_id);
     }
 
 
     /**
      * Created by ZhouLiangWei
-     * 查看订单
+     * 查看全部订单
      */
-    @PostMapping("/lookorder/{order_id}")
-    public  MSG lookorder(@PathVariable("order_id") int order_id) throws IOException{
-        return  orderService.lookorder(order_id);
+    @PostMapping("/lookorder/{user_id}")
+    public  MSG lookorder(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder(user_id);
+    }
+
+    /**
+     * Created by ZhouLiangWei
+     * 查看未付款订单
+     */
+    @PostMapping("/lookorder1/{user_id}")
+    public  MSG lookorder1(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder1(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看待收货订单
+     */
+    @PostMapping("/lookorder2/{user_id}")
+    public  MSG lookorder2(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder2(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看已收货订单
+     */
+    @PostMapping("/lookorder3/{user_id}")
+    public  MSG lookorder3(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder3(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看退货中订单
+     */
+    @PostMapping("/lookorder4/{user_id}")
+    public  MSG lookorder4(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder4(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看已退货订单
+     */
+    @PostMapping("/lookorder5/{user_id}")
+    public  MSG lookorder5(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder5(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看退款中订单
+     */
+    @PostMapping("/lookorder6/{user_id}")
+    public  MSG lookorder6(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder6(user_id);
+    }
+    /**
+     * Created by ZhouLiangWei
+     * 查看已退款订单
+     */
+    @PostMapping("/lookorder7/{user_id}")
+    public  MSG lookorder7(@PathVariable("user_id") int user_id) throws IOException{
+        return  orderService.lookorder7(user_id);
     }
 
     /**
      * Created by ZhouLiangWei
      * 删除订单
      */
-    @DeleteMapping("/cancelorder1")
-    public MSG cancelorder1(int status, int order_id) throws  IOException{
-        return orderService.cancelorder1(status,order_id);
+    @GetMapping("/cancelorder1/{order_id}")
+    public MSG cancelorder1(@PathVariable int order_id) throws  IOException{
+        return orderService.cancelorder1(order_id);
     }
 
     /**
      * Created by ZhouLiangWei
      * 申请退款
      */
-    @PostMapping("/cancelorder2")
-    public MSG cancelorder2(int status, int order_id) throws IOException{
-        return orderService.cancelorder2(status,order_id);
+    @GetMapping("/cancelorder2/{order_id}")
+    public MSG cancelorder2(@PathVariable("order_id") int order_id) throws IOException{
+        return orderService.cancelorder2(order_id);
     }
 
     /**
      * Created by ZhouLiangWei
      * 申请退货
      */
-    @PostMapping("/cancelorder3")
-    public MSG cancelorder3(int status, int order_id) throws IOException{
-        return orderService.cancelorder3(status,order_id);
+    @GetMapping("/cancelorder3/{order_id}")
+    public MSG cancelorder3(@PathVariable("order_id") int order_id) throws IOException{
+        return orderService.cancelorder3(order_id);
     }
 }

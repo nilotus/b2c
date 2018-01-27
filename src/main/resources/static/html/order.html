@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单</title>
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/order.css">
+	</head>
+	<body>
+		<!--快速导航栏-->
+		<div class="shortcut w">
+
+			<ul class="fl city">
+				<li>
+					<a href="#">南京</a>
+			</ul>
+			<ul class="fr">
+				<li>
+					<a href="./login.html">你好，请登录 </a>
+					<a href="./register.html" class="f10">免费注册</a>
+				<li class="space">
+				<li>
+					<a href="order.html">我的订单</a>
+				<li class="space">
+				<li>
+					<a href="shopping-cart.html">我的购物车</a>
+				<li class="space">
+				<li>
+					<a href="favourite1.html">我的收藏</a>
+				<li class="space">
+				<li>
+					<a href="personal.html">个人中心</a>
+			</ul>
+		</div>
+		<div align="center" ;>
+			<img src="../img/5.png" />
+		</div>
+		<div id="title">
+			<div class="m">
+				<p id="time">时间</p>
+			</div>
+			<div class="m">
+				<p id="info">订单详情</p>
+			</div>
+			<div class="m">
+				<p id="man">收货人</p>
+			</div>
+			<div class="m">
+				<p id="value">单价</p>
+			</div>
+			<div class="m">
+				<p id="num">数量</p>
+			</div>
+			<div class="dropdown">
+				<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				全部
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dLabel">
+					<li><a href="status1.html">待付款</a></li>
+					<li><a href="status2.html">待收货</a></li>
+					<li><a href="status3.html">已收货</a></li>
+					<li><a href="status4.html">退货中</a></li>
+					<li><a href="status5.html">已退货</a></li>
+					<li><a href="status6.html">退款中</a></li>
+					<li><a href="status7.html">已退款</a></li>
+				</ul>
+			</div>
+			<div class="m">
+				<p id="operate">操作</p>
+			</div>
+		</div>
+
+		<div class="mark">
+		</div>
+
+
+		<div id="tail">
+
+		</div>
+	</body>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script>
+        $.ajax({
+            type: "post",
+            url: "/order/lookorder/"+22,
+            /* data: {order_id: 13},*/
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                console.log(status);
+                if (data.code == 1) {
+                    var result = data.data;
+                    var total = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        var str = '' +
+                            '<p class="time" >' + formatLocalDate(result[i].time) + '</p>\n' +
+                            '<div class="stuff">\n' +
+                            '<a href="goodsindex.html?good_id='+result[i].good_id+'"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
+                            '<div class="dis">\n' +
+                            '<a href="goodsindex.html?good_id='+result[i].good_id+'">' + result[i].description + '</a>\n' +
+                            '</div>\n' +
+                            '<div class="user">\n' +
+                            '<span class="name">' + result[i].username + '</span>\n' +
+                            '</div>\n' +
+                            '<div class="value">\n' +
+                            '<label class="price">' + result[i].price + '</label>\n' +
+                            '</div>\n' +
+                            '<div class="num">\n' +
+                            '<label class="number">' + result[i].good_num + '</label>\n' +
+                            '</div>\n' +
+                            '<div class="state">\n' +
+                            '<label class="situation">'+ result[i].status +'</label>\n' +
+                            '</div>\n' +
+                            '<div class="dele11">\n' +
+                            '<a href="goodsindex.html?good_id='+result[i].good_id+'">查看</a>\n' +
+                            '</div>\n' +
+                            '</div>'
+                        $('.mark').append(str);
+                    }
+                } else {
+                    console.log(data.message);
+                }
+            }
+        });
+        //转换时间
+        function formatLocalDate(now) {
+            if(!now)
+                now = new Date();
+            else
+                now = new Date(now);
+            var tzo = -now.getTimezoneOffset(),
+                dif = tzo >= 0 ? '+' : '-',
+                pad = function(num) {
+                    norm = Math.abs(Math.floor(num));
+                    return (norm < 10 ? '0' : '') + norm;
+                };
+            return now.getFullYear()
+                + '-' + pad(now.getMonth()+1)
+                + '-' + pad(now.getDate())
+                + ' ' + pad(now.getHours())
+                + ':' + pad(now.getMinutes())
+                + ':' + pad(now.getSeconds());
+        };
+	</script>
+	<script src="../js/bootstrap.min.js"></script>
+</html>

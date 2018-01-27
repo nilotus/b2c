@@ -78,13 +78,12 @@ public class CartServiceImpl implements CartService{
      * 根据good_id,user_id,good_num将商品的属性都加入cart表中
      */
     @Override
-    public MSG goodsAdd(int good_id, int user_id, int good_num) {
-        RMessage rMessage = new RMessage();
+    public MSG goodsAdd(int good_id, int user_id) {
+        RMessage rMessage= new RMessage();
         rMessage.setGoods(cartMapper.findSidP(good_id));
-
-        float price = rMessage.getGoods().getPrice() * good_num;
-        int shop_id = rMessage.getGoods().getShop_id();
-        cartMapper.insertCart(user_id, good_id, good_num, price, shop_id);
+        float price = rMessage.getGoods().getPrice();
+         int shop_id = rMessage.getGoods().getShop_id();
+        cartMapper.insertCart(user_id, good_id, price, shop_id);
         return new MSG(1,"添加成功");
     }
 

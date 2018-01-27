@@ -21,8 +21,8 @@ public class CartController {
      * 查看商量功能1
      * 根据user_id输出商品的name,price,img
      */
-    @PostMapping("/userlook")
-    public MSG goodCheckOne(int user_id) throws IOException {
+    @PostMapping("/userlook/{user_id}")
+    public MSG goodCheckOne(@PathVariable("user_id") int user_id) throws IOException {
         return cartService.goodsCheckOne(user_id);
     }
 
@@ -51,8 +51,8 @@ public class CartController {
      * 添加商品
      */
     @GetMapping("/addgoods")
-    public MSG goodsAdd(int good_id, int user_id, int goodnum) throws IOException{
-        return cartService.goodsAdd(good_id,user_id,goodnum);
+    public MSG goodsAdd(@RequestParam("good_id") int good_id, @RequestParam("user_id") int user_id) throws IOException{
+        return cartService.goodsAdd(good_id,user_id);
     }
 
     /**

@@ -5,6 +5,12 @@
 	width: 1050px;
 }
 
+#btn{
+	position: relative;
+	align-content: center;
+	background-color: #e7e7e7;
+}
+
 #title {
 	background-color: #E64346;
 	border: 1px solid #D3D3D3;

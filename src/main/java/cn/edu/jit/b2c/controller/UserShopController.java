@@ -16,71 +16,57 @@ public class UserShopController {
 
     /**
      * Created by ZhouLiangWei
-     * 查看用户收藏夹的所有属性
-     * 输出status，good_id,shop_id
+     * 根据用user_id查看用户收藏夹的所有商品信息
+     * 输出所有商品信息的name，img，price，describe
      */
     @PostMapping("/uslook/{user_id}")
     public MSG usershopLook(@PathVariable("user_id") int user_id) throws IOException {
         return userShopService.usershopLook(user_id);
     }
 
-    /**
-     * Created by ZhouLiangWei
-     * 查看用户收藏夹的商品信息
-     * 输出status，good_id,shop_id
-     */
-    @PostMapping("/usglook")
-    public MSG usershopGLook(int good_id, int status) throws IOException {
-        return userShopService.usershopGFind(good_id, status);
-    }
 
     /**
      * Created by ZhouLiangWei
-     * 查看用户收藏夹的店铺信息
-     * 输出店铺的name，img
+     * 根据用user_id查看用户收藏夹的所有店铺信息
+     * 输出所有店铺信息的name，img，describe
      */
-    @PostMapping("/usslook")
-    public MSG usershopSLook(int shop_id, int status) throws IOException {
-        return userShopService.usershopSFind(shop_id, status);
+    @PostMapping("/uhlook/{user_id}")
+    public MSG usershopLook1(@PathVariable("user_id") int user_id) throws IOException {
+        return userShopService.usershopLook1(user_id);
     }
+
+
 
     /**
      * Created by ZhouLiangWei
      * 在收藏夹里添加商品信息
      * 输入 user_id,shop_id,good_id,status
      */
-    @PostMapping("/usadd1")
-    public MSG usershopAdd1(int user_id,int good_id) throws IOException {
+    @GetMapping("/user_add1")
+    public MSG usershopAdd1(@RequestParam("user_id") int user_id,@RequestParam("good_id") int good_id) throws IOException {
         return userShopService.usershopAdd1(user_id, good_id);
     }
+
+
+
 
     /**
      * Created by ZhouLiangWei
      * 在收藏夹里添加店铺信息
      * 输入 user_id,shop_id,good_id,status
      */
-    @PostMapping("/usadd2")
-    public MSG usershopAdd2(int user_id,int shop_id) throws IOException {
+    @GetMapping("/user_add2")
+    public MSG usershopAdd2(@RequestParam("user_id") int user_id,@RequestParam("shop_id") int shop_id) throws IOException {
         return userShopService.usershopAdd2(user_id, shop_id);
     }
 
     /**
      * Created by ZhouLiangWei
      * 在收藏夹里删除店铺信息
-     * 输入 user_id,shop_id,good_id,status
      */
-    @PostMapping("/usdel1")
-    public MSG usershopDelete1(int shop_id) {
-        return userShopService.usershopDelete1(shop_id);
+    @DeleteMapping("/usdel2/{usid}")
+    public MSG usershopDelete1(@PathVariable("usid") int usid) {
+        return userShopService.usershopDelete(usid);
     }
 
-    /**
-     * Created by ZhouLiangWei
-     * 在收藏夹里删除商品信息
-     * 输入 user_id,shop_id,good_id,status
-     */
-    @PostMapping("/usdel2")
-    public MSG usershopDelete2(int good_id) {
-        return userShopService.usershopDelete2(good_id);
-    }
 }
