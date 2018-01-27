@@ -67,6 +67,24 @@ input button{
 	outline: none;
 	
 }
+.check{
+	width: 300px;
+	height: 30px;
+
+	position: absolute;
+	left:330px;
+}
+.check .r_left{
+	float: left;
+	height: 30px;
+	width: 150px;
+}
+.check .r_right{
+	float: right;
+	height: 30px;
+	width: 150px;
+}
+
 
 .space{
 	width: 1px;

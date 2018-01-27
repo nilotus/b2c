@@ -31,7 +31,7 @@ public class ShopController {
      * 输入关键字跳出模糊查询的店铺图片
      */
 
-    @GetMapping("/search")
+    @RequestMapping("/searchShop")
     public MSG shopFindAll(@RequestParam("key") String key) throws IOException{
         return shopService.shopFindAll(key);
     }

@@ -15,7 +15,7 @@ public interface UserService {
 
     MSG  userDelete(int user_id);
 
-    MSG  userUpdate(int user_id, String phone, String password, int role_id, String name, String address, String email);
+    MSG  userUpdate(int user_id,String name, String address, String email);
 
     MSG userImgUpdate(int user_id, String img);
 

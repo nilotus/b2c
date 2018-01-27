@@ -10,7 +10,7 @@ import java.util.List;
 public interface ShopMapper {
     @Select("SELECT shop_id,name,img FROM Shop")
     List<Shop> browse();
-    @Select("SELECT shop_id,name,img FROM Shop WHERE name like '%key%'")
+    @Select("SELECT shop_id,name,img FROM Shop WHERE name like CONCAT(CONCAT('%', #{key}), '%')")
     List<Shop> findAll(@Param("key") String key);
     @Select("SELECT SUM(totalprice) FROM Orders WHERE shop_id =#{shop_id}")
     float money(@Param("shop_id") int shop_id);
