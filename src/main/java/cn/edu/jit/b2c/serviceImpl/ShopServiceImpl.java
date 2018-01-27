@@ -28,6 +28,19 @@ public class ShopServiceImpl implements ShopService {
         return new MSG(1,"浏览商品",shop);
     }
 
+    /**
+     * Created by SunFuRong
+     * 浏览店铺主页(about shop)
+     * 输出店铺name，img
+     */
+
+    @Override
+    public MSG shopBrowseOne(int shop_id){
+        Shop shop =shopMapper.browseOne(shop_id);
+        return new MSG(1,"浏览商品",shop);
+
+    }
+
 
     /**
      * Created by SunFuRong

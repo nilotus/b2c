@@ -35,7 +35,7 @@
 				<a href="../html/favourite1.html">我的收藏</a>
 			<li class="space">
 			<li>
-				<a href="personalinfo.html">个人中心</a>
+				<a href="personal.html">个人中心</a>
 		</ul>
 	</div>
 	<div class="w">
@@ -62,7 +62,7 @@
             success: function (data) {
                 var str = "<ul>";
                 $.each(data.data,function (index,val) {
-                    str += "<li><p>"+val.name+"</p><a href='shopindex.html?shop_id="+val.shop_id+"'><img src="+val.img+"></a> </li>";
+                    str += "<li><p>"+val.name+"</p><a href='shopindex2.html?shop_id="+val.shop_id+"'><img class='img' src="+val.img+"></a> </li>";
                 })
                 str += "</ul>";
                 $('.container').append(str);

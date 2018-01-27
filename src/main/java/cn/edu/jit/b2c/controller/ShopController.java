@@ -17,12 +17,24 @@ public class ShopController {
     /**
      * Created by SunFuRong
      * 浏览店铺
-     * 输出店铺name，img
+     * 输出店铺name，img,description
      */
 
     @GetMapping("/browse")
     public MSG shopBrowse() throws  IOException{
         return shopService.shopBrowse();
+    }
+
+    /**
+     * Created by SunFuRong
+     * 浏览店铺主页(about shop)
+     * 输出店铺name，img,description
+     */
+
+    @RequestMapping("/enterShop/{shop_id}")
+    public MSG shopBrowseOne(@PathVariable("shop_id") int shop_id) throws  IOException{
+        System.out.println(shop_id);
+        return shopService.shopBrowseOne(shop_id);
     }
 
     /**

@@ -43,6 +43,10 @@ header{
 #2{
 
 }
+.img{
+	width: 220px;
+	height: 220px;
+}
 
 .window {
 	width: 332px;

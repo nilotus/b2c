@@ -14,7 +14,7 @@ public interface GoodsMapper {
     Goods browseOne1(@Param("good_id") int good_id);
     @Select("SELECT Shop.name FROM Goods,Shop WHERE Goods.good_id=#{good_id} AND Shop.shop_id=Goods.shop_id")
     String browseOne2(@Param("good_id") int good_id);
-    @Select("SELECT good_id,name,price,img FROM Goods WHERE shop_id =#{shop_id}")
+    @Select("SELECT good_id,name,price,img,restnum FROM Goods WHERE shop_id =#{shop_id} ORDER BY (totalnum-restnum) DESC")
     List<Goods> browseShop(@Param("shop_id") int shop_id);
     @Select("SELECT good_id,shop_id,`name`,price,img FROM Goods WHERE name like CONCAT(CONCAT('%', #{key}), '%')")
     List<Goods> findAll(@Param("key") String key);

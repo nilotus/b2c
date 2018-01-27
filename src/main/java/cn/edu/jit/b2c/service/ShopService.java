@@ -5,6 +5,7 @@ import cn.edu.jit.b2c.util.MSG;
 
 public interface ShopService {
         MSG shopBrowse();
+        MSG shopBrowseOne(int shop_id);
         MSG shopFindAll(String key);
         MSG shopINFO(int shop_id);
         MSG shopAdd(Shop shop);

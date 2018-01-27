@@ -977,9 +977,6 @@
                     var str = "<ul>";
                     $.each(data.data, function (index, val) {
                         str += "<li><a href='html/goodsindex.html?good_id=" + val.good_id + "'><img src=" + val.img + "></a><p>" + val.name + "</p><p class='price'>" + val.price + "</p></li>";
-                        if(index=='7'){
-                            return false;
-                        }
                     })
                     str += "</ul>";
                     $('.container').append(str);

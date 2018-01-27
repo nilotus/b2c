@@ -45,7 +45,7 @@ public class GoodsServiceImpl implements GoodsService{
     /**
      * Created by SunFuRong
      * 浏览店铺内商品
-     * 输出name，price，img
+     * 输出name，price，img,restnum
      */
 
     public MSG goodsBrowseShop(int shop_id){
