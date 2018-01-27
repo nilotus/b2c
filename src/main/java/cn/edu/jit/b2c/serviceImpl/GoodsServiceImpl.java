@@ -35,17 +35,17 @@ public class GoodsServiceImpl implements GoodsService{
 
     public MSG goodsBrowseOne(int good_id){
         Goods goods=goodsMapper.browseOne1(good_id);
-        String name=goodsMapper.browseOne2(good_id);
-        RMessage rMessage=new RMessage();
-        rMessage.setC(name);
-        rMessage.setGoods(goods);
-        return new MSG(1,"浏览成功",rMessage);
+       // String name=goodsMapper.browseOne2(good_id);
+        //RMessage rMessage=new RMessage();
+       // rMessage.setC(name);
+       // rMessage.setGoods(goods);
+        return new MSG(1,"浏览成功",goods);
     }
 
     /**
      * Created by SunFuRong
      * 浏览店铺内商品
-     * 输出name，price，img
+     * 输出name，price，img,restnum
      */
 
     public MSG goodsBrowseShop(int shop_id){
@@ -62,7 +62,11 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public MSG goodsFindAll(String key){
-        List<Goods> goods =goodsMapper.findAll(key);
+        List<Goods> goods = goodsMapper.findAll(key);
+        if (goods.size() == 0) {
+            return new MSG(-1,"没有商品");
+        }
+        System.out.println(goods);
         return new MSG(1,"搜索成功",goods);
     }
 

@@ -17,12 +17,30 @@ public class ShopController {
     /**
      * Created by SunFuRong
      * 浏览店铺
-     * 输出店铺name，img
+     * 输出店铺name，img,description
      */
 
     @GetMapping("/browse")
-    public MSG shopBrowse(HttpServletRequest request) throws  IOException{
-        return shopService.shopBrowse(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
+    public MSG shopBrowse() throws  IOException{
+        return shopService.shopBrowse();
+    }
+
+    @GetMapping("/browse")
+    public MSG shopBrowseByUser(HttpServletRequest request) throws  IOException{
+        return shopService.shopBrowseByUser(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
+    }
+
+
+    /**
+     * Created by SunFuRong
+     * 浏览店铺主页(about shop)
+     * 输出店铺name，img,description
+     */
+
+    @RequestMapping("/enterShop/{shop_id}")
+    public MSG shopBrowseOne(@PathVariable("shop_id") int shop_id) throws  IOException{
+        System.out.println(shop_id);
+        return shopService.shopBrowseOne(shop_id);
     }
 
     /**
@@ -31,7 +49,7 @@ public class ShopController {
      * 输入关键字跳出模糊查询的店铺图片
      */
 
-    @GetMapping("/search")
+    @RequestMapping("/searchShop")
     public MSG shopFindAll(@RequestParam("key") String key) throws IOException{
         return shopService.shopFindAll(key);
     }

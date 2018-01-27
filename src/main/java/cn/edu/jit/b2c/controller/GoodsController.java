@@ -3,7 +3,6 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.Goods;
 import cn.edu.jit.b2c.service.GoodsService;
 import cn.edu.jit.b2c.util.MSG;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +29,7 @@ public class GoodsController {
      * 详细浏览特定商品
      * 输出name，price，img，describe店铺名
      */
-    @GetMapping("/goodsinfoone/{good_id}")
+    @GetMapping("/info/{good_id}")
     public MSG goodsBrowseOne(@PathVariable("good_id") int good_id) throws IOException{
         return goodsService.goodsBrowseOne(good_id);
     }
@@ -40,9 +39,8 @@ public class GoodsController {
      * 浏览店铺内商品
      * 输出name，price，img
      */
-    @GetMapping("/goodsinfoshop/{shop_id}")
+    @GetMapping("/shopinfo/{shop_id}")
     public MSG goodsBrowseShop(@PathVariable("shop_id") int shop_id) throws IOException{
-        System.out.println(shop_id);
         return goodsService.goodsBrowseShop(shop_id);
     }
 
@@ -51,7 +49,7 @@ public class GoodsController {
      * 全局搜索功能（商品）
      * 输入关键字跳出模糊查询的商品图片
      */
-    @GetMapping("/search")
+    @RequestMapping("/searchGoods")
     public MSG goodsFindAll(@RequestParam("key") String key) throws IOException{
         return goodsService.goodsFindAll(key);
     }

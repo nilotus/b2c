@@ -3,64 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
-    <link rel="stylesheet" type="text/css" href="../css/login111.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.lite.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.lite.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.min.css"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         body {
-            margin:0;
-            background: url(../img/122.jpg);
-            background-attachment: fixed;
+            margin: 0;
+            background-color: #FFFFFF;
 
         }
+
 
     </style>
 
 </head>
 <body>
-    <div class="goods w">
-        <h1>欢迎登录</h1>
-    </div>
-
-    <div class="d">
-
-
-        <form action="" method="" onkeydown="if(event.keyCode==13)return false;">
-
-            <div class="register-box">
-                <label for="loginName" class="other_label"><span>用户名</span>
-                    <input id="loginName" maxlength="20" type="text" placeholder="建议使用常用手机">
-                </label>
-                <div class="tips">
-
-                </div>
-            </div>
-
-
-            <div class="register-box">
-                <label for="pwd" class="other_label"><span> 密 码</span>
-                    <input maxlength="20"  id="pwd" type="password" placeholder="建议使用两种字符组合">
-                </label>
-                <div class="tips">
-
-                </div>
-            </div>
-            <div class="r">
-                <a href="register.html">立即注册</a>
-
-            </div>
-            <div class="submit_btn">
-                <button type="button" id="login-button" >立 即 登 录</button>
-            </div>
-
-        </form>
+<div id="container">
+    <div id="header">
+        <img src="../img/5.png">
 
     </div>
 
+    <div id="main">
+        <div id="left">
+            <img src="../img/100.jpg">
+        </div>
 
-</body>
+        <div id="right">
 
+            <form action="">
+                <fieldset>
+                    <legend><h2>欢迎登录</h2></legend>
+                    <br/><br/>
+                    <div class="input-group" style="margin:20px 1px 1px 1px ;width: 405px;">
+                        <span class="input-group-addon" id="basic-addon1" style="width:50px">用户名</span>
+                        <input id="loginName" type="text" class="form-control" placeholder="请输入手机号">
+                    </div>
+                    <div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+                        <span class="input-group-addon" style="width:50px">密码</span>
+                        <input id="pwd" type="password" class="form-control" placeholder="请输入密码">
+                    </div>
 
-<script src="../js/jquery-3.2.1.min.js" charset="utf-8"></script>
-<script src="../js/login.js" charset="utf-8"></script>
+                    <a href="./register.html" style="font-size: 15px;float:right;margin-right: 0px;">免费注册</a><br/>
+                    <br/>
+                    <button type="button" onclick="login()" class="btn btn-info btn-block"
+                            style="margin-left: 40px;height: 50px;width: 330px;font-size: 20px;">登 录
+                    </button>
+
+                </fieldset>
+                <div style="margin-top: 20px;"></div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div id="footer">
+    <p>联系我们：115607029@qq.com</p>
+</div>
+
+<script src="../js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
     $('#login-button').click(function () {
         if(phoneFlag == 1 && pwdFlag == 1)
@@ -101,5 +106,7 @@
         })
     }
 </script>
-
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
 </html>

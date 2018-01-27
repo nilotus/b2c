@@ -1,63 +1,125 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>我的收藏夹-商品列表</title>
-		<link rel="stylesheet" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/favourite.css">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>我的收藏夹-商品列表</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/favourite.css">
+</head>
 
-	<body>
-		<!--快速导航栏-->
-		<div class="shortcut w">
+<body>
+<!--快速导航栏-->
+<div class="shortcut w">
 
-			<ul class="fl city">
-				<li>
-					<a href="#">南京</a>
-			</ul>
-			<ul class="fr">
-				<li>
-					<a href="./login.html">你好，请登录 </a>
-					<a href="register1.html" class="f10">免费注册</a>
-				<li class="space">
-				<li>
-					<a href="order1.html">我的订单</a>
-				<li class="space">
-				<li>
-					<a href="shopping-cart.html">我的购物车</a>
-				<li class="space">
-				<li>
-					<a href="favourite1.html">我的收藏</a>
-				<li class="space">
-				<li>
-					<a href="personal.html">个人中心</a>
-			</ul>
-		</div>
-		<div align="center" ;>
-			<img src="../img/5.jpg" />
-		</div>
-		<div id="tou">
-			<span class="label label-info"><a href="favourite1.html" id="shangping">商品</a></span>
-			<span class="label label-danger"><a href="favourite2.html" id="dianpu">店铺</a></span>
-		</div>
-		<div id="main">
-			<div class="window">
-				<div class="row">
-				  <div class="col-sm-6 col-md-4">
-				    <div class="thumbnail">
-				      <img src="../img/stuff.jpg">
-				      <div class="caption">
-				        <h3 align="center">神舟八手店</h3>
-				        <p align="center">三天保修</p>
-				        	<p align="center">￥<label class="price">6666</label></p>
-				        <p><a href="#" class="btn btn-primary" role="button">删除</a> <a href="#" class="btn btn-default" role="button">进入店铺</a></p>
-				      </div>
-				    </div>
-				  </div>
+	<ul class="fl city">
+		<li>
+			<a href="#">南京</a>
+	</ul>
+	<ul class="fr">
+		<li>
+			<a href="./login.html">你好，请登录 </a>
+			<a href="./register.html" class="f10">免费注册</a>
+		<li class="space">
+		<li>
+			<a href="order.html">我的订单</a>
+		<li class="space">
+		<li>
+			<a href="shopping-cart.html">我的购物车</a>
+		<li class="space">
+		<li>
+			<a href="favourite1.html">我的收藏</a>
+		<li class="space">
+		<li>
+			<a href="personal.html">个人中心</a>
+	</ul>
+</div>
+<div align="center" ;
+"margin-bottom: 10px;">
+<img src="../img/5.png"/>
+</div>
+<div style="position: relative;left: 1000px; margin-bottom: 20px;">
+	<span class="label label-info"><a href="favourite1.html" style="color: #FFFFFF;">商品</a></span>
+	<span class="label label-danger"><a href="favourite2.html" style="color: #FFFFFF;">店铺</a></span>
+</div>
+<div class="main">
+	<div class="window">
+		<div class="row" style=" margin: 0 auto;  position: relative; width: 263px;height: 330px;">
+			<div class="col-sm-6 col-md-4" style="margin: 0 auto; position: relative; width: 263px; height: 330px;">
+				<div class="thumbnail">
+					<img src="../img/stuff.jpg">
+					<div class="caption">
+						<h3 align="center">神舟笔记本</h3>
+						<p align="center">性能超强</p>
+						<p align="center">￥<label class="price">6666</label></p>
+						<p>
+							<a href="#" class="btn btn-primary" role="button">删除</a>
+							<a href="#" class="btn btn-default" style=" position: relative;  right: -20px;" role="button">加入购物车</a>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+
+</div>
+<script src="../js/jquery.1.4.2-min.js"></script>
+<script>
+	/*TODO user_idw*/
+    $.ajax({
+        type: "post",
+        url: "/usershop/uhlook/"+22,
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 1) {
+                var result = data.data;
+                for (var i = 0; i < result.length; i++) {
+                    var str = '' +
+                        '<div class="window" id="'+result[i].usid+'">\n' +
+                        '<div class="row" style=" margin: 0 auto;  position: relative; width: 263px;height: 330px;">\n' +
+                        '<div class="col-sm-6 col-md-4" style="margin: 0 auto; position: relative; width: 263px; height: 330px;">\n' +
+                        '<div class="thumbnail">\n' +
+                        '<img src="' + result[i].img + '">\n' +
+                        '<div class="caption">\n' +
+                        '<h3 align="center">'+result[i].name+'</h3>\n' +
+                        '<p align="center"> '+result[i].describe+'</p>\n' +
+                        '<p>\n' +
+                        '<button  class="btn btn-primary" role="button"  onclick="deleteS('+result[i].usid+')">删除</button>' +
+                        '<a href="shopindex.html?shop_id='+result[i].shop_id+'" class="btn btn-default" style=" position: relative;  right: -40px;" role="button" >进入店铺</a>\n' +
+                        '</p>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>'
+                    $('.main').append(str);
+                }
+            }
+        }
+    })
+					function deleteS(id) {
+						$.ajax({
+							type: "delete",
+							url: "/usershop/usdel2/"+id,
+							async: true,
+							dataType: "json",
+							success:function(){
+								$('div[id='+id+']').remove();
+								console.log(data);
+								if(data.original == 0) {
+									alert(data.info);
+								} else {
+									alert("success");
+								}
+							},
+							error: function() {
+								alert("failed!");
+							}
+						});
+					}
+
+</script>
+
+</body>
 
 </html>

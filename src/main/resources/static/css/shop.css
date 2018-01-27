@@ -29,7 +29,7 @@ header{
 	width: 540px;
 }
 
-#main {
+.main {
 	margin: 0 auto;
 	position: relative;
 	width: 100%;
@@ -37,10 +37,24 @@ header{
 	padding: 5px;
 }
 
+#1{
+
+}
+#2{
+
+}
+.img{
+	width: 220px;
+	height: 220px;
+}
+
 .window {
 	width: 332px;
 	height: 520px;
 	float: left;
+	margin: 10px;
+
+
 }
 
 .pic{

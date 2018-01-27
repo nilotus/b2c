@@ -6,6 +6,7 @@ import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.io.IOException;
 
 @RestController
@@ -18,7 +19,7 @@ public class CartController {
     /**
      * Created by ZhouLiangWei
      * 查看商量功能1
-     * 输出cart_id,good_id
+     * 根据user_id输出商品的name,price,img
      */
     @PostMapping("/userlook/{user_id}")
     public MSG goodCheckOne(@PathVariable("user_id") int user_id) throws IOException {
@@ -28,7 +29,7 @@ public class CartController {
     /**
      * Created by ZhouLiangWei
      * 查看商量功能2
-     * 输出商品name,price,img,shop_id所对应的店铺名name（浏览商品功能）
+     * 根据good_id输出商品name,price,img,shop_id所对应的店铺名name（浏览商品功能）
      */
     @PostMapping("/brose")
     public MSG goodCheckTwo(int good_id) throws IOException {
@@ -38,7 +39,7 @@ public class CartController {
     /**
      * Created by ZhouLiangWei
      * 查看商量功能3
-     * 输出goodnum ，price（总）
+     * 输出goodnum ，price
      */
     @PostMapping("/numprice")
     public MSG goodCheckThree(int cart_id) throws IOException {
@@ -47,12 +48,11 @@ public class CartController {
 
     /**
      * Created by ZhouLiangWei
-     * 查看商量功能3
-     * 输出goodnum ，price（总）
+     * 添加商品
      */
-    @PostMapping("/addgoods")
-    public MSG goodsAdd(int good_id, int user_id, int goodnum) throws IOException{
-        return cartService.goodsAdd(good_id,user_id,goodnum);
+    @GetMapping("/addgoods")
+    public MSG goodsAdd(@RequestParam("good_id") int good_id, @RequestParam("user_id") int user_id) throws IOException{
+        return cartService.goodsAdd(good_id,user_id);
     }
 
     /**
@@ -60,8 +60,8 @@ public class CartController {
      * 删除商品
      * 将该商品good_id的删除
      */
-    @PostMapping("/delgoods")
-    public MSG goodsDelete(int good_id) throws IOException{
-        return cartService.goodsDelete(good_id);
+    @DeleteMapping("/delgoods/{cart_id}")
+    public MSG goodsDelete(@PathVariable("cart_id") int cart_id) throws IOException{
+        return cartService.goodsDelete(cart_id);
     }
 }

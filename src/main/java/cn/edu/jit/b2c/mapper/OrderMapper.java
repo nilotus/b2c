@@ -9,26 +9,36 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-    @Insert("INSERT INTO Orders(order_id,time,good_id,user_id,good_num ,price,shop_id,status) " +
-            "VALUES (#{user_id},#{time},#{good_id},#{user_id},#{good_num},#{price},#{shop_id},1)")
-    int insertorder1(@Param("order_id") int order_id,@Param("time")Timestamp time,@Param("good_id") int good_id,
-                    @Param("user_id") int user_id,@Param("good_num") int good_num,
-                     @Param("price") float price ,@Param("shop_id") int shop_id);
+    @Insert("INSERT INTO Orders(time,good_id,user_id,good_num ,price,`status`,img,description) " +
+            "VALUES (#{time},#{good_id},#{user_id},#{good_num},#{price},1,#{img},#{description})")
+    int insertorder1(@Param("time")Timestamp time,@Param("good_id") int good_id,
+                     @Param("user_id") int user_id,@Param("good_num") int good_num,
+                     @Param("price") float price,@Param("img") String img,@Param("description") String descption);
 
-    @Select("SELECT pirce,shop_id,img from Goods WHERE good_id = #{good_id}")
-    Goods findPSid(@Param("good_id") int good_id);
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `delete`=1")
+    List<Order> lookorder(@Param("user_id") int user_id);
 
-    @Insert("INSERT INTO Orders(totalprice) VALUES Orders.price * Orders.good_num")
-    int totalprice();
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=1 AND `delete`=1")
+    List<Order> lookorder1(@Param("user_id") int user_id);
 
-    @Select("SELECT img FROM Goods where good_id = #{good_id}")
-    Goods findimg(@Param("good_id") int good_id);
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=2 AND `delete`=1")
+    List<Order> lookorder2(@Param("user_id") int user_id);
 
-    @Insert("INSERT INTO Orders(img) VALUES (#{img})")
-    int insertimg(@Param("img") String img);
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=3 AND `delete`=1")
+    List<Order> lookorder3(@Param("user_id") int user_id);
 
-    @Select("SELECT order_id,cart_id,time,user_id,description,status,price,totalprice,img,good_num FROM Orders where order_id = #{order_id}")
-    List<Order> lookorder(@Param("order_id") int order_id);
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=4 AND `delete`=1")
+    List<Order> lookorder4(@Param("user_id") int user_id);
+
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=5 AND `delete`=1")
+    List<Order> lookorder5(@Param("user_id") int user_id);
+
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=6 AND `delete`=1")
+    List<Order> lookorder6(@Param("user_id") int user_id);
+
+    @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=7 AND `delete`=1")
+    List<Order> lookorder7(@Param("user_id") int user_id);
+
 
     @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
     List<Order> browseAll();
@@ -36,15 +46,8 @@ public interface OrderMapper {
     @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
     List<Order> browseOne();
 
-    @Insert("INSERT INTO Orders(time,good_id,user_id,good_num,cart_id,shop_id,price,status) " +
-            "VALUES (#{time},#{good_id},#{user_id},num=#{num},#{cart_id},#{shop_id},#{price},1")
-    int insertorder2(@Param("time")Timestamp time,@Param("good_id") int good_id,
-                    @Param("user_id") int user_id,@Param("good_num") int good_num,
-                     @Param("shop_id") int shop_id,@Param("cart_id") int cart_id,
-                     @Param("price") float price);
-
     @Update("UPDATE Orders SET status = 2 where order_id=#{order_id}")
-    void afterpay(int status,@Param("oder_id") int order_id);
+    void afterpay(int status,@Param("order_id") int order_id);
 
     @Delete("DELETE FROM Cart WHERE cart_id = #{cart_id}")
     void deletecart(@Param("cart_id") int cart_id);
@@ -54,22 +57,20 @@ public interface OrderMapper {
     int insertdesc(@Param("description") String description,@Param("order_id") int order_id);
 
     @Update("UPDATE Orders SET status = 3 where order_id=#{order_id}")
-    void aftersend(int status,@Param("oder_id") int order_id);
+    void aftersend(int status,@Param("order_id") int order_id);
 
     //下面是取消订单
-    @Select("SELECT status from Orders WHERE order_id=#{order_id}")
-    int findstatus(@Param("order_id") int order_id);
 
-    @Delete("DELETE FROM Orders WHERE order_id =#{order_id}")
-    void deletedd(@Param("oder_id") int order_id);
-
-    @Update("UPDATE Orders SET status = 5 where order_id=#{order_id}")
-    void tuikuan(int status,@Param("oder_id") int order_id);
+    @Update("UPDATE  Orders SET `delete`=0 WHERE order_id =#{order_id}")
+    void deletedd(@Param("order_id") int order_id);
 
     @Update("UPDATE Orders SET status = 6 where order_id=#{order_id}")
-    void tuihuo(int status,@Param("oder_id") int order_id);
+    void tuikuan(@Param("order_id") int order_id);
 
     @Update("UPDATE Orders SET status = 4 where order_id=#{order_id}")
-    void confirmrece(int status,@Param("oder_id") int order_id);
+    void tuihuo(@Param("order_id") int order_id);
+
+    @Update("UPDATE Orders SET status = 3 where order_id=#{order_id}")
+    void confirmrece(@Param("order_id") int order_id);
 
 }

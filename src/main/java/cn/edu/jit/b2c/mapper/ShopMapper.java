@@ -8,9 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface ShopMapper {
-    @Select("SELECT shop_id,`name`,img,`describe` FROM Shop WHERE isdelete = 0 and user_id = #{user_id} order by shop_id desc")
-    List<Shop> browse(@Param("user_id") int user_id);
-    @Select("SELECT shop_id,name,img FROM Shop WHERE name like '%key%' and isdelete = 0")
+    @Select("SELECT shop_id,name,img FROM Shop")
+    List<Shop> browse();
+    @Select("SELECT shop_id,`name`,img,`describe` FROM Shop WHERE shop_id =#{shop_id}")
+    Shop browseOne(@Param("shop_id") int shop_id);
+    @Select("SELECT shop_id,name,img FROM Shop WHERE name like CONCAT(CONCAT('%', #{key}), '%')")
     List<Shop> findAll(@Param("key") String key);
     @Select("SELECT shop_id,`name`,`describe`,img FROM Shop WHERE shop_id =#{shop_id}")
     List<Shop> selectShopInfo(@Param("shop_id") int shop_id);

@@ -1,72 +1,86 @@
-.mark{
-	background-color: 	#FDF5E6;
+.mark {
+	background-color: #FDF5E6;
 	border: 1px solid #D3D3D3;
 	margin: 0 auto;
 	width: 1050px;
 }
-#title{
+
+#btn{
+	position: relative;
+	align-content: center;
+	background-color: #e7e7e7;
+}
+
+#title {
 	background-color: #E64346;
 	border: 1px solid #D3D3D3;
 	margin: 0 auto;
 	width: 1050px;
 	height: 30px;
 }
-#tail{
+
+#tail {
 	background-color: #E64346;
 	border: 1px solid #D3D3D3;
 	margin: 0 auto;
 	width: 1050px;
 	height: 40px;
 }
-.total{
+
+#total {
 	width: 50px;
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
 }
-.num{
-	left: 350px; 
-	bottom: 92px; 
-	width:100px; 
-	height: 30px; 
+
+#num {
+	color: #ff5500;
+}
+
+.price {
+	width: 50px;
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.num {
+	left: 350px;
+	bottom: 92px;
+	width: 100px;
+	height: 30px;
 	position: relative;
 	float: right;
 }
-.min{
-	position: relative;
-	top: 3px;
-	width: 20px; 
-	height: 20px; 
-	margin: 5px,5px,5px,5px;
-}
-.add{
-	position: relative;
-	top: 3px;
-	width: 20px; 
-	height: 20px; 
-	margin: 5px,5px,5px,5px;
-}
-.text{
+
+.text {
 	position: relative;
 	top: 0.5px;
-	width: 40px; 
-	height: 20px; 
-	margin: 5px,5px,5px,5px;
+	width: 40px;
+	height: 20px;
+	margin: 5px, 5px, 5px, 5px;
 }
-.subtotal{
+
+.subtotal {
 	position: relative;
-	left:625px; 
-	bottom: 90px; 
-	width:100px; 
-	height: 20px; 
+	left: 625px;
+	bottom: 90px;
+	width: 100px;
+	height: 20px;
 	float: right;
 }
-.subtotal2{
+
+.subtotal2 {
 	position: relative;
-	right:250px; 
-	bottom: -3px; 
-	width:100px; 
-	height: 20px; 
+	right: 250px;
+	bottom: -3px;
+	width: 100px;
+	height: 20px;
 	float: right;
 }
-.dele{
+
+.dele {
 	position: relative;
 	left: 766px;
 	bottom: 60px;
@@ -74,7 +88,8 @@
 	height: 20px;
 	float: right;
 }
-.collect{
+
+.collect {
 	position: relative;
 	left: 806px;
 	bottom: 90px;
@@ -82,110 +97,172 @@
 	height: 20px;
 	float: right;
 }
-.w{
+
+.w {
 	width: 100%;
 	margin: 0 auto;
 }
-.fl{
-	float:left;
-	
+
+.fl {
+	float: left;
 }
-.fr{
-	float:right;
+
+.fr {
+	float: right;
 }
-ul{
+
+ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	
 }
+
 h1 input button {
 	margin: 0;
 	padding: 0;
 }
-body{
+
+body {
 	background: #F6F6F6;
 }
-.f10{
+
+.f10 {
 	color: #EE0030;
 }
-a{
+
+a {
 	text-decoration: none;
-	color:#999999 ;
+	color: #999999;
 	font-size: 12px;
 	margin: 8px;
 }
-a:hover{
+
+a:hover {
 	color: #FF0033;
 }
-.shortcut{
+
+.shortcut {
 	height: 32px;
-	border-bottom:1px solid #DDDDDD ;
+	border-bottom: 1px solid #DDDDDD;
 	background-color: #F2F2F2;
 	font-size: 12px;
 	line-height: 30px;
 	color: #999;
 }
-.shortcut li{
-	float:left;
-	
-}
-header{
-	height:100px;
-	background-color: #F5F7F8;
-}
-.city{
-	margin-left: 200px;
-	
-}
-input button{
-	border: 0;
-	outline: none;
-	
+
+.shortcut li {
+	float: left;
 }
 
-.space{
+header {
+	height: 100px;
+	background-color: #F5F7F8;
+}
+
+.city {
+	margin-left: 200px;
+}
+
+input button {
+	border: 0;
+	outline: none;
+}
+
+.space {
 	width: 1px;
 	height: 10px;
 	background-color: #ccc;
 	margin: 10px 12px 0;
-	
 }
-.middle{
+
+.middle {
 	height: 140px;
 	background-color: #F5F7F8;
 	position: relative;
 }
-.logo{
+
+.logo {
 	position: absolute;
 	top: -30px;
-	left:0;
-	box-shadow: 0px -10px 10px rgba(0,0,0,.3);
+	left: 0;
+	box-shadow: 0px -10px 10px rgba(0, 0, 0, .3);
 }
-.logo a{
+
+.logo a {
 	display: block;
 	width: 190px;
 	height: 170px;
 	background: url(../img/logo.jpg) no-repeat;
 }
-.form{
+
+.form {
 	width: 550px;
 	height: 35px;
 	position: absolute;
-	top:25px;
-	left:320px;
+	top: 25px;
+	left: 320px;
 }
-.form input{
-	width:495px;
-	height:33px;
-	border:1px solid #F93A60;
+
+.form input {
+	width: 495px;
+	height: 33px;
+	border: 1px solid #F93A60;
 	float: left;
 	font-size: 14px;
-	padding-left:3px;
+	padding-left: 3px;
 }
-.form button{
+
+.form button {
 	width: 50px;
 	height: 35px;
 	background-color: #F93A60;
 	float: left;
+}
+
+.add {
+	width: 20px;
+	height: 18px;
+	border: 1px solid #ccc;
+	width: 20px;
+	height: 18px;
+	border: 1px solid #ccc;
+}
+
+.min {
+	width: 20px;
+	height: 18px;
+	border: 1px solid #ccc;
+	width: 20px;
+	height: 18px;
+	border: 1px solid #ccc;
+}
+
+.text_box {
+	width: 30px;
+	text-align: center;
+	border: 1px solid #ccc;
+	width: 30px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+.tot {
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.price {
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#shuliang {
+	color: #ff5500;
+	font-size: 14px;
+	font-weight: bold;
 }

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>宝贝详情</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/goodsindex.css"/>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /*background: #F7F7F7;*/
+        }
+
+    </style>
+</head>
+<body>
+<div id="1">
+
+</div>
+
+</body>
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+/*    layui.use('element', function() {
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)',
+            function(data) {
+                console.log(data);
+            });
+    });*/
+
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    function gouwuche() {
+
+        //接收URL中的参数good_id TODO
+        var good_id = getUrlParam('good_id');
+        console.log('good_id:' + good_id);
+
+        $.ajax({
+            type: 'get',
+            url: '/cart/addgoods',
+            async: true,
+            dataType: 'json',
+            data: {
+                user_id:22,
+                good_id:good_id,
+            },
+            success: function(data) {
+                console.log(data);
+                if(data.original == 0) {
+                    alert(data.info);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function() {
+                alert("failed!");
+            }
+        });
+    }
+
+
+    function shoucang() {
+        //接收URL中的参数good_id TODO user_id
+        var good_id = getUrlParam('good_id');
+        console.log('good_id:' + good_id);
+        $.ajax({
+            type: 'get',
+            url: '/usershop/user_add1',
+            async: true,
+            dataType: 'json',
+            data: {
+                user_id:22,
+                good_id:good_id,
+            },
+            success: function(data) {
+                console.log(data);
+                if(data.original == 0) {
+                    alert(data.info);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function() {
+                alert("failed!");
+            }
+        });
+    }
+
+
+</script>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    $(function () {
+
+        //接收URL中的参数good_id
+        var good_id = getUrlParam('good_id');
+        console.log('good_id:' + good_id);
+        $.ajax({
+            type: "get",
+            url: '/goods/info/' + good_id,
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                var str = "<div id='header' class='w'>"
+                    +"<img src='../img/5.jpg'>"
+                    +"</div>"
+                    +"<div class='main w'>"
+                    +"<div class='main_left fl'>"
+                    +"<div class='main_left_t'>"
+                    +" <h2>"+data.data.name+"</h2>"
+                    +"<input value='131243455'  id='goodsId' type='hidden' />"
+                    +"</div>"
+                    +"<div class='main_left_b' id='div1'>"
+                    +"<div class='small_pic'>"
+                    +"<span class='mark'></span>"
+                    +"<span class='float_layer'></span>"
+                    +"<img src='"+data.data.img+"'> "
+                    +"</div>"
+                    +"</div>"
+                    +"</div>"
+                    +" <div class='main_right fr'>"
+                    +" <div class='main_right_t'>"
+                    +" <p>"+data.data.describe+"</p>"
+                    +" </div>"
+                    +" <div class='main_right_b'>"
+                    +"<p class='price'><span class='yuan'>¥</span>"+data.data.price+"<span class='oldprice'>¥880</span> </p>"
+                    +"<button type='button' class='gouwuche' id='button1' onclick='gouwuche();'>加入购物车</button>"
+                    +" <button type='button' class='shoucang' id='button2' onclick='shoucang();'>加入收藏夹</button>"
+                    +" </div>"
+                    +"</div>";
+                $('#1').append(str);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    })
+</script>
+</html>

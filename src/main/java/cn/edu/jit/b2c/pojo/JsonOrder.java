@@ -9,8 +9,26 @@ public class JsonOrder {
     private String img;
     private String description;
     private float price;
-    private float totalprice;
     private int good_num;
+    private int good_id;
+    private int order_id;
+
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public int getGood_id() {
+        return good_id;
+    }
+
+    public void setGood_id(int good_id) {
+        this.good_id = good_id;
+    }
 
     public String getUsername() {
         return username;
@@ -58,14 +76,6 @@ public class JsonOrder {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public float getTotalprice() {
-        return totalprice;
-    }
-
-    public void setTotalprice(float totalprice) {
-        this.totalprice = totalprice;
     }
 
     public int getGood_num() {

@@ -5,8 +5,9 @@ import cn.edu.jit.b2c.util.MSG;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 
 public interface ShopService {
-    MSG shopBrowse(int user_id);
-
+    MSG shopBrowse();
+    MSG shopBrowseByUser(int user_id);
+    MSG shopBrowseOne(int shop_id);
     MSG shopFindAll(String key);
 
     MSG shopINFO(int shop_id);

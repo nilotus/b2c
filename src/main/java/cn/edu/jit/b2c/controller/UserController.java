@@ -121,10 +121,10 @@ public class UserController {
     /**
      * Created by SunFuRong
      * 调出指定用户信息（路径上的id）
-     * 信息：phone,role_id, name,address,email
+     * 信息：phone,name,address,email
      */
 
-    @GetMapping("/userinfo/{user_id}")//调出用户信息
+    @GetMapping("/selectInfo/{user_id}")//调出用户信息
     public MSG userFindOne(@PathVariable("user_id") int user_id) throws IOException {
         return iUserService.userFindOne(user_id);
     }
@@ -134,7 +134,7 @@ public class UserController {
      * 删除指定用户信息（路径上的id）
      */
 
-    @DeleteMapping("/userinfo/{user_id}")//删除用户
+    @DeleteMapping("/deleteInfo/{user_id}")//删除用户
     public MSG userDelete(@PathVariable("user_id") int user_id) throws IOException{
         return iUserService.userDelete(user_id);
     }
@@ -145,10 +145,9 @@ public class UserController {
      * 信息phone,password,role_id, name,address,email
      */
 
-    @PutMapping("/userinfo/{user_id}")//修改信息，不包括头像
-    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam("phone")String phone, @RequestParam("password") String password, @RequestParam ("role_id")int role_id, @RequestParam ("name")String name, @RequestParam("address") String address, @RequestParam("email") String email) throws IOException{
-        password = getMD5(password);
-        return iUserService.userUpdate(user_id, phone,password,role_id, name,address,email);
+    @PostMapping("/updataInfo/{user_id}")//修改信息，不包括头像
+    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam ("name")String name, @RequestParam("address") String address, @RequestParam("email") String email) throws IOException{
+        return iUserService.userUpdate(user_id,name,address,email);
     }
 
     /**
@@ -157,7 +156,7 @@ public class UserController {
      * 信息：img
      */
 
-    @PutMapping("/userimg/{user_id}")//修改头像
+    @PostMapping("/updateImg/{user_id}")//修改头像
     public MSG userImgUpdate(@PathVariable("user_id") int user_id,@RequestParam("img")String img) throws IOException{
         return iUserService.userImgUpdate(user_id,img);
     }

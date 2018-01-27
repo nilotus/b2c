@@ -13,7 +13,10 @@
 		/*float:left;*/
 		margin-bottom: 30px;
 		
-}	
+}
+#1{
+
+}
 .main{
 	height: 500px;
 	width: 1090px;
@@ -33,6 +36,10 @@
 	color: #333333;
 }
 .main .main_left_b{
+	width: 597px;
+	height: 397px;
+}
+.main  img{
 	width: 597px;
 	height: 397px;
 }

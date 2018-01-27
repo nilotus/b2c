@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    @Select("SELECT good_id,name,price,img FROM Goods")
+    @Select("SELECT good_id,shop_id,name,price,img FROM Goods")
     List<Goods> browseAll();
     /*sql语句多表查询*/
     @Select("SELECT good_id,`name`,type_id,status,price,img,restnum,totalnum,`describe` FROM Goods WHERE good_id =#{good_id}")
@@ -18,9 +18,9 @@ public interface GoodsMapper {
     String browseOne2(@Param("good_id") int good_id);
     @Select("SELECT * FROM Goods WHERE shop_id =#{shop_id}")
     List<Goods> browseShop(@Param("shop_id") int shop_id);
-    @Select("SELECT good_id,name,img FROM Goods WHERE name like '%key%'")
+    @Select("SELECT good_id,shop_id,`name`,price,img FROM Goods WHERE name like CONCAT(CONCAT('%', #{key}), '%')")
     List<Goods> findAll(@Param("key") String key);
-    @Select("SELECT good_id,name,img FROM Goods WHERE name like '%key%' WHERE shop_id =#{shop_id}")
+    @Select("SELECT good_id,shop_id,name,price,img FROM Goods WHERE name like '%${key}%' AND shop_id =#{shop_id}")
     List<Goods> findShop(@Param("shop_id") int shop_id, @Param("key") String key);
     @Insert("INSERT INTO Goods(`name`,`price`,status,shop_id,type_id,img,restnum,totalnum,`describe`) VALUES(#{name},#{price},#{status},#{shop_id},#{type_id},#{img},#{totalnum},#{totalnum},#{describe})")
     boolean add(Goods goods);
