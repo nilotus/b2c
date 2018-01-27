@@ -18,6 +18,17 @@ public class MSG {
     private int code;
     private String msg;
     private Object data;
+    private int count;
+
+    public MSG(){}
+
+    public MSG(int code, String msg, Object data, int count) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.count = count;
+    }
+
 
     public MSG(int code, String msg) {
         this.code = code;
@@ -28,6 +39,7 @@ public class MSG {
         this.msg = msg;
         this.data = data;
     }
+
 
     public int getCode() {
         return code;
@@ -54,4 +66,11 @@ public class MSG {
     }
 
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }

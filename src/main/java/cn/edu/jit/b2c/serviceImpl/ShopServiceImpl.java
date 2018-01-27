@@ -6,9 +6,11 @@ import cn.edu.jit.b2c.pojo.Shop;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.ShopService;
 import cn.edu.jit.b2c.util.MSG;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -23,9 +25,9 @@ public class ShopServiceImpl implements ShopService {
      */
 
     @Override
-    public MSG shopBrowse(){
-        List<Shop> shop =shopMapper.browse();
-        return new MSG(1,"浏览商品",shop);
+    public MSG shopBrowse(int user_id){
+        List<Shop> shopList =shopMapper.browse(user_id);
+        return new MSG(0,"浏览商品",shopList, shopList.size());
     }
 
 
@@ -48,27 +50,14 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public MSG shopINFO(int shop_id){
-        float money= shopMapper.money(shop_id);
-        int order=shopMapper.order(shop_id);
+        float ordermoney= shopMapper.money(shop_id);
+        int ordernum=shopMapper.order(shop_id);
         RMessage rMessage = new RMessage();
-        rMessage.setA(order);
-        rMessage.setB(order);
+        rMessage.setA(ordernum);
+        rMessage.setB(ordermoney);
         return new MSG(1,"查看成功",rMessage);
     }
 
-    /**
-     * Created by SunFuRong
-     * 添加店铺
-     * 输入name,describe,user_id,img
-     */
-    @Override
-    public MSG shopAdd(Shop shop){
-        boolean result =shopMapper.add(shop);
-        if (result)
-            return new MSG(1,"添加店铺成功");
-        else
-            return new MSG(-1,"添加失败");
-    }
 
     /**
      * Created by SunFuRong
@@ -85,16 +74,17 @@ public class ShopServiceImpl implements ShopService {
 
     /**
      * Created by SunFuRong
-     * 更新店铺
+     * 增加/编辑店铺
      * 输入输入shop_id,name,describe,img
      */
     @Override
-    public MSG shopUpdate(Shop shop){
-        boolean result =shopMapper.update(shop);
-        if (result)
-            return new MSG(1,"更新店铺成功");
-        else
-            return new MSG(-1,"更新失败");
+    public MSG shopEdit(Shop shop){
+        if(shop.getShop_id()==0){
+            shopMapper.add(shop);
+        }else{
+           shopMapper.update(shop);
+        }
+        return new MSG(1,"操作成功");
     }
 
     /**
@@ -104,8 +94,25 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public MSG shopFan(int shop_id){
-        User user=shopMapper.fan(shop_id);
-        return new MSG(1,"查看会员信息",user);
+        List<User> user=shopMapper.fan(shop_id);
+        System.out.println("shop_id:"+shop_id);
+        return new MSG(0,"查看会员信息",user);
+    }
+
+    /**
+     * Created by Mr.Chen
+     * 查看店铺信息
+     * 输出name，img，email
+     */
+    @Override
+    public MSG findShopInfo(int shop_id) {
+        Shop shop;
+        if(shop_id==0){
+            shop=new Shop(0);
+        }else {
+            shop=  shopMapper.selectShopInfo(shop_id).get(0);
+        }
+        return new MSG(1,"success",shop);
     }
 
 

@@ -26,4 +26,6 @@ public interface OrderService {
 
     MSG ordersBrowseAll();
 
+    MSG ordersBrowseOne(int shop_id);
+
 }

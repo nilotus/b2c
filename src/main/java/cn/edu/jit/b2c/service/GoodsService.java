@@ -13,4 +13,6 @@ public interface GoodsService {
       MSG goodsDelete(int good_id);
       MSG goodsUpdate(Goods goods);
       MSG goodsSaleNum(int good_id);
+      MSG findGoodInfo(int good_id);
+
 }

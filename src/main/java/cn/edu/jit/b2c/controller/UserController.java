@@ -1,5 +1,7 @@
 package cn.edu.jit.b2c.controller;
 
+import cn.edu.jit.b2c.enums.ResultEnum;
+import cn.edu.jit.b2c.exceptiion.CtrlException;
 import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.service.UserService;
 import cn.edu.jit.b2c.util.MSG;
@@ -9,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
@@ -28,6 +33,13 @@ public class UserController {
         return new MSG(1, "server init", "data");
     }
 
+    @RequestMapping("/home")
+    public String home() throws Exception {
+
+//        throw new Exception("Sam 错误");
+            throw new CtrlException(ResultEnum.UNKONW_ERROR);
+
+    }
 
 
     /**
@@ -38,10 +50,21 @@ public class UserController {
 
     @PostMapping("/login")
     //@RequestMapping(value="login", method = RequestMethod.POST)
-    public MSG login(@RequestParam String phone, @RequestParam String password) throws IOException{
-        password = getMD5(password);
-        return iUserService.login(phone,password);
+    public MSG login(@RequestParam String phone, @RequestParam String password, HttpServletRequest request) throws IOException{
+        return iUserService.login(phone,password,request);
 }
+    /**
+     * Created by Mr.Chen
+     * 输出用户信息
+     */
+
+
+    @RequestMapping("/getUserInfo")
+    public MSG getUserInfo(HttpServletRequest request) {
+        return iUserService.getUserInfo(request);
+
+    }
+
 
     /**
      * Created by SunFuRong
@@ -78,12 +101,10 @@ public class UserController {
         //User currentUser = userService.getCurrentUser();
         //String path = QiniuUtil.uploadImg(inputStream,  UUID.randomUUID().toString().replaceAll("-",""));
         String path = QiniuUtil.uploadImg(inputStream, UUID.randomUUID().toString().replaceAll("-",""));
+
         System.out.println(path);
         return path;
     }
-
-
-
 
 
     /**

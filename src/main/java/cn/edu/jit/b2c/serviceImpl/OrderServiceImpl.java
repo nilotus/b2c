@@ -173,7 +173,13 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public MSG ordersBrowseAll() {
-        Order order1=orderMapper.browseAll();
+        List<Order> order1=orderMapper.browseAll();
         return new MSG(1,"查看成功",order1);
+    }
+
+    @Override
+    public MSG ordersBrowseOne(int shop_id) {
+        List<Order> orderList = orderMapper.browseOne();
+        return new MSG(0,"success",orderList);
     }
 }

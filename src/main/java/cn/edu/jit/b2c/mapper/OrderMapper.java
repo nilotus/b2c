@@ -31,8 +31,10 @@ public interface OrderMapper {
     List<Order> lookorder(@Param("order_id") int order_id);
 
     @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
-    Order browseAll();
+    List<Order> browseAll();
 
+    @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
+    List<Order> browseOne();
 
     @Insert("INSERT INTO Orders(time,good_id,user_id,good_num,cart_id,shop_id,price,status) " +
             "VALUES (#{time},#{good_id},#{user_id},num=#{num},#{cart_id},#{shop_id},#{price},1")

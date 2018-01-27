@@ -3,6 +3,7 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.Shop;
 import cn.edu.jit.b2c.service.ShopService;
 import cn.edu.jit.b2c.util.MSG;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,6 @@ import java.io.IOException;
 public class ShopController {
     @Autowired
     private ShopService shopService;
-
     /**
      * Created by SunFuRong
      * 浏览店铺
@@ -21,8 +21,8 @@ public class ShopController {
      */
 
     @GetMapping("/browse")
-    public MSG shopBrowse() throws  IOException{
-        return shopService.shopBrowse();
+    public MSG shopBrowse(HttpServletRequest request) throws  IOException{
+        return shopService.shopBrowse(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
     }
 
     /**
@@ -49,25 +49,9 @@ public class ShopController {
 
     /**
      * Created by SunFuRong
-     * 添加店铺
-     * 输入name,describe,user_id,img
-     */
-
-    @PostMapping("/add/{user_id}")
-    public MSG shopAdd(@RequestParam("name") String name,@RequestParam("describe")String descirbe,@RequestParam("user_id")int user_id,@RequestParam("img")String img){
-        Shop shop =new Shop();
-        shop.setName(name);
-        shop.setDescribe(descirbe);
-        shop.setUser_id(user_id);
-        shop.setImg(img);
-        return shopService.shopAdd(shop);
-    }
-
-    /**
-     * Created by SunFuRong
      * 删除店铺
      */
-    @DeleteMapping("/delete/{shop_id}")
+    @DeleteMapping("/deleteShop/{shop_id}")
     public MSG shopDelete(@PathVariable("shop_id") int shop_id){
         return shopService.shopDelete(shop_id);
     }
@@ -77,24 +61,41 @@ public class ShopController {
      * 更新店铺
      * 输入shop_id,name,describe,img
      */
-    @PutMapping("/update/{shop_id}")
-    public MSG shopUpdate(@PathVariable("shop_id") int shop_id,@RequestParam("name") String name,@RequestParam("describe")String descirbe,@RequestParam("img")String img){
+    @PostMapping("/shopEdit")
+    public MSG shopEdit(HttpServletRequest request,@RequestParam("shop_id") int shop_id,@RequestParam("name") String name,@RequestParam("describe")String descirbe,@RequestParam("img")String img){
         Shop shop =new Shop();
         shop.setName(name);
+        Object user=request.getSession().getAttribute("user_id");
+
+        if(user==null){
+            return  new MSG(-1,"error");
+        }
+        shop.setUser_id(Integer.parseInt(user.toString()));
         shop.setDescribe(descirbe);
         shop.setImg(img);
         shop.setShop_id(shop_id);
-        return shopService.shopUpdate(shop);
+        return shopService.shopEdit(shop);
     }
 
     /**
      * Created by SunFuRong
-     * 查看会员信息
+     * 根据shop_id查看会员信息
      * 输出name，img，email
      */
     @GetMapping("/fan/{shop_id}")
     public MSG shopFan(@PathVariable("shop_id") int shop_id){
         return shopService.shopFan(shop_id);
+    }
+
+
+    /**
+     * Created by Mr.Chen
+     * 根据shop_id取店铺数据
+     * 输入shop_id
+     */
+    @RequestMapping("/getshopInfo/{shop_id}")
+    public MSG getShopInfo(@PathVariable("shop_id") int shop_id) {
+        return shopService.findShopInfo(shop_id);
     }
 
 }

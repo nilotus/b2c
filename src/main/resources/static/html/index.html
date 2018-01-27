@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
     <title>Document</title>
     <style>
 
@@ -196,11 +196,11 @@
 </div>
 <script type="text/javascript">
     function register() {
-        window.location.href='upLoad.html';
+        window.location.href='html/upLoad.html';
         return false;
     }
     function register() {
-        window.location.href='register.html';
+        window.location.href='html/register.html';
         return false;
     }
 
@@ -220,8 +220,9 @@
             },
             success:function (data) {
                 console.log(data);
-                if(data.code==0){
-                    alert(data.info);
+                alert(data.code);
+                if(data.code == -1){
+                    alert(data.msg);
                 }else{
                     alert("success");
                 }

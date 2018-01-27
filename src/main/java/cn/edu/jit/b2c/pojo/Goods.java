@@ -24,6 +24,10 @@ public class Goods {
     public Goods(){
     }
 
+    public Goods(int good_id){
+        this.good_id = good_id;
+    }
+
     public Goods(int good_id, String name, float price, int status, int shop_id, int type_id, String img, int restnum, int totalnum, String describe) {
         this.good_id = good_id;
         this.name = name;
@@ -127,5 +131,21 @@ public class Goods {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "good_id=" + good_id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                ", shop_id=" + shop_id +
+                ", type_id=" + type_id +
+                ", img='" + img + '\'' +
+                ", restnum=" + restnum +
+                ", totalnum=" + totalnum +
+                ", describe='" + describe + '\'' +
+                '}';
     }
 }

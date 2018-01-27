@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>商家管理系统</title>
+    <link rel="stylesheet" type="text/css" href="../../css/seller.css"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <style>
+        .layui-container {
+            margin-left: 80px;
+            margin-top: 40px;
+        }
+        .layui-logo a:link{
+            color: #FFF;
+        }
+        .layui-logo a:visited {
+            color: #FFF;
+        }
+        .layui-logo a:hover{
+            color: #FFF;
+        }
+        .layui-logo a:active{
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><a href="../seller.html">b2c商家管理系统</a></div>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <div>
+                    <a href="javascript:">
+                        <img src="../../img/yy.png" class="layui-nav-img" id="userimg">
+                        <span id="username">未登录</span>
+                    </a>
+                </div>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="sellerInfo.html">基本资料</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="../login.html">退出</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:">商家管理</a>
+                    <dl class="layui-nav-child">
+                        <dd >
+                            <a href="shopInfo.html">店铺管理</a>
+                        </dd>
+                    </dl>
+
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this">
+                            <a href="javascript:">会员管理</a>
+                        </dd>
+                    </dl>
+
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="goodsInfo.html">商品管理</a>
+                        </dd>
+                    </dl>
+
+
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="orderInfo.html" onclick="shopList()">订单管理</a>
+                        </dd>
+                    </dl>
+
+                </li>
+            </ul>
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">用户管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="layui-container">
+            <div class="info"></div>
+            <!--<button class="layui-btn layui-btn-small" onclick="">-->
+            <!--<i class="layui-icon">&#xe61f;</i>增加店铺-->
+            <!--</button>-->
+            <!--<button class="layui-btn layui-btn-small  layui-btn-danger" onclick="">-->
+            <!--<i class="layui-icon">&#xe642;</i>编辑店铺-->
+            <!--</button>-->
+            <!--<button class="layui-btn layui-btn-normal layui-btn-small" onclick="">-->
+            <!--<i class="layui-icon">&#xe640;</i>删除店铺-->
+            <!--</button>-->
+
+            <table id="demo" lay-filter="test"></table>
+        </div>
+
+
+    </div>
+
+    <div class="layui-footer" style="text-align: right;">
+
+        联系我们：1156070529@qq.com
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="../../lib/layui/layui.all.js"></script>
+<script src="../../js/util/common.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type:'get',
+            url:'/shop/browse',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                var str='';
+                $.each(d.data,function (index,val) {
+                    str+='<button class="layui-btn layui-btn-small" onclick="ui.loadGrid('+val.shop_id+')">'+
+                        '<i class="layui-icon">&#xe705;</i>'+val.name+'</button>';
+                });
+                $('.info').append(str);
+
+            }
+        })
+    });
+
+    var ui = ui || {};
+    (function () {
+        $.extend(ui, {
+            loadGrid: function (shop_id) {
+                //第一个实例
+                layui.table.render({
+                    id: 'vip'
+                    , elem: '#demo'
+                    , height: 500
+                    , url: '/shop/fan/'+shop_id //数据接口
+                    , page: false //开启分页
+                    , cols: [[ //表头
+                        {field: 'user_id', title: '会员ID', width: 80, sort: true}
+                        , {field: 'name', title: '会员名称', width: 200}
+                        , {field: 'eamil', title: '会员邮箱', width: 300}
+                        , {field: 'address', title: '会员收货地址', width: 220}
+                        , {field: 'img', title: '会员头像', width: 220, templet: '#titleTpl'}
+                    ]]
+                });
+            },
+        });
+        $(function () {
+            var shop_id = com.getQueryString('shop_id');
+            console.log(shop_id);
+            com.getUserInfo();
+
+        });
+    })();
+
+
+</script>
+<script type="text/html" id="titleTpl">
+    <img src="{{d.img}}"/>
+</script>
+
+</html>

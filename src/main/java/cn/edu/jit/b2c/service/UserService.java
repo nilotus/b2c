@@ -4,8 +4,12 @@ import cn.edu.jit.b2c.pojo.User;
 import cn.edu.jit.b2c.util.MSG;
 import com.aliyuncs.exceptions.ClientException;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService {
-    MSG login(String phone, String password);
+    MSG login(String phone, String password, HttpServletRequest request);
+
+    MSG getUserInfo(HttpServletRequest request);
 
     MSG sendVericode(String phone) throws ClientException;
 

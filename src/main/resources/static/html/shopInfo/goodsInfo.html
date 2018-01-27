@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>商家管理系统</title>
+    <link rel="stylesheet" type="text/css" href="../../css/seller.css"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+    <style>
+        .layui-logo a:link {
+            color: #FFF;
+        }
+
+        .layui-logo a:visited {
+            color: #FFF;
+        }
+
+        .layui-logo a:hover {
+            color: #FFF;
+        }
+
+        .layui-logo a:active {
+            color: #FFF;
+        }
+
+
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><a href="../seller.html">b2c商家管理系统</a></div>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <div>
+                    <a href="javascript:">
+                        <img src="../img/yy.png" class="layui-nav-img" id="userimg">
+                        <span id="username">未登录</span>
+                    </a>
+                </div>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="personal.html">基本资料</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">退出</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:">商家管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="shopInfo.html">店铺管理</a>
+                        </dd>
+                    </dl>
+
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="vipInfo.html">会员管理</a>
+                        </dd>
+                    </dl>
+
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this">
+                            <a href="">商品管理</a>
+                        </dd>
+                    </dl>
+
+
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="orderInfo.html" onclick="shopList()">订单管理</a>
+                        </dd>
+                    </dl>
+
+                </li>
+            </ul>
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">用户管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+
+        <div class="shopList">
+
+        </div>
+        <div class="btnList">
+            <button class="layui-btn layui-btn-small" id="btn-refresh" onclick="ui.add();"><i
+                    class="layui-icon">&#xe61f;</i>增加商品
+            </button>
+            <button class="layui-btn layui-btn-small  layui-btn-danger" id="btn" onclick="ui.edit();"><i
+                    class="layui-icon">&#xe642;</i>编辑商品
+            </button>
+            <button class="layui-btn layui-btn-normal layui-btn-small" id="btn-export" onclick="ui.delGood()"><i
+                    class="layui-icon">&#xe640;</i>删除商品
+            </button>
+
+        </div>
+
+        <table id="demo" lay-filter="test"></table>
+
+    </div>
+
+    <div class="layui-footer" style="text-align: right;">
+
+        联系我们：1156070529@qq.com
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="../../lib/layui/layui.all.js"></script>
+<script src="../../js/util/common.js"></script>
+<script>
+
+
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: '/shop/browse',
+            async: 'true',
+            dataType: 'json',
+            success: function (data) {
+                var str = "";
+                $.each(data.data, function (index, val) {
+                    str+='<button class="layui-btn layui-btn-small" onclick="ui.loadGrid('+val.shop_id+')">'+
+                        '<i class="layui-icon">&#xe705;</i>'+val.name+'</button>';
+                });
+                $('.shopList').append(str);
+
+            }
+
+        })
+    });
+
+    
+    var ui = ui || {};
+    (function () {
+        $.extend(ui, {
+            loadGrid: function (shop_id) {
+                //第一个实例
+                layui.table.render({
+                    id: 'goods'
+                    , elem: '#demo'
+                    , height: 500
+                    , url: '/goods/goodsinfoshop/'+shop_id //数据接口
+                    , page: true //开启分页
+                    , cols: [[ //表头
+                        {field: 'shop_id', title: '商品ID', width: 80, sort: true, type: 'checkbox'}
+                        , {field: 'type_id', title: '商品类型', width: 200}
+                        , {field: 'name', title: '商品名', width: 300}
+                        , {field: 'price', title: '商品价格（元）', width: 220}
+                        , {field: 'status', title: '商品状态', width: 220}
+                        , {field: 'restnum', title: '商品剩余数量', width: 220}
+                        , {field: 'totalnum', title: '商品总数量', width: 220}
+                        , {field: 'img', title: '商品图片', width: 220, templet: '#titleTpl'}
+                    ]]
+                });
+            },
+            editInfo: function (id, title) {
+                com.layerOpen({
+                    title: title,
+                    width: '56%',
+                    height: '60%',
+                    content: '/html/shopInfo/editGoods.html?good_id=' + id,
+                    yes: function (iframebody, iframeWin, index) {
+                        iframeWin.editUI.saveEdit(index);
+                    }
+                });
+            },
+            addInfo: function (id, title) {
+                com.layerOpen({
+                    title: title,
+                    width: '56%',
+                    height: '60%',
+                    content: '/html/shopInfo/editGoods.html?good_id=' + id,
+                    yes: function (iframebody, iframeWin, index) {
+                        iframeWin.editUI.saveAdd(index);
+                    }
+                });
+            },
+            delInfo: function (id) {
+                layer.confirm('是否删除?', {icon: 3, title: '提示'}, function (index) {
+                    $.ajax({
+                        type: 'delete',
+                        url: '/goods/delete/' + id,
+                        async: true,
+                        dataType: 'json',
+                        success: function (d) {
+                            layer.alert(d.msg, {icon: 1});
+                            layui.layer.close(index);
+                            layui.table.reload('goods', {
+                                url: '/goods/goodsinfoshop/'+shop_id,
+                                where: {}
+                            });
+                        }
+                    });
+
+                    layer.close(index);
+                });
+            },
+            add: function () {
+                ui.addInfo(0, '增加商品');
+            },
+            edit: function () {
+                var checkStatus = layui.table.checkStatus('goods'); //test即为基础参数id对应的值
+                var len = checkStatus.data.length;
+                if (len == 0) {
+                    layer.alert('请先选择一个商品', {icon: 3});
+                    return;
+                } else if (len > 1) {
+                    layer.alert('只可选择一个商品', {icon: 3});
+                    return;
+                } else {
+                    var id = layui.table.checkStatus('goods').data[0].good_id;
+                    ui.editInfo(id, '编辑商品');
+                }
+
+            },
+            delGood: function () {
+                var checkStatus = layui.table.checkStatus('goods'); //test即为基础参数id对应的值
+                var len = checkStatus.data.length;
+                if (len == 0) {
+                    layer.alert('请先选择一个商品', {icon: 3});
+                    return;
+                } else if (len > 1) {
+                    layer.alert('只可选择一个商品', {icon: 3});
+                    return;
+                } else {
+                    var id = layui.table.checkStatus('goods').data[0].good_id;
+                    ui.delInfo(id);
+                }
+            },
+
+        });
+        $(function () {
+            com.getUserInfo();
+            //ui.loadGrid();
+        });
+    })();
+
+
+</script>
+<script type="text/html" id="titleTpl">
+    <img src="{{d.img}}"/>
+</script>
+
+</html>

@@ -39,10 +39,6 @@
 				</li>
 			</ul>
 			<ul class="fr">
-				<li>
-					<a href="./login.html">你好，请登录 </a>
-					<a href="./register.html" class="f10">免费注册</a>
-				</li>
 				<li class="space"></li>
 				<li>
 					<a href="#">我的订单</a>
@@ -1095,12 +1091,37 @@
 		</footer>
 
 	</body>
-
+	</body>
 	<script type="text/javascript" src="js/news.js"></script>
 	<script type="text/javascript" src="js/time.js"></script>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/top.js"></script>
 	<script type="text/javascript" src="js/banner.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+            $(function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/user/getUserInfo',
+                    async: true,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == -1) return ;
+						var str;
+						str = 'Hi,'+data.data.name+'<br/>\
+                        <a href="./login.html">个人信息</a>\
+                            <a href="#" class="user-info">\
+                            <img src="'+data.data.img+'">\
+                            </a>';
+						$('.login-t').html(str);
+                    },
+                    error: function () {
+                        alert("failed!");
+                    }
+                })
+            })
 
+
+
+		</script>
 </html>

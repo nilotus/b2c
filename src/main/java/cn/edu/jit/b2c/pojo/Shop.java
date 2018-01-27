@@ -24,6 +24,10 @@ public class Shop {
     public Shop(){
     }
 
+    public Shop(int shop_id){
+        this.shop_id = shop_id;
+    }
+
     public int getShop_id() {
         return shop_id;
     }

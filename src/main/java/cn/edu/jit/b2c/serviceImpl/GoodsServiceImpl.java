@@ -50,7 +50,7 @@ public class GoodsServiceImpl implements GoodsService{
 
     public MSG goodsBrowseShop(int shop_id){
         List<Goods> goods =goodsMapper.browseShop(shop_id);
-        return new MSG(1,"浏览成功",goods);
+        return new MSG(0,"浏览成功",goods);
     }
 
 
@@ -85,6 +85,7 @@ public class GoodsServiceImpl implements GoodsService{
      */
     @Override
     public MSG goodsAdd(Goods goods){
+        System.out.println(goods.toString());
         boolean result=goodsMapper.add(goods);
         if(result)
             return new MSG(1,"添加成功");
@@ -118,6 +119,7 @@ public class GoodsServiceImpl implements GoodsService{
             return new MSG(1,"更新成功");
         else
             return new MSG(1,"更新失败");
+
     }
 
     /**
@@ -130,4 +132,21 @@ public class GoodsServiceImpl implements GoodsService{
         int salenum=num.getTotalnum()-num.getRestnum();
         return new MSG(1,"查询成功",salenum);
     }
+
+     /**
+     * Created by Mr.Chen
+     * 查询单一商品信息
+     */
+    @Override
+    public MSG findGoodInfo(int good_id) {
+        Goods goods;
+        if(good_id == 0) {
+            goods = new Goods(0);
+        }else {
+            goods = goodsMapper.selectGoodInfo(good_id).get(0);
+        }
+        return new MSG(1,"success",goods);
+    }
+
+
 }

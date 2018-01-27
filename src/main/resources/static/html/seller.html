@@ -1,428 +1,267 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>商家管理系统</title>
-		<link rel="stylesheet" type="text/css" href="../css/seller.css" />
-		<script src="../js/echarts.js"></script>
-		<link rel="stylesheet" href="../lib/layui/css/layui.css">
-		<link href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>商家管理系统</title>
+    <link rel="stylesheet" type="text/css" href="../css/seller.css"/>
+    <script src="../js/echarts.js"></script>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <style>
+        .layui-logo a:link{
+            color: #FFF;
+        }
+        .layui-logo a:visited {
+            color: #FFF;
+        }
+        .layui-logo a:hover{
+            color: #FFF;
+        }
+        .layui-logo a:active{
+            color: #FFF;
+        }
+    </style>
+</head>
 
-	<body class="layui-layout-body">
-		<div class="layui-layout layui-layout-admin">
-			<div class="layui-header">
-				<div class="layui-logo">商家管理系统</div>
-				<!-- 头部区域（可配合layui已有的水平导航） -->
-				<ul class="layui-nav layui-layout-left">
-					<li class="layui-nav-item" >
-						<a href="" onmouseover="change1()  ">订单管理</a>
-					</li>
-					<li class="layui-nav-item ">
-						<a href=""  onmouseover="change2()">交易记录</a>
-					</li>
-					<li class="layui-nav-item ">
-						<a a href="" onmouseover="change3()">用户管理</a>
-					</li>
-					<li class="layui-nav-item ">
-						<a a href="" onmouseover="change4()">消息管理</a>
-					</li>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><a href="seller.html">b2c商家管理系统</a></div>
 
-					<li class="layui-nav-item">
-						<a href="javascript:;">其它系统</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="">邮件管理</a>
-							</dd>
-							<dd>
-								<a href="">活动管理</a>
-							</dd>
-							<dd>
-								<a href="">授权管理</a>
-							</dd>
-						</dl>
-					</li>
-				</ul>
-				<ul class="layui-nav layui-layout-right">
-					<li class="layui-nav-item">
-						<a href="javascript:;">
-							<img src="../img/yy.png" class="layui-nav-img"> 浪花
-						</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="">基本资料</a>
-							</dd>
-							<dd>
-								<a href="">安全设置</a>
-							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="">退出</a>
-					</li>
-				</ul>
-			</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <div>
+                    <a href="javascript:">
+                        <img src="../img/yy.png" class="layui-nav-img" id="userimg">
+                        <span id="username">未登录</span>
+                    </a>
+                </div>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="shopInfo/sellerInfo.html">基本资料</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="login.html">退出</a>
+            </li>
+        </ul>
+    </div>
 
-			<div class="layui-side layui-bg-black">
-				<div class="layui-side-scroll">
-					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					<ul class="layui-nav layui-nav-tree" lay-filter="test">
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">商品管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;">鞋子</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">衣服</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">数码</a>
-								</dd>
-								<dd>
-									<a href="">超链接</a>
-								</dd>
-							</dl>
-						</li>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">商家管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="shopInfo/shopInfo.html">店铺管理</a>
+                        </dd>
+                    </dl>
 
-						<li class="layui-nav-item">
-							<a href="javascript:;">店铺管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;">样式1</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">样式2</a>
-								</dd>
-							</dl>
-						</li>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="shopInfo/vipInfo.html">会员管理</a>
+                        </dd>
+                    </dl>
 
-						<!--<li class="layui-nav-item">
-							<a href="javascript:;">解决方案</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;">1</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">2</a>
-								</dd>
-								<dd>
-									<a href="">超链接</a>
-								</dd>
-							</dl>
-						</li>-->
-						 
-						<li class="layui-nav-item">
-							<a href="">发布商品</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="layui-body" id="grid1" style="display:block;">
-				<!-- 内容主体区域 -->
-				<div  class="introduction">店铺介绍
-
-					<br><br>
-					<blockquote class="layui-elem-quote">
-						一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
-						三番四次精心修整 十分诚意还要加二
-
-					</blockquote>
-
-				</div>
-				
-			<div class="echarts dingdan" >
-					<h2 class="style">订单信息表</h2><br />
-					<table class="table">
-					<thead>
-						<tr>
-							<th>订单号</th>
-							<th>付款日期</th>
-							<th>状态</th>
-							<th>收货地址</th>
-							<th>款项</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="active">
-							<td>116465414</td>
-							<td>2018/1/20</td>
-							<td>待发货</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="success">
-							<td>116465412</td>
-							<td>2018/1/20</td>
-							<td>发货中</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="warning">
-							<td>116465413</td>
-							<td>2018/1/20</td>
-							<td>待确认</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="danger">
-							<td>116465144</td>
-							<td>2018/1/20</td>
-							<td>已退货</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="active">
-							<td>116454141</td>
-							<td>2018/1/20</td>
-							<td>待发货</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="success">
-							<td>164654142</td>
-							<td>2018/1/20</td>
-							<td>发货中</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="warning">
-							<td>116654143</td>
-							<td>2018/1/20</td>
-							<td>待确认</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-						<tr class="danger">
-							<td>164654144</td>
-							<td>2018/1/20</td>
-							<td>已退货</td>
-							<td>广东省佛山市文沙路16号</td>
-							<td>¥336</td>
-						</tr>
-					</tbody>
-				</table>
-				
-			</div>	 	
-				 
-				
-			</div>
-
-			<div class="layui-body" id="grid2" style="display:none;">
-				<!-- 内容主体区域 -->
-				<div  class="introduction">店铺介绍
-
-					<br><br>
-					<blockquote class="layui-elem-quote">
-						一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
-						三番四次精心修整 十分诚意还要加二
-
-					</blockquote>
-
-				</div>
-				
-				<div class="echarts1" id="main"> </div>
-				
-			</div>
-
-			<div class="layui-body" id="grid3" style="display:none;">
-				<!-- 内容主体区域 -->
-				<div class="echarts yonghu" id="main1"> </div>				 
-				<div class="left" > 
-					<table class="table table-striped">
-	 
-						<h2 class="style">会员用户</h2><br />
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>用户名</th>
-								<th>联系电话</th>
-								<th>注册时间</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				
-				<div class="right">
-					<table class="table table-striped">
-					<h2 class="style">消费客户</h2><br />
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>用户名</th>
-								<th>联系电话</th>
-								<th>注册时间</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-							<tr>
-								<td>23</td>
-								<td>浪花</td>
-								<td>13290907878</td>
-								<td>2017/10/1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>	
-				 
-			</div>
-			
-			<div class="layui-body" id="grid4" style="display:none;">
-				<!-- 内容主体区域 -->
-				<div  class="introduction">店铺介绍
-
-					<br><br>
-					<blockquote class="layui-elem-quote">
-						一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
-						三番四次精心修整 十分诚意还要加二
-
-					</blockquote>
-
-				</div>
-				
-				<div class="echarts1" > 
-				
-				<table class="table table-hover wid">
-	 
-					<thead>
-						<tr>
-							<th>宝贝管理</th>
-							<th> </th>
-							<th> </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>出售中的宝贝：20</td>
-							<td>等待上架的宝贝：3</td>
-							<td>已下架的宝贝：4</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="table table-hover wid">
-	 
-					<thead>
-						<tr>
-							<th>订单提醒</th>
-							<th> </th>
-							<th> </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>待发货的订单：20</td>
-							<td>已发货的订单：24</td>
-							<td>总订单数：44</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="table table-hover wid">
-	 
-					<thead>
-						<tr>
-							<th>访客管理</th>
-							<th> </th>
-							<th> </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>今日访问人数：3</td>
-							<td>历史访问人数：20</td>
-							<td>总访问人数：23</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				</div>
-				
-			</div>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="shopInfo/goodsInfo.html">商品管理</a>
+                        </dd>
+                    </dl>
 
 
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="shopInfo/orderInfo.html">订单管理</a>
+                        </dd>
+                    </dl>
 
-			<div class="layui-footer" style="text-align: right;">
+                </li>
+            </ul>
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed shopList" >
+                    <a class="" href="javascript:;">店铺管理</a>
 
-				联系我们：1156070529@qq.com
-			</div>
-		</div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-	</body>
-	<script src="../lib/layui/layui.js"></script>
-	<script src="../js/jquery-3.2.1.min.js"></script>
-	<script src="../lib/bootstrap /js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/seller.js"></script>
-	<script src="../js/change.js"></script>
-	<script src="../js/table.js"></script>
-	<script src="../js/seller1.js"></script>
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">网站设置</li>
+                <li>用户管理</li>
+                <li>权限分配</li>
+                <li>商品管理</li>
+                <li>订单管理</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-item layui-show">
+                    <br><br>
+                    <blockquote class="layui-elem-quote">
+                        一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                        三番四次精心修整 十分诚意还要加二
 
-	<script>
-		layui.use('element', function() {
-			var element = layui.element;
+                    </blockquote>
+                </div>
+                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item">内容4</div>
+                <div class="layui-tab-item">内容5</div>
+            </div>
+        </div>
+    </div>
 
-		});
-		
-		
-	</script>
+
+    <div class="layui-body" id="grid1" style="display:none;">
+        <!-- 内容主体区域 -->
+        <div class="introduction">店铺介绍
+
+            <br><br>
+            <blockquote class="layui-elem-quote">
+                一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                三番四次精心修整 十分诚意还要加二
+
+            </blockquote>
+
+        </div>
+
+        <div class="echarts dingdan">
+            <h2 class="style">订单信息表</h2><br/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>订单号</th>
+                    <th>付款日期</th>
+                    <th>状态</th>
+                    <th>收货地址</th>
+                    <th>款项</th>
+                </tr>
+                </thead>
+                <tbody class="textbody">
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="layui-footer" style="text-align: right;">
+
+        联系我们：1156070529@qq.com
+    </div>
+</div>
+
+</body>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../lib/layui/layui.js"></script>
+
+<script>
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+//
+//    $(function () {
+//        $.ajax({
+//            type: 'get',
+//            url: '/order/lookall',
+//            async: true,
+//            dataType: 'json',
+//            success: function (data) {
+//                var str = "";
+//                $.each(data.data, function (index, val) {
+//                    str += "<tr class='active'>"
+//                        + "<td>" + val.order_id + "</td>"
+//                        + "<td>" + val.time + "</td>"
+//                        + "<td>" + val.status + "</td>"
+//                        + "<td>" + val.user_id + "</td>"
+//                        + "<td>" + val.price + "</td>"
+//                        + "</tr>";
+//                });
+//
+//                $('.textbody').append(str);
+//            },
+//            error: function () {
+//                alert("failed!");
+//            }
+//        })
+//    });
+
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: '/shop/browse',
+            async: 'true',
+            dataType: 'json',
+            success: function (data) {
+                var str = "";
+                $.each(data.data, function (index, val) {
+                    str += "<dl class='layui-nav-child'><dd><a href='shopInfo/goodsInfo.html?shop_id='"+val.shop_id+">" + val.name + "</a></dd></dl>";
+
+                });
+
+                $('.shopList').append(str);
+
+            }
+
+        })
+    });
+
+//    $(function () {
+//        $.ajax({
+//            type: 'get',
+//            url: '/shop/browse',
+//            async: true,
+//            dataType: 'json',
+//            success: function (data) {
+//                var str = "";
+//                $.each(data.data, function (index, val) {
+//                    str += "<tr>"
+//                        + "<td>" + val.user_id + "</td>"
+//                        + "<td>" + val.description + "</td>"
+//                        + "<td>" + val.good_id + "</td>"
+//                        + "<td>" + val.img + "</td>"
+//                        + "</tr>";
+//                });
+//
+//                $('.buyers').append(str);
+//            },
+//            error: function () {
+//                alert("failed!");
+//            }
+//        })
+//    });
+
+
+    $(function () {
+        $.ajax({
+            type:'get',
+            url:'/user/getUserInfo',
+            async:true,
+            dataType:'json',
+            success:function (data) {
+                if (data.code == -1) return ;
+                $('#username').text(data.data.name);
+                $('#userimg').attr("src",data.data.img);
+
+            },
+            error:function () {
+
+            }
+        })
+
+    });
+
+
+</script>
 
 </html>

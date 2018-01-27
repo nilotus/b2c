@@ -3,6 +3,7 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.pojo.Goods;
 import cn.edu.jit.b2c.service.GoodsService;
 import cn.edu.jit.b2c.util.MSG;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class GoodsController {
      * 详细浏览特定商品
      * 输出name，price，img，describe店铺名
      */
-    @GetMapping("/goodsinfo/{good_id}")
+    @GetMapping("/goodsinfoone/{good_id}")
     public MSG goodsBrowseOne(@PathVariable("good_id") int good_id) throws IOException{
         return goodsService.goodsBrowseOne(good_id);
     }
@@ -39,8 +40,9 @@ public class GoodsController {
      * 浏览店铺内商品
      * 输出name，price，img
      */
-    @GetMapping("/goodsinfo/{shop_id}")
+    @GetMapping("/goodsinfoshop/{shop_id}")
     public MSG goodsBrowseShop(@PathVariable("shop_id") int shop_id) throws IOException{
+        System.out.println(shop_id);
         return goodsService.goodsBrowseShop(shop_id);
     }
 
@@ -70,9 +72,10 @@ public class GoodsController {
      * 增加商品
      * 输入name,price,status,shop_id,type_id,img,totalnum,describe
      */
-    @PostMapping("/add/{shop_id}")
-    public MSG goodsAdd(@PathVariable("shop_id") int shop_id,Goods goods){
-        goods.setShop_id(shop_id);
+    @PostMapping("/add")
+    public MSG goodsAdd(@RequestBody Goods goods){
+        System.out.println(goods.toString());
+        goods.setGood_id(0);
         return goodsService.goodsAdd(goods);
     }
 
@@ -91,9 +94,13 @@ public class GoodsController {
      * 更新商品
      * 输入name,price,status,img,describe
      */
-    @PutMapping("/update/{good_id}")
-    public MSG goodsUpdate(@PathVariable("good_id") int good_id,Goods goods){
-        goods.setGood_id(good_id);
+    @PostMapping("/goodsEdit")
+    public MSG goodsUpdate(@RequestBody Goods goods){
+//        System.out.println(request.getParameter("goods"));
+//        System.out.println(request);
+        System.out.println(goods);
+//        System.out.println(good_id);
+//        goods.setGood_id(good_id);
         return goodsService.goodsUpdate(goods);
     }
 
@@ -104,6 +111,15 @@ public class GoodsController {
     @GetMapping("/fan/{good_id}")
     public MSG goodsSaleNum(@PathVariable("good_id") int good_id){
         return goodsService.goodsSaleNum(good_id);
+    }
+
+    /**
+     * Created by Mr.Chen
+     * 获取商品信息
+     */
+    @RequestMapping("getgoodInfo/{good_id}")
+    public MSG getGoodInfo(@PathVariable("good_id") int good_id) {
+        return goodsService.findGoodInfo(good_id);
     }
 
 }

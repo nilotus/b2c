@@ -10,10 +10,14 @@ import org.apache.ibatis.jdbc.Null;
 import cn.edu.jit.b2c.util.MSG;
 import cn.edu.jit.b2c.util.SmsDemo;
 import com.aliyuncs.exceptions.ClientException;
+import org.hibernate.validator.constraints.ModCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 import static cn.edu.jit.b2c.util.SmsDemo.sendSms;
 
@@ -31,19 +35,44 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public MSG login(String phone, String password) {
+    public MSG login(String phone, String password, HttpServletRequest request) {
         User user = userMapper.findPhone(phone);
         if(user == null){
             return new MSG(-1,"该用户不存在");
         }
-        else if (!user.getPhone().equals(user.getPassword())){
+        else if (!user.getPassword().equals(password)){
             return new MSG(-1,"密码错误");
         }
         else {
-            return new MSG(1,"登陆成功");
+            HttpSession session = request.getSession();
+            session.setAttribute("admin_now",phone);
+            session.setAttribute("user_id",user.getUser_id());
+            ArrayList userInfo = new ArrayList();
+            userInfo.add(user.getUser_id());
+            userInfo.add(user.getRole_id());
+            return new MSG(1,"登陆成功",userInfo);
         }
     }
 
+    /**
+     * Created by Mr.Chen
+     * 获取用户信息
+     */
+    @Override
+    public MSG getUserInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Object phoneSession = session.getAttribute("admin_now");
+        if(phoneSession == null)
+            return new MSG(-1,"failed");
+        User userInfo = userMapper.findPhone(phoneSession.toString());
+        userInfo.setPassword(null);
+        return new MSG(1,"success",userInfo);
+    }
+
+    /**
+     * Created by Mr.Chen
+     * 发送验证码
+     */
     @Override
     public MSG sendVericode(String phone) throws ClientException {
         code = vericode.sendSms(phone);

@@ -3,10 +3,7 @@ package cn.edu.jit.b2c.controller;
 import cn.edu.jit.b2c.service.OrderService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -31,10 +28,21 @@ public class OrderController {
      * Created by ZhouLiangWei
      *查看所有订单
      */
-    @PostMapping("/lookall")
+    @GetMapping("/lookall")
     public  MSG lookall() throws IOException{
         return orderService.ordersBrowseAll();
     }
+
+    /**
+     * Created by ZhouLiangWei
+     *查看所有订单
+     */
+    @RequestMapping("/orderBorwse/{shop_id}")
+    public MSG orderBorwse(@PathVariable("shop_id") int shop_id) throws IOException{
+        return orderService.ordersBrowseOne(shop_id);
+    }
+
+
 
     /**
      * Created by ZhouLiangWei
