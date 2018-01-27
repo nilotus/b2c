@@ -1,15 +1,15 @@
 package cn.edu.jit.b2c.serviceImpl;
 
 import cn.edu.jit.b2c.mapper.UserShopMapper;
-import cn.edu.jit.b2c.pojo.RMessage;
-import cn.edu.jit.b2c.pojo.Shop;
-import cn.edu.jit.b2c.pojo.UserShop;
+import cn.edu.jit.b2c.pojo.*;
 import cn.edu.jit.b2c.service.UserShopService;
 import cn.edu.jit.b2c.util.MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserShopServiceImpl implements UserShopService{
@@ -18,38 +18,58 @@ public class UserShopServiceImpl implements UserShopService{
 
     /**
      * Created by ZhouLiangWei
-     * 查看用户收藏夹的所有属性
-     * 输出status，good_id,shop_id
+     * 根据user_id查看用户收藏夹的所有商品信息
+     * 输出name,price,img,describe,good_id
      */
     @Override
     public MSG usershopLook(int user_id) {
-        UserShop uslook = userShopMapper.usershopLook(user_id);
-        return new MSG(1,"查看成功",uslook);
+        List<UserShop> userShop = userShopMapper.usershopLook(user_id);
+        List<JsonUsershop> jsonUsershopList = new ArrayList<>();
+        for(int i=0;i<userShop.size();i++)
+        {
+            jsonUsershopList.add(Json2Usershop(userShop.get(i)));
+        }
+        return new MSG(1,"查看成功",jsonUsershopList);
     }
-
-    /**TODO
-     * Created by ZhouLiangWei
-     * 查看用户收藏夹的商品信息
-     * 输出status，good_id,shop_id
-     */
-    @Override
-    public MSG usershopGFind(int good_id, int status) {
-        RMessage rMessage = new RMessage();
-        rMessage.setGoods(userShopMapper.usershopGFind(good_id));
-        rMessage.setC(userShopMapper.usershopGFind1(rMessage.getGoods().getShop_id()));
-        return new MSG(1,"查看成功",rMessage);
+    public JsonUsershop Json2Usershop(UserShop userShop){
+        JsonUsershop jsonUsershop = new JsonUsershop();
+        Goods goods = userShopMapper.usershopGFind(userShop.getGood_id());
+        jsonUsershop.setDescription(goods.getDescribe());
+        jsonUsershop.setPrice(goods.getPrice());
+        jsonUsershop.setImg(goods.getImg());
+        jsonUsershop.setName(goods.getName());
+        jsonUsershop.setGood_id(userShop.getGood_id());
+        jsonUsershop.setUsid(userShop.getUsid());
+        return jsonUsershop;
     }
 
     /**
      * Created by ZhouLiangWei
-     * 查看用户收藏夹的店铺信息
-     * 输出店铺的name，img
+     * 根据user_id查看用户收藏夹的所有店铺信息
+     * 输出shop_id,name,price,img,describe
      */
     @Override
-    public MSG usershopSFind(int shop_id, int status) {
-        Shop ussfind  = userShopMapper.usershopSFind(shop_id);
-        return new MSG(1,"查看成功",ussfind);
+    public MSG usershopLook1(int user_id) {
+        List<UserShop> userShop = userShopMapper.usershopLook2(user_id);
+        List<JsonUsershop2> jsonUsershopList1 = new ArrayList<>();
+        for(int i=0;i<userShop.size();i++)
+        {
+            jsonUsershopList1.add(Json3Usershop(userShop.get(i)));
+        }
+        return new MSG(1,"查看成功",jsonUsershopList1);
     }
+    public JsonUsershop2 Json3Usershop(UserShop userShop){
+        JsonUsershop2 jsonUsershop2 = new JsonUsershop2();
+        Shop shop = userShopMapper.usershopSFind(userShop.getShop_id());
+        jsonUsershop2.setDescribe(shop.getDescribe());
+        jsonUsershop2.setImg(shop.getImg());
+        jsonUsershop2.setName(shop.getName());
+        jsonUsershop2.setShop_id(userShop.getShop_id());
+        jsonUsershop2.setUsid(userShop.getUsid());
+        return jsonUsershop2;
+    }
+
+
 
     /**
      * Created by ZhouLiangWei
@@ -75,23 +95,12 @@ public class UserShopServiceImpl implements UserShopService{
 
     /**
      * Created by ZhouLiangWei
-     * 在收藏夹里删除店铺信息
+     * 在收藏夹里删除信息
      * 输入 user_id,shop_id,good_id,status
      */
     @Override
-    public MSG usershopDelete1(int shop_id) {
-        userShopMapper.delete2(shop_id);
-        return new MSG(1,"删除成功");
-    }
-
-    /**
-     * Created by ZhouLiangWei
-     * 在收藏夹里删除商品信息
-     * 输入 user_id,shop_id,good_id,status
-     */
-    @Override
-    public MSG usershopDelete2(int good_id) {
-        userShopMapper.delete1(good_id);
+    public MSG usershopDelete(int usid) {
+        userShopMapper.delete(usid);
         return new MSG(1,"删除成功");
     }
 
