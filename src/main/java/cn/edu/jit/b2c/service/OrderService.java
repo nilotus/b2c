@@ -8,11 +8,9 @@ import java.util.List;
 public interface OrderService {
     MSG purchaseDirent(int user_id, List<Integer> good_id, List<Integer> good_num);
 
-    MSG afterpay(int status, int order_id, int cart_id);
+    MSG distribution(int order_id, int user_id);
 
-    MSG distribution(int status, int order_id, String description);
-
-    MSG confirmrece(int order_id);
+    MSG confirmrece(int order_id, int user_id);
 
     MSG cancelorder1(int order_id);
 
@@ -30,9 +28,5 @@ public interface OrderService {
     MSG lookorder6(int user_id);
     MSG lookorder7(int user_id);
 
-
-    MSG ordersBrowseAll();
-
-    MSG ordersBrowseOne(int shop_id);
-
+    MSG fukuan(int order_id,int user_id);
 }

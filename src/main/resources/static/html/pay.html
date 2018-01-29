@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>付款</title>
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/pay.css">
+	</head>
+	<body>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script>
+        function afterPay(order_id) {
+            $.ajax({
+                type: 'post',
+                url: '/order/distribution',
+                async: true,
+                dataType: 'json',
+                data: {
+                    order_id:order_id,
+                    user_id:22,
+                },
+            });
+        }
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+        var order_id = getUrlParam('order_id');
+        console.log('order_id:' + order_id);
+
+        $.ajax({
+            type: 'post',
+            url: '/order/fukuan',
+            async: true,
+            dataType: 'json',
+            data: {
+                order_id:order_id,
+                user_id:22,
+            },
+            success: function (data) {
+                //console.log(data.data)
+                if (data.code == 1) {
+                    var result = data.data;
+                    var total = 0;
+                    total = result.price*result.good_num;
+                    console.log("total="+total);
+                    var str = '<p class="money2">应付金额：￥<span id="money">'+total+'</span></p>'+
+								'<div id="pay">\n' +
+								'<img id="pic" src="../img/pay.png" />\n' +
+								'</div>\n' +
+								'<div id="btn">' +
+								'<button onclick="afterPay(order_id)" type="button" id="myButton" data-loading-text="loading..." class="btn btn-primary" autocomplete="off">\n' +
+								' <a id="6" href="status2.html">已付款</a>\n' +
+								'</button>\n' +
+								'</div>\n'
+                    $('.money1').append(str);
+                }
+            }
+        });
+        
+
+	</script>
+
+		<div align="center" ;>
+			<img src="../img/5.png" />
+		</div>
+		<div class="money1">
+		</div>
+		<!--<div id="pay">
+			<img id="pic" src="../img/pay.png" />
+		</div>
+		<div id="btn">		
+			<button onclick="aftetPay(order_id)" type="button" id="myButton" data-loading-text="loading..." class="btn btn-primary" autocomplete="off">
+			  <a id="6" href="status2.html">已付款</a>
+			</button>
+		</div>-->
+	</body>
+
+	<script src="../js/bootstrap.min.js"></script>
+</html>

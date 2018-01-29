@@ -29,52 +29,33 @@ public class OrderController {
 
     /**
      * Created by ZhouLiangWei
-     *查看所有订单
+     * 付款
+     * 输出 good_num price
      */
-    @PostMapping("/lookall")
-    public  MSG lookall() throws IOException{
-        return orderService.ordersBrowseAll();
+    @PostMapping("/fukuan")
+    public  MSG fukuan(@RequestParam("order_id") int order_id,@RequestParam("user_id") int user_id) throws IOException {
+        return orderService.fukuan(order_id,user_id);
     }
 
-    /**
-     * Created by ZhouLiangWei
-     *查看所有订单
-     */
-    @RequestMapping("/orderBorwse/{shop_id}")
-    public MSG orderBorwse(@PathVariable("shop_id") int shop_id) throws IOException{
-        return orderService.ordersBrowseOne(shop_id);
-    }
-
-
-
-    /**
-     * Created by ZhouLiangWei
-     * 付款后
-     * 改变状态
-     */
-    @PostMapping("afterpay")
-    public MSG afterpay(int status ,int order_id,int cart_id) throws IOException{
-        return orderService.afterpay(status,order_id,cart_id);
-    }
 
     /**
      * Created by ZhouLiangWei
      * 配货状态
-     * 改变状态为3
+     * 改变状态为2
      */
     @PostMapping("/distribution")
-    public MSG distribution(int status, int order_id, String description) throws  IOException{
-        return orderService.distribution(status,order_id,description);
+    public MSG distribution(@RequestParam("order_id") int order_id,@RequestParam("user_id") int user_id) throws  IOException{
+        return orderService.distribution(order_id,user_id);
     }
 
     /**
      * Created by ZhouLiangWei
      * 确认收货
-     * 改变状态为4
+     * 改变状态为3
      */
     @PostMapping("/confirmrece")
-    public MSG confirmrece( int order_id) throws IOException {
-        return orderService.confirmrece(order_id);
+    public MSG confirmrece(@RequestParam("order_id") int order_id,@RequestParam("user_id") int user_id) throws IOException {
+        return orderService.confirmrece(order_id,user_id);
     }
 
 

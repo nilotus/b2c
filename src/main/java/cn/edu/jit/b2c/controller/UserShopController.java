@@ -62,7 +62,7 @@ public class UserShopController {
 
     /**
      * Created by ZhouLiangWei
-     * 在收藏夹里删除店铺信息
+     * 在收藏夹里删除商铺和商品信息
      */
     @DeleteMapping("/usdel2/{usid}")
     public MSG usershopDelete1(@PathVariable("usid") int usid) {

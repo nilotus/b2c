@@ -289,6 +289,15 @@
 	height: 20px;
 	float: right;
 }
+.dele111 {
+	position: relative;
+	text-align: center;
+	left: 540px;
+	bottom:45px;
+	width: 80px;
+	height: 20px;
+	float: right;
+}
 
 .dele6 {
 	position: relative;
@@ -323,7 +332,7 @@
 	position: relative;
 	text-align: center;
 	left: 460px;
-	bottom:50px;
+	bottom:55px;
 	width: 80px;
 	height: 20px;
 	float: right;
