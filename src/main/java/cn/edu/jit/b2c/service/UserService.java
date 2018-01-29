@@ -19,9 +19,11 @@ public interface UserService {
 
     MSG  userDelete(int user_id);
 
-    MSG  userUpdate(int user_id,String name, String address, String email);
+    MSG  userUpdate(int user_id,String name,String phone, String address, String email);
 
     MSG userImgUpdate(int user_id, String img);
 
     MSG register(User user, String message);
+
+    MSG loginOut(HttpServletRequest request);
 }

@@ -26,16 +26,35 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-/*    layui.use('element', function() {
-        var element = layui.element;
+    /*    layui.use('element', function() {
+     var element = layui.element;
 
-        //一些事件监听
-        element.on('tab(demo)',
-            function(data) {
-                console.log(data);
-            });
-    });*/
-
+     //一些事件监听
+     element.on('tab(demo)',
+     function(data) {
+     console.log(data);
+     });
+     });*/
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/user/getUserInfo',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    });
 
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -56,18 +75,18 @@
             async: true,
             dataType: 'json',
             data: {
-                user_id:22,
-                good_id:good_id,
+                user_id: 22,
+                good_id: good_id,
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
-                if(data.original == 0) {
+                if (data.original == 0) {
                     alert(data.info);
                 } else {
                     alert("success");
                 }
             },
-            error: function() {
+            error: function () {
                 alert("failed!");
             }
         });
@@ -84,18 +103,18 @@
             async: true,
             dataType: 'json',
             data: {
-                user_id:22,
-                good_id:good_id,
+                user_id: 22,
+                good_id: good_id,
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
-                if(data.original == 0) {
+                if (data.original == 0) {
                     alert(data.info);
                 } else {
                     alert("success");
                 }
             },
-            error: function() {
+            error: function () {
                 alert("failed!");
             }
         });
@@ -123,32 +142,32 @@
             dataType: "json",
             success: function (data) {
                 var str = "<div id='header' class='w'>"
-                    +"<img src='../img/5.jpg'>"
-                    +"</div>"
-                    +"<div class='main w'>"
-                    +"<div class='main_left fl'>"
-                    +"<div class='main_left_t'>"
-                    +" <h2>"+data.data.name+"</h2>"
-                    +"<input value='131243455'  id='goodsId' type='hidden' />"
-                    +"</div>"
-                    +"<div class='main_left_b' id='div1'>"
-                    +"<div class='small_pic'>"
-                    +"<span class='mark'></span>"
-                    +"<span class='float_layer'></span>"
-                    +"<img src='"+data.data.img+"'> "
-                    +"</div>"
-                    +"</div>"
-                    +"</div>"
-                    +" <div class='main_right fr'>"
-                    +" <div class='main_right_t'>"
-                    +" <p>"+data.data.describe+"</p>"
-                    +" </div>"
-                    +" <div class='main_right_b'>"
-                    +"<p class='price'><span class='yuan'>¥</span>"+data.data.price+"<span class='oldprice'>¥880</span> </p>"
-                    +"<button type='button' class='gouwuche' id='button1' onclick='gouwuche();'>加入购物车</button>"
-                    +" <button type='button' class='shoucang' id='button2' onclick='shoucang();'>加入收藏夹</button>"
-                    +" </div>"
-                    +"</div>";
+                    + "<img src='../img/5.jpg'>"
+                    + "</div>"
+                    + "<div class='main w'>"
+                    + "<div class='main_left fl'>"
+                    + "<div class='main_left_t'>"
+                    + " <h2>" + data.data.name + "</h2>"
+                    + "<input value='131243455'  id='goodsId' type='hidden' />"
+                    + "</div>"
+                    + "<div class='main_left_b' id='div1'>"
+                    + "<div class='small_pic'>"
+                    + "<span class='mark'></span>"
+                    + "<span class='float_layer'></span>"
+                    + "<img src='" + data.data.img + "'> "
+                    + "</div>"
+                    + "</div>"
+                    + "</div>"
+                    + " <div class='main_right fr'>"
+                    + " <div class='main_right_t'>"
+                    + " <p>" + data.data.describe + "</p>"
+                    + " </div>"
+                    + " <div class='main_right_b'>"
+                    + "<p class='price'><span class='yuan'>¥</span>" + data.data.price + "<span class='oldprice'>¥880</span> </p>"
+                    + "<button type='button' class='gouwuche' id='button1' onclick='gouwuche();'>加入购物车</button>"
+                    + " <button type='button' class='shoucang' id='button2' onclick='shoucang();'>加入收藏夹</button>"
+                    + " </div>"
+                    + "</div>";
                 $('#1').append(str);
             },
             error: function () {

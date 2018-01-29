@@ -302,6 +302,26 @@
 <!--about shop-->
 <script>
     $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/user/getUserInfo',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    });
+    $(function () {
         var shop_id = getUrlParam('shop_id');
         console.log('shop_id:'+shop_id);
         $.ajax({

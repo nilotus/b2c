@@ -1,7 +1,4 @@
-.w{
-	width: 1190px;
-	margin: 0 auto;
-}
+
 .fl{
 	float:left;
 	
@@ -19,10 +16,7 @@ h1 input button {
 	margin: 0;
 	padding: 0;
 }
-/**{
-	margin: 0;
-	padding: 0;
-}*/
+
 body{
 	background: #F6F6F6;
 }
@@ -51,6 +45,10 @@ a:hover{
 .shortcut li{
 	float:left;
 	
+}
+.container img{
+	height: 220px;
+	width:220px;
 }
 
 header{
@@ -85,6 +83,10 @@ input button{
 	width: 150px;
 }
 
+.footIndex{
+	width:900px ;
+	margin: 0;
+}
 
 .space{
 	width: 1px;
@@ -234,30 +236,9 @@ footer{
 .service li:nth-child(4) h5{
 	background-position: bottom ;
 }
-
-.help{
-	height: 200px;
-	border-bottom:1px solid #DEDEDE;
-	padding-top: 25px;
-	box-sizing: border-box;
-}
-.help dl{
-	width: 192px;
-	float: left;
-
-}
-.help dt{
-	height: 30px;
-	
-}
-.help dd{
-	height: 22px;
-	margin:0px;
-}
 .coverage{
 	width: 200px;
 	height: 150px;
-	
 }
 .copyright{
 	padding-top:20px ;
@@ -276,4 +257,9 @@ footer{
 }
 .copyright div{
 	margin-top: 20px;
+}
+.imgInfo {
+	width: 60px;
+	height: 60px;
+	border-radius:50%;
 }

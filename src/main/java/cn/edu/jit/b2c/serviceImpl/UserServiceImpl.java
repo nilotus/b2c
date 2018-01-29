@@ -108,6 +108,16 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * Created by Mr.Chen
+     * 退出登录状态
+     */
+    @Override
+    public MSG loginOut(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new MSG(1,"成功退出");
+    }
+
+    /**
      * Created by SunFuRong
      * 查看所有用户信息
      * 信息：phone,role_id, name,address,email
@@ -154,9 +164,9 @@ public class UserServiceImpl implements UserService {
      */
 
     @Override
-    public MSG userUpdate(int user_id,String name, String address, String email){
+    public MSG userUpdate(int user_id,String name, String phone, String address, String email){
         boolean result;
-        result=userMapper.update(user_id,name,address, email);
+        result=userMapper.update(user_id,name,phone,address, email);
         if(result)
             return new MSG(1,"修改信息成功");
 

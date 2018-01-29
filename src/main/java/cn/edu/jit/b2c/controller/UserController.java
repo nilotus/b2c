@@ -79,6 +79,17 @@ public class UserController {
     }
 
     /**
+     * Created by Mr.Chen
+     * 退出登录状态
+     */
+    @RequestMapping("loginOut")
+    public MSG loginOut(HttpServletRequest request) {
+        return iUserService.loginOut(request);
+    }
+
+
+
+    /**
      * Created by SunFuRong
      * 发送验证码功能
      * 输入phone信息
@@ -146,8 +157,8 @@ public class UserController {
      */
 
     @PostMapping("/updataInfo/{user_id}")//修改信息，不包括头像
-    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam ("name")String name, @RequestParam("address") String address, @RequestParam("email") String email) throws IOException{
-        return iUserService.userUpdate(user_id,name,address,email);
+    public MSG userUpdate(@PathVariable("user_id") int user_id, @RequestParam ("name")String name,@RequestParam("phone") String phone, @RequestParam("address") String address, @RequestParam("email") String email) throws IOException{
+        return iUserService.userUpdate(user_id,name,phone,address,email);
     }
 
     /**

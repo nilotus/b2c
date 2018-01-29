@@ -75,8 +75,11 @@
 	</ul>
 	<ul class="fr">
 		<li>
-			<a href="./login.html">你好，请登录 </a>
-			<a href="./register.html" class="f10">免费注册</a>
+			<div class="login-t">
+				<a href="login.html">你好，请登录 </a>
+				<a href="register.html" class="f10">免费注册</a>
+			</div>
+
 		<li class="space">
 		<li>
 			<a href="order.html">我的订单</a>
@@ -110,6 +113,26 @@
 
 	<!----商品加减算总数---->
 	<script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: 'post',
+                url: '/user/getUserInfo',
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == -1) return;
+                    var str;
+                    str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                    $('.login-t').html(str);
+                },
+                error: function () {
+                    alert("failed!");
+                }
+            })
+        });
         function  bindClick() {
             $(".add").click(function() {
                 var t = $(this).parent().find('input[class*=text_box]');

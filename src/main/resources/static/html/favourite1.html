@@ -18,8 +18,10 @@
     </ul>
     <ul class="fr">
         <li>
-            <a href="./login.html">你好，请登录 </a>
-            <a href="./register.html" class="f10">免费注册</a>
+            <div class="login-t">
+                <a href="login.html">你好，请登录 </a>
+                <a href="register.html" class="f10">免费注册</a>
+            </div>
         <li class="space">
         <li>
             <a href="order.html">我的订单</a>
@@ -34,8 +36,7 @@
             <a href="personal.html">个人中心</a>
     </ul>
 </div>
-<div align="center" ;
-"margin-bottom: 10px;">
+<div align="center" style="margin-bottom: 10px;">
 <img src="../img/5.png"/>
 </div>
 <div style="position: relative;left: 1000px; margin-bottom: 20px;">
@@ -54,7 +55,8 @@
                         <p align="center">￥<label class="price">6666</label></p>
                         <p>
                             <a href="#" class="btn btn-primary" role="button">删除</a>
-                            <a href="#" class="btn btn-default" style=" position: relative;  right: -20px;" role="button">加入购物车</a>
+                            <a href="#" class="btn btn-default" style=" position: relative;  right: -20px;"
+                               role="button">加入购物车</a>
                         </p>
                     </div>
                 </div>
@@ -65,83 +67,102 @@
 </div>
 <script src="../js/jquery.1.4.2-min.js"></script>
 <script>
-
+    $(function () {
         $.ajax({
-            type: "post",
-            url: "/usershop/uslook/"+22,
+            type: 'post',
+            url: '/user/getUserInfo',
             async: true,
-            dataType: "json",
+            dataType: 'json',
             success: function (data) {
-                if (data.code == 1) {
-                    var result = data.data;
-                    for (var i = 0; i < result.length; i++) {
-                        var str = '' +
-                            '<div class="window" id="'+result[i].usid+'">\n' +
-                            '<div class="row" style=" margin: 0 auto;  position: relative; width: 263px;height: 330px;">\n' +
-                            '<div class="col-sm-6 col-md-4" style="margin: 0 auto; position: relative; width: 263px; height: 330px;">\n' +
-                            '<div class="thumbnail">\n' +
-                            '<img src="' + result[i].img + '">\n' +
-                            '<div class="caption">\n' +
-                            '<h3 align="center">'+result[i].name+'</h3>\n' +
-                            '<p align="center"> '+result[i].description+'</p>\n' +
-                            '<p align="center">￥<label class="price"> '+result[i].price+' </label></p>\n' +
-                            '<p>\n' +
-                            '<button  class="btn btn-primary" role="button"  onclick=" deletes('+result[i].usid+')">删除</button>' +
-                            '<button class="btn btn-default" style=" position: relative;  right: -40px;" role="button" onclick="addS('+result[i].good_id+')">加入购物车</button>\n' +
-                            '</p>\n' +
-                            '</div>\n' +
-                            '</div>\n' +
-                            '</div>\n' +
-                            '</div>'
-                        $('.main').append(str);
-                    }
-                }
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+            },
+            error: function () {
+                alert("failed!");
             }
         })
-                        function deletes(id) {
-                            $.ajax({
-                                type: "delete",
-                                url: "/usershop/usdel2/"+id,
-                                async: true,
-                                dataType: "json",
-                                success:function(){
-                                    $('div[id='+id+']').remove();
-                                        console.log(data);
-                                        if(data.original == 0) {
-                                            alert(data.info);
-                                        } else {
-                                            alert("success");
-                                        }
-                                    },
-                                    error: function() {
-                                        alert("failed!");
-                                    }
-                            });
-                        }
-                            /*TODO user_id*/
-                        function addS(id) {
-                            $.ajax({
-                                type: 'get',
-                                url: '/cart/addgoods',
-                                async: true,
-                                dataType: 'json',
-                                data: {
-                                    user_id:22,
-                                    good_id:id,
-                                },
-                                success: function(data) {
-                                    console.log(data);
-                                    if(data.original == 0) {
-                                        alert(data.info);
-                                    } else {
-                                        alert("success");
-                                    }
-                                },
-                                error: function() {
-                                    alert("failed!");
-                                }
-                            });
-                        }
+    });
+    $.ajax({
+        type: "post",
+        url: "/usershop/uslook/" + 22,
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 1) {
+                var result = data.data;
+                for (var i = 0; i < result.length; i++) {
+                    var str = '' +
+                        '<div class="window" id="' + result[i].usid + '">\n' +
+                        '<div class="row" style=" margin: 0 auto;  position: relative; width: 263px;height: 330px;">\n' +
+                        '<div class="col-sm-6 col-md-4" style="margin: 0 auto; position: relative; width: 263px; height: 330px;">\n' +
+                        '<div class="thumbnail">\n' +
+                        '<img src="' + result[i].img + '">\n' +
+                        '<div class="caption">\n' +
+                        '<h3 align="center">' + result[i].name + '</h3>\n' +
+                        '<p align="center"> ' + result[i].description + '</p>\n' +
+                        '<p align="center">￥<label class="price"> ' + result[i].price + ' </label></p>\n' +
+                        '<p>\n' +
+                        '<button  class="btn btn-primary" role="button"  onclick=" deletes(' + result[i].usid + ')">删除</button>' +
+                        '<button class="btn btn-default" style=" position: relative;  right: -40px;" role="button" onclick="addS(' + result[i].good_id + ')">加入购物车</button>\n' +
+                        '</p>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>'
+                    $('.main').append(str);
+                }
+            }
+        }
+    })
+    function deletes(id) {
+        $.ajax({
+            type: "delete",
+            url: "/usershop/usdel2/" + id,
+            async: true,
+            dataType: "json",
+            success: function () {
+                $('div[id=' + id + ']').remove();
+                console.log(data);
+                if (data.original == 0) {
+                    alert(data.info);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function () {
+                alert("failed!");
+            }
+        });
+    }
+    /*TODO user_id*/
+    function addS(id) {
+        $.ajax({
+            type: 'get',
+            url: '/cart/addgoods',
+            async: true,
+            dataType: 'json',
+            data: {
+                user_id: 22,
+                good_id: id,
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.original == 0) {
+                    alert(data.info);
+                } else {
+                    alert("success");
+                }
+            },
+            error: function () {
+                alert("failed!");
+            }
+        });
+    }
 </script>
 
 </body>

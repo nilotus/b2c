@@ -18,12 +18,14 @@
 
     <ul class="fl city">
         <li>
-            <a href="#">南京</a>
+            <a href="../index.html">主页</a>
     </ul>
     <ul class="fr">
         <li>
-            <a href="../html/login.html">你好，请登录 </a>
-            <a href="../html/register.html" class="f10">免费注册</a>
+            <div class="login-t">
+                <a href="login.html">你好，请登录 </a>
+                <a href="register.html" class="f10">免费注册</a>
+            </div>
         <li class="space">
         <li>
             <a href="../html/order.html">我的订单</a>
@@ -39,10 +41,18 @@
     </ul>
 </div>
 
+<div class="container">
+    <div class="jumbotron">
+        <img src="" alt="">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+</div>
 <!--商品列表-->
 <div class="w">
     <!--商品列表-->
-    <div class="container">
+    <div class="container list">
     </div>
 </div>
 </body>
@@ -55,7 +65,26 @@
 </script>
 
 <script>
-
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/user/getUserInfo',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    });
     $(function () {
         //获取url中的参数
         function getUrlParam(name) {
@@ -75,13 +104,13 @@
             dataType: "json",
             success: function (data) {
                 var str = "<ul>";
-                $.each(data.data,function (index,val) {
-                    str +=  "<li><a href='goodsindex.html?good_id="+val.good_id+"'><img src="+val.img+"></a>"
-                        +"<p>"+val.name+"</p><p class='price'>"+val.price+"</p></li>";
+                $.each(data.data, function (index, val) {
+                    str += "<li><a href='goodsindex.html?good_id=" + val.good_id + "'><img src=" + val.img + "></a>"
+                        + "<p>" + val.name + "</p><p class='price'>" + val.price + "</p></li>";
                 })
 
                 str += "</ul>";
-                $('.container').append(str);
+                $('.list').append(str);
 
             },
             error: function () {

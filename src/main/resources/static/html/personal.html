@@ -2,211 +2,276 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>个人中心</title>
-	<link rel="stylesheet" href="../css/personal.css" />
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../css/personal.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
 
 </head>
 <style>
-	body {
-		background-image: url(../img/D.jpg);
-		background-size: cover;
-		width: 100%;
-		height: 100%;
-	}
-	.input-group{
-		width: 450px;
-	}
-	.input-group-addon{
-		width:100px;
-	}
+    body {
+        background-image: url(../img/D.jpg);
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    label {
+        width: 110px;
+    }
+
 </style>
 
 <body>
 <!--快速导航栏-->
 <div class="shortcut w">
 
-	<ul class="fl city">
-		<li>
-			<a href="#">南京</a>
-	</ul>
-	<ul class="fr">
-		<li>
-			<a href="./login.html">你好，请登录 </a>
-			<a href="./register.html" class="f10">免费注册</a>
-		<li class="space">
-		<li>
-			<a href="order1.html">我的订单</a>
-		<li class="space">
-		<li>
-			<a href="shopping-cart.html">我的购物车</a>
-		<li class="space">
-		<li>
-			<a href="favourite1.html">我的收藏</a>
-		<li class="space">
-		<li>
-			<a href="personal.html">个人中心</a>
-	</ul>
+    <ul class="fl city">
+        <li>
+            <a href="../index.html">主页</a>
+    </ul>
+    <ul class="fr">
+        <li>
+            <div class="login-t">
+                <a href="login.html">你好，请登录 </a>
+                <a href="register.html" class="f10">免费注册</a>
+            </div>
+
+        <li class="space">
+        <li>
+            <a href="order1.html">我的订单</a>
+        <li class="space">
+        <li>
+            <a href="shopping-cart.html">我的购物车</a>
+        <li class="space">
+        <li>
+            <a href="favourite1.html">我的收藏</a>
+        <li class="space">
+        <li>
+            <a href="personal.html">个人中心</a>
+    </ul>
 </div>
+
+
 <div id="container">
-	<div align="center" >
-		<img src="../img/5.png" />
-	</div>
-	<div class="box1">
-		<!-- 头像 -->
-		<div class="row">
-			<a href="upLoad.html">
-			<button type='button' id='ed' class='btn btn-primary' data-toggle='button' autocomplete='off' > 编辑头像 </button>
-			</a>
-		</div>
-		<!-- 展示信息 -->
-		<div class="panel">
-			<div class="panel-heading">个人信息</div>
+    <div align="center">
+        <img src="../img/5.png"/>
+    </div>
+    <div class="box1">
+        <!-- 头像 -->
+        <div class="row">
+            <button type='button' onclick="upload()" id='ed' class='btn btn-primary' data-toggle='button'
+                    autocomplete='off'> 编辑头像
+            </button>
+        </div>
+        <!-- 展示信息 -->
+        <div class="panel">
+            <div class="panel-heading">个人信息</div>
 
-			<div class="panel-body">
+            <div class="panel-body">
 
-			</div>
-				<!-- 编辑信息按钮 -->
-				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >编辑</button>
+            </div>
+            <!-- 编辑信息按钮 -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addUserModal">编辑
+            </button>
 
-				<!-- 编辑信息-->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">个人信息</h4>
-							</div>
-							<form action="">
-								<div class="modal-body">
-									<div class="input-group">
-									<div class="input-group-addon">昵称</div>
-									<input type="text" id="1" class="form-control" aria-label="Amount (to the nearest dollar)">
-								</div>
-									<div class="input-group">
-									<div class="input-group-addon">邮箱</div>
-									<input type="text" id="2" class="form-control" aria-label="Amount (to the nearest dollar)">
-								</div>
-									<div class="input-group">
-									<div class="input-group-addon">收货地址</div>
-									<input type="text" id="3" class="form-control" aria-label="Amount (to the nearest dollar)">
-								</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="save" onclick="update()">Save changes</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-		</div>
-		<!-- 购物车收藏夹订单 -->
-		<div class="box2">
-			<div id="cart">
-				<img src="../img/cart1.png" usemap="shopping-cart" class="img" />
-			</div>
-			<map name="shopping-cart" id="shopping-cart">
-				<area shape="default" href="shopping-cart.html"/>
-			</map>
-			<div id="order1">
-				<img src="../img/order1.png" usemap="order" class="img" />
-			</div>
-			<map name="order" id="order">
-				<area shape="default" href="order.html"/>
-			</map>
-			<div id="fa">
-				<img src="../img/fa.png" usemap="collect" class="img" />
-			</div>
-			<map name="collect" id="collect">
-				<area shape="default" href="favourite1.html"/>
-			</map>
-		</div>
-		<div id="footer">
-			<p>联系我们：115607029@qq.com</p>
-		</div>
-	</div>
+
+            <!-- 编辑信息-->
+            <form method="post" action="" class="form-horizontal" role="form" id="form_data"
+                  onsubmit="return check_form()" style="margin: 20px;" enctype="multipart/form-data">
+                <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    用户信息
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">用户名</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name" value=""
+                                                   id="name" placeholder="用户名">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone" class="col-sm-2 control-label">手机号</label>
+                                        <div class="col-sm-10">
+                                            <input type="tel" class="form-control" name="phone" value=""
+                                                   id="phone" placeholder="手机号">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">用户头像</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="file" id="file" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="email" id="email"
+                                                   placeholder="邮箱">
+                                            </input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address" class="col-sm-2 control-label">地址</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="address" value="" id="address"
+                                                   placeholder="地址">
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button type="submit" class="btn btn-primary">提交
+                                </button>
+                                <span id="tip"> </span>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+            </form>
+        </div>
+        <!-- 购物车收藏夹订单 -->
+        <div class="box2">
+            <div id="cart">
+                <img src="../img/cart1.png" usemap="shopping-cart" class="img"/>
+            </div>
+            <map name="shopping-cart" id="shopping-cart">
+                <area shape="default" href="shopping-cart.html"/>
+            </map>
+            <div id="order1">
+                <img src="../img/order1.png" usemap="order" class="img"/>
+            </div>
+            <map name="order" id="order">
+                <area shape="default" href="order.html"/>
+            </map>
+            <div id="fa">
+                <img src="../img/fa.png" usemap="collect" class="img"/>
+            </div>
+            <map name="collect" id="collect">
+                <area shape="default" href="favourite1.html"/>
+            </map>
+        </div>
+        <div id="footer">
+            <p>联系我们：115607029@qq.com</p>
+        </div>
+    </div>
 </div>
 </body>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/ajaxfileupload.js"></script>
+
 <!-- 展示信息ajax -->
 <script>
-    //获取cookie中的id
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg); //匹配目标参数
-        if (r != null) return unescape(r[2]);
-        return null; //返回参数值
-    }
+    window.userId;
     $(function () {
-
-        //接收URL中的参数user_id
-        var user_id='22';
-        console.log('user_id:' + user_id);
         $.ajax({
-            type: "get",
-            url: '/user/selectInfo/' + user_id,
+            type: 'post',
+            url: '/user/getUserInfo',
             async: true,
-            dataType: "json",
+            dataType: 'json',
             success: function (data) {
-                var str1="<img src='"+data.data.img+"' id='pic'> ";
-				var str2="<div class='box'>昵称:</div>"
-                +"<p id='name'>"+data.data.name+"</p><br /><br />"
-                +" <div class='box'>手机号:</div>"
-                +" <p id='phone'>"+data.data.phone+"</p><br /><br />"
-                +"  <div class='box'>邮箱:</div>"
-                +"<p id='email'>"+data.data.email+"</p><br /><br />"
-                +" <div class='box'>收货地址:</div>"
-                +"<p id='address'>"+data.data.address+"</p>";
-                $('.row').append(str1);
-				$('.panel-body').append(str2);
+//                console.log(data.data.user_id);
+                userId = data.data.user_id;
+//                console.log(userId);
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+                $(function () {
+                    //接收URL中的参数user_id
+                    console.log('user_id:' + userId);
+                    $.ajax({
+                        type: "get",
+                        url: '/user/selectInfo/' + userId,
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            var str1 = "<img src='" + data.data.img + "' id='pic'> ";
+                            var str2 = "<div class='box'>昵称:</div>"
+                                + "<p id='name'>" + data.data.name + "</p><br /><br />"
+                                + " <div class='box'>手机号:</div>"
+                                + " <p id='phone'>" + data.data.phone + "</p><br /><br />"
+                                + "  <div class='box'>邮箱:</div>"
+                                + "<p id='email'>" + data.data.email + "</p><br /><br />"
+                                + " <div class='box'>收货地址:</div>"
+                                + "<p id='address'>" + data.data.address + "</p>";
+                            $('.row').append(str1);
+                            $('.panel-body').append(str2);
+                        },
+                        error: function () {
+                            alert("failed!");
+                        }
+                    })
+                })
             },
             error: function () {
                 alert("failed!");
             }
         })
-    })
-</script>
-<!-- 编辑信息ajax -->
-<script>
-    //获取cookie中的id
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg); //匹配目标参数
-        if (r != null) return unescape(r[2]);
-        return null; //返回参数值
-    }
-    function update() {
+    });
 
-        //接收URL中的参数user_id
-        var user_id='22';
-        console.log('user_id:' + user_id);
+    function upload() {
+
+    }
+    function check_form() {
+        var form_data = $('#form_data').serialize();
+        console.log(form_data);
+        form_data.phone = parseInt(form_data.phone);
+        console.log(form_data);
+        // 异步提交数据到action/add_action.php页面
         $.ajax({
-            type: "post",
-            url: '/user/updataInfo/' + user_id,
-            async: true,
-            dataType: "json",
-			data:{
-                name:$('#1').val(),
-				email:$('#2').val(),
-				address:$('#3').val()
-			},
-            success: function (data) {
-                if(data.code == -1){
+                url: "/user/updataInfo/" + userId,
+                dataType: 'json',
+                type: "post",
+                data: form_data,
+                success: function (data) {
                     alert(data.msg);
+                    parent.location.reload();
+                    $('#addUserModal').modal('hide');
+                },
+                error: function () {
+                    alert('请求出错');
+                },
+                complete: function () {
+                    $('#acting_tips').hide();
                 }
-                else {
-                    alert(data.msg);
-				}
-            },
-            error: function () {
-                alert("修改信息失败!");
-            }
-        })
-    }
+        });
+        $.ajaxFileUpload({
+            url: '/user/uploadImgQiniu', //用于文件上传的服务器端请求地址
+            fileElementId: 'file', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+            type: 'post',
+            dataType: 'JSON', //返回值类型 一般设置为json
+            success: function (data, status) //服务器成功响应处理函数
+            {
 
+            }
+        });
+        return false;
+    }
 </script>
 </html>

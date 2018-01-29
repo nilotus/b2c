@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.lite.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.lite.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/zui.min.css"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #FFFFFF;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <img src="../img/5.png">
+
+    </div>
+
+    <div id="main">
+        <div id="left">
+            <img src="../img/100.jpg">
+        </div>
+
+        <div id="right">
+
+            <form action="">
+                <fieldset>
+                    <legend><h2>欢迎登录</h2></legend>
+                    <br/><br/>
+                    <div class="input-group" style="margin:20px 1px 1px 1px ;width: 405px;">
+                        <span class="input-group-addon" id="basic-addon1" style="width:50px">用户名</span>
+                        <input id="loginName" type="text" class="form-control" placeholder="请输入手机号">
+                    </div>
+                    <div class="input-group" style="margin:20px 1px 1px 1px;width: 405px;">
+                        <span class="input-group-addon" style="width:50px">密码</span>
+                        <input id="pwd" type="password" class="form-control" placeholder="请输入密码">
+                    </div>
+
+                    <a href="registeraaa.html" style="font-size: 15px;float:right;margin-right: 0px;">免费注册</a><br/>
+                    <br/>
+                    <button type="button" onclick="loginaaa()" class="btn btn-info btn-block"
+                            style="margin-left: 40px;height: 50px;width: 330px;font-size: 20px;">登 录
+                    </button>
+
+                </fieldset>
+                <div style="margin-top: 20px;"></div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div id="footer">
+    <p>联系我们：115607029@qq.com</p>
+</div>
+
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $('#login-button').click(function () {
+        if(phoneFlag == 1 && pwdFlag == 1)
+            loginaaa();
+    })
+
+    function login() {
+        $('#login-button').click(function () {
+            $('#form').serialize();
+        })
+
+        $.ajax({
+            type: 'post',
+            url: '/user/login',
+            async: true,
+            dataType: 'json',
+            data: {
+                phone: $('#loginName').val(),
+                password: $('#pwd').val()
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.code == -1) {
+                    alert(data.msg);
+                } else {
+                    if (data.data[1] == 1)
+                        window.location.href='../index.html?userId='+data.data[0];
+                    else
+                        window.location.href = 'seller.html?userId='+data.data[0];
+
+                }
+            },
+            error: function () {
+                alert("failed!");
+
+            }
+
+        })
+    }
+</script>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>

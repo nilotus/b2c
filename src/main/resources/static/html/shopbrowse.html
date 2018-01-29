@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>浏览店铺</title>
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/shopbrowse.css"/>
-	<link rel="stylesheet" type="text/css" href="../css/shop.css">
-	<style>
-		body {
-			background-color: #f7f7f7;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>浏览店铺</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/shopbrowse.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/shop.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+    </style>
 </head>
 <body>
-	<!--快速导航栏-->
-	<div class="shortcut w">
+<!--快速导航栏-->
+<div class="shortcut w">
 
-		<ul class="fl city">
-			<li>
-				<a href="#">南京</a>
-		</ul>
-		<ul class="fr">
-			<li>
-				<a href="../html/login.html">你好，请登录 </a>
-				<a href="../html/register.html" class="f10">免费注册</a>
-			<li class="space">
-			<li>
-				<a href="../html/order.html">我的订单</a>
-			<li class="space">
-			<li>
-				<a href="../html/shopping-cart2.html">我的购物车</a>
-			<li class="space">
-			<li>
-				<a href="../html/favourite1.html">我的收藏</a>
-			<li class="space">
-			<li>
-				<a href="personal.html">个人中心</a>
-		</ul>
-	</div>
-	<div class="w">
-		<div class="container">
+    <ul class="fl city">
+        <li>
+            <a href="#">南京</a>
+    </ul>
+    <ul class="fr">
+        <li>
+            <div class="login-t">
+                <a href="login.html">你好，请登录 </a>
+                <a href="register.html" class="f10">免费注册</a>
+            </div>
 
-		</div>
-	</div>
-		
-		
+        <li class="space">
+        <li>
+            <a href="../html/order.html">我的订单</a>
+        <li class="space">
+        <li>
+            <a href="../html/shopping-cart2.html">我的购物车</a>
+        <li class="space">
+        <li>
+            <a href="../html/favourite1.html">我的收藏</a>
+        <li class="space">
+        <li>
+            <a href="personal.html">个人中心</a>
+    </ul>
+</div>
+<div class="w">
+    <div class="container">
+
+    </div>
+</div>
+
+
 </body>
 
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -55,14 +58,34 @@
 <script>
     $(function () {
         $.ajax({
+            type: 'post',
+            url: '/user/getUserInfo',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == -1) return;
+                var str;
+                str = 'Hi,' + data.data.name + '\
+                            <a href="#" class="user-info">\
+                            </a>\
+                            <a href="login.html" class="f10">退出登录</a>';
+                $('.login-t').html(str);
+            },
+            error: function () {
+                alert("failed!");
+            }
+        })
+    });
+    $(function () {
+        $.ajax({
             type: 'get',
             url: '/shop/browse',
             async: true,
             dataType: 'json',
             success: function (data) {
                 var str = "<ul>";
-                $.each(data.data,function (index,val) {
-                    str += "<li><p>"+val.name+"</p><a href='shopindex2.html?shop_id="+val.shop_id+"'><img class='img' src="+val.img+"></a> </li>";
+                $.each(data.data, function (index, val) {
+                    str += "<li><p>" + val.name + "</p><a href='shopindex2.html?shop_id=" + val.shop_id + "'><img class='img' src=" + val.img + "></a> </li>";
                 })
                 str += "</ul>";
                 $('.container').append(str);
