@@ -102,96 +102,92 @@
                 alert("failed!");
             }
         })
-        $.ajax({
-            type: "post",
-            url: "/order/lookorder2/" + 22,
-            /* data: {order_id: 13},*/
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                console.log(status);
-                if (data.code == 1) {
-                    var result = data.data;
-                    for (var i = 0; i < result.length; i++) {
-                        var str = '' +
-                            '<p class="time" >' + formatLocalDate(result[i].time) + '</p>\n' +
-                            '<div class="stuff">\n' +
-                            '<a href="goodsindex.html?good_id=' + result[i].good_id + '"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
-                            '<div class="dis">\n' +
-                            '<a href="goodsindex.html?good_id=' + result[i].good_id + '">' + result[i].description + '</a>\n' +
-                            '</div>\n' +
-                            '<div class="user">\n' +
-                            '<span class="name">' + result[i].username + '</span>\n' +
-                            '</div>\n' +
-                            '<div class="value">\n' +
-                            '<label class="price">' + result[i].price + '</label>\n' +
-                            '</div>\n' +
-                            '<div class="num">\n' +
-                            '<label class="number">' + result[i].good_num + '</label>\n' +
-                            '</div>\n' +
-                            '<div class="state">\n' +
-                            '<label class="situation">' + result[i].status + '</label>\n' +
-                            '</div>\n' +
-                            '<div class="dele2-4">\n' +
-                            '<button  onclick="wuliu()">查看物流</button>\n' +
-                            '</div>\n' +
-                            '<div class="dele2-4">\n' +
-                            '<button  onclick="queding(' + result[i].order_id + ')" style="margin-top: 25px">确定收货</button>\n' +
-                            '</div>\n' +
-                            '</div>'
-                        $('.mark').append(str);
-                    }
-                } else {
-                    console.log(data.message);
+    });
+    $.ajax({
+        type: "post",
+        url: "/order/lookorder2/" + 22,
+        /* data: {order_id: 13},*/
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            console.log(status);
+            if (data.code == 1) {
+                var result = data.data;
+                for (var i = 0; i < result.length; i++) {
+                    var str = '' +
+                        '<p class="time" >' + formatLocalDate(result[i].time) + '</p>\n' +
+                        '<div class="stuff">\n' +
+                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
+                        '<div class="dis">\n' +
+                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '">' + result[i].description + '</a>\n' +
+                        '</div>\n' +
+                        '<div class="user">\n' +
+                        '<span class="name">' + result[i].username + '</span>\n' +
+                        '</div>\n' +
+                        '<div class="value">\n' +
+                        '<label class="price">' + result[i].price + '</label>\n' +
+                        '</div>\n' +
+                        '<div class="num">\n' +
+                        '<label class="number">' + result[i].good_num + '</label>\n' +
+                        '</div>\n' +
+                        '<div class="state">\n' +
+                        '<label class="situation">' + result[i].status + '</label>\n' +
+                        '</div>\n' +
+                        '<div class="dele2-4">\n' +
+                        '<button  onclick="wuliu()">查看物流</button>\n' +
+                        '</div>\n' +
+                        '</div>'
+                    $('.mark').append(str);
                 }
+            } else {
+                console.log(data.message);
+            }
+        }
+    });
+    //转换时间
+    function formatLocalDate(now) {
+        if (!now)
+            now = new Date();
+        else
+            now = new Date(now);
+        var tzo = -now.getTimezoneOffset(),
+            dif = tzo >= 0 ? '+' : '-',
+            pad = function (num) {
+                norm = Math.abs(Math.floor(num));
+                return (norm < 10 ? '0' : '') + norm;
+            };
+        return now.getFullYear()
+            + '-' + pad(now.getMonth() + 1)
+            + '-' + pad(now.getDate())
+            + ' ' + pad(now.getHours())
+            + ':' + pad(now.getMinutes())
+            + ':' + pad(now.getSeconds());
+    };
+    //物流信息
+    function wuliu() {
+        alert("到您家门口了，快出来取货，别废话！！！");
+    }
+    function queding(id) {
+        console.log(id);
+        $.ajax({
+            type: 'post',
+            url: '/order/confirmrece',
+            async: true,
+            dataType: 'json',
+            data: {
+                order_id: id,
+                user_id: 22,
+            },
+            success:function(){
+                $('div[id='+id+']').remove();
+                $('p[id='+id+']').remove();
+                alert("success");
+            },
+            error: function() {
+                alert("failed!");
             }
         });
-        //转换时间
-        function formatLocalDate(now) {
-            if (!now)
-                now = new Date();
-            else
-                now = new Date(now);
-            var tzo = -now.getTimezoneOffset(),
-                dif = tzo >= 0 ? '+' : '-',
-                pad = function (num) {
-                    norm = Math.abs(Math.floor(num));
-                    return (norm < 10 ? '0' : '') + norm;
-                };
-            return now.getFullYear()
-                + '-' + pad(now.getMonth() + 1)
-                + '-' + pad(now.getDate())
-                + ' ' + pad(now.getHours())
-                + ':' + pad(now.getMinutes())
-                + ':' + pad(now.getSeconds());
-        };
-        //物流信息
-        function wuliu() {
-            alert("到您家门口了，快出来取货，别废话！！！");
-        }
-
-        function queding(id) {
-            console.log(id);
-            $.ajax({
-                type: 'post',
-                url: '/order/confirmrece',
-                async: true,
-                dataType: 'json',
-                data: {
-                    order_id: id,
-                    user_id: 22,
-                },
-                success: function () {
-                    $('div[id=' + id + ']').remove();
-                    $('p[id=' + id + ']').remove();
-                    alert("success");
-                },
-                error: function () {
-                    alert("failed!");
-                }
-            });
-        }
     }
-	</script>
-	<script src="../js/bootstrap.min.js"></script>
+</script>
+<script src="../js/bootstrap.min.js"></script>
 </html>
