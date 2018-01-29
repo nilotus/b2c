@@ -1,110 +1,107 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>订单</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/order.css">
-</head>
-<body>
-<!--快速导航栏-->
-<div class="shortcut w">
+	<head>
+		<meta charset="UTF-8">
+		<title>订单</title>
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/order.css">
+	</head>
+	<body>
+		<!--快速导航栏-->
+		<div class="shortcut w">
 
-    <ul class="fl city">
-        <li>
-            <a href="#">南京</a>
-    </ul>
-    <ul class="fr">
-        <li>
-            <div class="login-t">
-                <a href="login.html">你好，请登录 </a>
-                <a href="register.html" class="f10">免费注册</a>
-            </div>
+			<ul class="fl city">
+				<li>
+					<a href="#">南京</a>
+			</ul>
+			<ul class="fr">
+				<li>
+					<a href="./login.html">你好，请登录 </a>
+					<a href="./register.html" class="f10">免费注册</a>
+				<li class="space">
+				<li>
+					<a href="order.html">我的订单</a>
+				<li class="space">
+				<li>
+					<a href="shopping-cart.html">我的购物车</a>
+				<li class="space">
+				<li>
+					<a href="favourite1.html">我的收藏</a>
+				<li class="space">
+				<li>
+					<a href="personal.html">个人中心</a>
+			</ul>
+		</div>
+		<div align="center" ;>
+			<img src="../img/5.png" />
+		</div>
+		<div id="title">
+			<div class="m">
+				<p id="time">时间</p>
+			</div>
+			<div class="m">
+				<p id="info">订单详情</p>
+			</div>
+			<div class="m">
+				<p id="man">收货人</p>
+			</div>
+			<div class="m">
+				<p id="value">单价</p>
+			</div>
+			<div class="m">
+				<p id="num">数量</p>
+			</div>
+			<div class="dropdown">
+				<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				待付款
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dLabel">
+					<li><a href="order.html">全部</a></li>
+					<li><a href="status2.html">待收货</a></li>
+					<li><a href="status3.html">已收货</a></li>
+					<li><a href="status4.html">退货中</a></li>
+					<li><a href="status5.html">已退货</a></li>
+					<li><a href="status6.html">退款中</a></li>
+					<li><a href="status7.html">已退款</a></li>
+				</ul>
+			</div>
+			<div class="m">
+				<p id="operate">操作</p>
+			</div>
+		</div>
+		<div class="mark">
 
-        <li class="space">
-        <li>
-            <a href="order.html">我的订单</a>
-        <li class="space">
-        <li>
-            <a href="shopping-cart.html">我的购物车</a>
-        <li class="space">
-        <li>
-            <a href="favourite1.html">我的收藏</a>
-        <li class="space">
-        <li>
-            <a href="personal.html">个人中心</a>
-    </ul>
-</div>
-<div align="center" ;>
-    <img src="../img/5.png"/>
-</div>
-<div id="title">
-    <div class="m">
-        <p id="time">时间</p>
-    </div>
-    <div class="m">
-        <p id="info">订单详情</p>
-    </div>
-    <div class="m">
-        <p id="man">收货人</p>
-    </div>
-    <div class="m">
-        <p id="value">单价</p>
-    </div>
-    <div class="m">
-        <p id="num">数量</p>
-    </div>
-    <div class="dropdown">
-        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            待付款
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li><a href="order.html">全部</a></li>
-            <li><a href="status2.html">待收货</a></li>
-            <li><a href="status3.html">已收货</a></li>
-            <li><a href="status4.html">退货中</a></li>
-            <li><a href="status5.html">已退货</a></li>
-            <li><a href="status6.html">退款中</a></li>
-            <li><a href="status7.html">已退款</a></li>
-        </ul>
-    </div>
-    <div class="m">
-        <p id="operate">操作</p>
-    </div>
-</div>
-<div class="mark">
+		</div>
 
-</div>
+		</div>
 
-</div>
+		<div id="tail">
 
-<div id="tail">
-
-</div>
-</body>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script>
-    $(function () {
-        $.ajax({
-            type: 'post',
-            url: '/user/getUserInfo',
-            async: true,
-            dataType: 'json',
-            success: function (data) {
-                if (data.code == -1) return;
-                var str;
-                str = 'Hi,' + data.data.name + '\
+		</div>
+	</body>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script>
+        $(function () {
+            $.ajax({
+                type: 'post',
+                url: '/user/getUserInfo',
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == -1) return;
+                    var str;
+                    str = 'Hi,' + data.data.name + '\
                             <a href="#" class="user-info">\
                             </a>\
                             <a href="login.html" class="f10">退出登录</a>';
-                $('.login-t').html(str);
-            },
-            error: function () {
-                alert("failed!");
-            }
+                    $('.login-t').html(str);
+                },
+                error: function () {
+                    alert("failed!");
+                }
+            })
         })
-    });
     $.ajax({
         type: "post",
         url: "/order/lookorder1/" + 22,

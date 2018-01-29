@@ -104,100 +104,120 @@
             }
         })
     });
-    $.ajax({
-        type: "post",
-        url: "/order/lookorder3/" + 22,
-        /* data: {order_id: 13},*/
-        async: true,
-        dataType: "json",
-        success: function (data) {
-            console.log(status);
-            if (data.code == 1) {
-                var result = data.data;
-                for (var i = 0; i < result.length; i++) {
-                    var str = '' +
-                        '<p class="time" >' + formatLocalDate(result[i].time) + '</p>\n' +
-                        '<div class="stuff">\n' +
-                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
-                        '<div class="dis">\n' +
-                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '">' + result[i].description + '</a>\n' +
-                        '</div>\n' +
-                        '<div class="user">\n' +
-                        '<span class="name">' + result[i].username + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="value">\n' +
-                        '<label class="price">' + result[i].price + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="num">\n' +
-                        '<label class="number">' + result[i].good_num + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="state">\n' +
-                        '<label class="situation">' + result[i].status + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="dele">\n' +
-                        '<button onclick="cancel3(' + result[i].order_id + ')">申请退货</button>\n' +
-                        '</div>\n' +
-                        '<div class="dele">\n' +
-                        '<button onclick="cancel2(' + result[i].order_id + ')" style="margin-top: 15px">申请退款</button>\n' +
-                        '</div>\n' +
-                        '</div>'
-                    $('.mark').append(str);
-                }
-            } else {
-                console.log(data.message);
-            }
-        }
-    });
-    //转换时间
-    function formatLocalDate(now) {
-        if (!now)
-            now = new Date();
-        else
-            now = new Date(now);
-        var tzo = -now.getTimezoneOffset(),
-            dif = tzo >= 0 ? '+' : '-',
-            pad = function (num) {
-                norm = Math.abs(Math.floor(num));
-                return (norm < 10 ? '0' : '') + norm;
-            };
-        return now.getFullYear()
-            + '-' + pad(now.getMonth() + 1)
-            + '-' + pad(now.getDate())
-            + ' ' + pad(now.getHours())
-            + ':' + pad(now.getMinutes())
-            + ':' + pad(now.getSeconds());
-    };
-    //申请退货
-    function cancel3(id) {
         $.ajax({
-            type: "get",
-            url: "/order/cancelorder3/" + id,
+            type: "post",
+            url: "/order/lookorder3/"+22,
+            /* data: {order_id: 13},*/
             async: true,
             dataType: "json",
-            success: function () {
-                alert("success");
-            },
-            error: function () {
-                alert("failed!");
+            success: function (data) {
+                console.log(status);
+                if (data.code == 1) {
+                    var result = data.data;
+                    for (var i = 0; i < result.length; i++) {
+                        var str = '' +
+                            '<p class="time" >' + formatLocalDate(result[i].time) + '</p>\n' +
+                            '<div class="stuff">\n' +
+                            '<a href="goodsindex.html?good_id='+result[i].good_id+'"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
+                            '<div class="dis">\n' +
+                            '<a href="goodsindex.html?good_id='+result[i].good_id+'">' + result[i].description + '</a>\n' +
+                            '</div>\n' +
+                            '<div class="user">\n' +
+                            '<span class="name">' + result[i].username + '</span>\n' +
+                            '</div>\n' +
+                            '<div class="value">\n' +
+                            '<label class="price">' + result[i].price + '</label>\n' +
+                            '</div>\n' +
+                            '<div class="num">\n' +
+                            '<label class="number">' + result[i].good_num + '</label>\n' +
+                            '</div>\n' +
+                            '<div class="state">\n' +
+                            '<label class="situation">'+ result[i].status +'</label>\n' +
+                            '</div>\n' +
+                            '<div class="dele">\n' +
+                            '<button onclick="cancel3('+result[i].order_id+')">申请退货</button>\n' +
+                            '</div>\n' +
+                            '<div class="dele">\n' +
+                            '<button onclick="cancel2('+result[i].order_id+')" style="margin-top: 15px">申请退款</button>\n' +
+                            '</div>\n' +
+                            '<div class="dele111">\n' +
+                            '<button onclick="cancel1('+result[i].order_id+')" style="margin-top: 15px">删除</button>\n' +
+                            '</div>\n' +
+                            '</div>'
+                        $('.mark').append(str);
+                    }
+                } else {
+                    console.log(data.message);
+                }
             }
         });
-    }
-    //申请退款
-    function cancel2(id) {
+        //转换时间
+        function formatLocalDate(now) {
+            if(!now)
+                now = new Date();
+            else
+                now = new Date(now);
+            var tzo = -now.getTimezoneOffset(),
+                dif = tzo >= 0 ? '+' : '-',
+                pad = function(num) {
+                    norm = Math.abs(Math.floor(num));
+                    return (norm < 10 ? '0' : '') + norm;
+                };
+            return now.getFullYear()
+                + '-' + pad(now.getMonth()+1)
+                + '-' + pad(now.getDate())
+                + ' ' + pad(now.getHours())
+                + ':' + pad(now.getMinutes())
+                + ':' + pad(now.getSeconds());
+        };
+        //申请退货
+        function cancel3(id) {
+            $.ajax({
+                type: "get",
+                url: "/order/cancelorder3/"+id,
+                async: true,
+                dataType: "json",
+                success:function(){
+                        alert("success");
+                },
+                error: function() {
+                    alert("failed!");
+                }
+            });
+        }
+        //申请退款
+        function cancel2(id) {
+            $.ajax({
+                type: "get",
+                url: "/order/cancelorder2/"+id,
+                async: true,
+                dataType: "json",
+                success:function(){
+                    alert("success");
+                },
+                error: function() {
+                    alert("failed!");
+                }
+            });
+        }
+    //软删除订单
+    function cancel1(id) {
         $.ajax({
             type: "get",
-            url: "/order/cancelorder2/" + id,
+            url: "/order/cancelorder1/"+id,
             async: true,
             dataType: "json",
-            success: function () {
+            success:function(){
+                $('div[id='+id+']').remove();
+                $('p[id='+id+']').remove();
                 alert("success");
             },
-            error: function () {
+            error: function() {
                 alert("failed!");
             }
         });
     }
 
-</script>
-<script src="../js/bootstrap.min.js"></script>
+	</script>
+	<script src="../js/bootstrap.min.js"></script>
 </html>

@@ -43,31 +43,23 @@ public class OrderServiceImpl implements OrderService{
 
     /**
      * Created by ZhouLiangWei
-     * 付款（未完成）
-     */
-
-
-    /**
-     * Created by ZhouLiangWei
-     * 付款后
-     * 改变状态
+     * 付款
      */
     @Override
-    public MSG afterpay(int status ,int order_id,int cart_id) {
-        orderMapper.afterpay(status,order_id);
-        orderMapper.deletecart(cart_id);
-        return new MSG(1,"付款成功");
+    public MSG fukuan(int order_id,int user_id) {
+        Order order = orderMapper.fukuan(order_id,user_id);
+        return new MSG(1,"查找成功",order);
     }
 
+
     /**
      * Created by ZhouLiangWei
-     * 配货状态
-     * 改变状态为3
+     * 付款之后
+     * 改变状态为2
      */
     @Override
-    public MSG distribution(int status, int order_id, String description) {
-        orderMapper.insertdesc(description,order_id);
-        orderMapper.aftersend(status,order_id);
+    public MSG distribution(int order_id, int user_id) {
+        orderMapper.afterpay(order_id,user_id);
         return new MSG(1,"配送中");
     }
 
@@ -77,8 +69,8 @@ public class OrderServiceImpl implements OrderService{
      * 改变状态为4
      */
     @Override
-    public MSG confirmrece(int order_id) {
-        orderMapper.confirmrece(order_id);
+    public MSG confirmrece(int order_id,int user_id) {
+        orderMapper.confirmrece(order_id,user_id);
         return new MSG(1,"已确认收货");
     }
 
@@ -388,23 +380,5 @@ public class OrderServiceImpl implements OrderService{
         jsonOrder.setGood_id(order.getGood_id());
         jsonOrder.setOrder_id(order.getOrder_id());
         return jsonOrder;
-    }
-
-
-
-    /**
-     * Created by ZhouLiangWei
-     *查看所有订单
-     */
-    @Override
-    public MSG ordersBrowseAll() {
-        List<Order> order1=orderMapper.browseAll();
-        return new MSG(1,"查看成功",order1);
-    }
-
-    @Override
-    public MSG ordersBrowseOne(int shop_id) {
-        List<Order> orderList = orderMapper.browseOne();
-        return new MSG(0,"success",orderList);
     }
 }

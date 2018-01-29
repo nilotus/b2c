@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
+
     @Insert("INSERT INTO Orders(time,good_id,user_id,good_num ,price,`status`,img,description) " +
             "VALUES (#{time},#{good_id},#{user_id},#{good_num},#{price},1,#{img},#{description})")
     int insertorder1(@Param("time")Timestamp time,@Param("good_id") int good_id,
@@ -39,26 +40,14 @@ public interface OrderMapper {
     @Select("SELECT order_id,time,user_id,description,status,price,img,good_num,good_id FROM Orders where user_id = #{user_id} AND `status`=7 AND `delete`=1")
     List<Order> lookorder7(@Param("user_id") int user_id);
 
+    @Select("SELECT price,good_num FROM Orders WHERE order_id = #{order_id} AND user_id= #{user_id}")
+    Order fukuan(@Param("order_id") int order_id, @Param("user_id") int user_id);
 
-    @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
-    List<Order> browseAll();
+    @Update("UPDATE Orders SET status = 2 where order_id=#{order_id} AND user_id=#{user_id}")
+    void afterpay(@Param("order_id") int order_id,@Param("user_id") int user_id);
 
-    @Select("SELECT order_id,cart_id,time,user_id,description,status,price FROM Orders")
-    List<Order> browseOne();
-
-    @Update("UPDATE Orders SET status = 2 where order_id=#{order_id}")
-    void afterpay(int status,@Param("order_id") int order_id);
-
-    @Delete("DELETE FROM Cart WHERE cart_id = #{cart_id}")
-    void deletecart(@Param("cart_id") int cart_id);
-
-    //下面是配送
-    @Insert("INSERT INTO Orders(description) VALUES #{description} WHERE order_id = #{order_id}")
-    int insertdesc(@Param("description") String description,@Param("order_id") int order_id);
-
-    @Update("UPDATE Orders SET status = 3 where order_id=#{order_id}")
-    void aftersend(int status,@Param("order_id") int order_id);
-
+    @Update("UPDATE Orders SET status = 3 where order_id=#{order_id} AND user_id=#{user_id}")
+    void confirmrece(@Param("order_id") int order_id,@Param("user_id") int user_id);
     //下面是取消订单
 
     @Update("UPDATE  Orders SET `delete`=0 WHERE order_id =#{order_id}")
@@ -70,7 +59,6 @@ public interface OrderMapper {
     @Update("UPDATE Orders SET status = 4 where order_id=#{order_id}")
     void tuihuo(@Param("order_id") int order_id);
 
-    @Update("UPDATE Orders SET status = 3 where order_id=#{order_id}")
-    void confirmrece(@Param("order_id") int order_id);
+
 
 }
