@@ -36,11 +36,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MSG login(String phone, String password, HttpServletRequest request) {
+
         User user = userMapper.findPhone(phone);
+        System.out.println(user.getPassword());
+//        System.out.println(password);
+        System.out.println(MD5Util.string2MD5(password));
+//        System.out.println(MD5Util.convertMD5(MD5Util.convertMD5(password)));
+//        System.out.println(MD5Util.convertMD5(MD5Util.convertMD5(user.getPassword())));
+//        System.out.println(MD5Util.string2MD5(user.getPassword()));
         if(user == null){
             return new MSG(-1,"该用户不存在");
         }
-        else if (!user.getPassword().equals(password)){
+        else if (!user.getPassword().equals(MD5Util.string2MD5(password))){
             return new MSG(-1,"密码错误");
         }
         else {
@@ -95,7 +102,7 @@ public class UserServiceImpl implements UserService {
                 return new MSG(-1, "用户已存在，请更换用户名");
             else {
                 if(code.equals(message)) {
-                    user.setPassword(MD5Util.getMD5(user.getPassword()));
+                    user.setPassword(MD5Util.string2MD5(user.getPassword()));
                     userMapper.addUser(user);
                     return new MSG(1, "注册成功");
                 }
@@ -113,7 +120,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public MSG loginOut(HttpServletRequest request) {
+        System.out.println(request.getSession().getAttribute("admin_now"));
         request.getSession().invalidate();
+        System.out.println(request.getSession().getAttribute("admin_now"));
         return new MSG(1,"成功退出");
     }
 

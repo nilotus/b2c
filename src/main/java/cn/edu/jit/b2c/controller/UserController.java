@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-import static cn.edu.jit.b2c.util.MD5Util.getMD5;
+import static cn.edu.jit.b2c.util.MD5Util.string2MD5;
 
 
 @RestController
@@ -35,7 +35,6 @@ public class UserController {
 
     @RequestMapping("/home")
     public String home() throws Exception {
-
 //        throw new Exception("Sam 错误");
             throw new CtrlException(ResultEnum.UNKONW_ERROR);
 
@@ -52,12 +51,12 @@ public class UserController {
     //@RequestMapping(value="login", method = RequestMethod.POST)
     public MSG login(@RequestParam String phone, @RequestParam String password, HttpServletRequest request) throws IOException{
         return iUserService.login(phone,password,request);
-}
+    }
+
     /**
      * Created by Mr.Chen
      * 输出用户信息
      */
-
 
     @RequestMapping("/getUserInfo")
     public MSG getUserInfo(HttpServletRequest request) {
@@ -74,7 +73,7 @@ public class UserController {
 
     @PostMapping("/register")
     public MSG register(User user, @RequestParam("message") String message) throws IOException{
-        user.setPassword(getMD5(user.getPassword()));
+        user.setPassword(string2MD5(user.getPassword()));
         return iUserService.register(user,message);
     }
 
@@ -82,6 +81,7 @@ public class UserController {
      * Created by Mr.Chen
      * 退出登录状态
      */
+
     @RequestMapping("loginOut")
     public MSG loginOut(HttpServletRequest request) {
         return iUserService.loginOut(request);
@@ -112,7 +112,6 @@ public class UserController {
         //User currentUser = userService.getCurrentUser();
         //String path = QiniuUtil.uploadImg(inputStream,  UUID.randomUUID().toString().replaceAll("-",""));
         String path = QiniuUtil.uploadImg(inputStream, UUID.randomUUID().toString().replaceAll("-",""));
-
         System.out.println(path);
         return path;
     }

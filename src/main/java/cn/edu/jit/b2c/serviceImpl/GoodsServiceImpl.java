@@ -152,5 +152,26 @@ public class GoodsServiceImpl implements GoodsService{
         return new MSG(1,"success",goods);
     }
 
+    /**
+     * Created by Mr.Chen
+     * 查询单一商品的店铺名称
+     */
+    @Override
+    public MSG selectGoodShop(int good_id) {
+        String shopName = goodsMapper.selectGoodsShop(good_id);
+        return new MSG(1,"success",shopName);
+    }
+
+    /**
+     * Created by SunFuRong
+     * 二级联动
+     * 输出name，price，img
+     */
+
+    public MSG goodsBrowseType(int type_id){
+        List<Goods> goods =goodsMapper.browseType(type_id);
+        return new MSG(1,"浏览成功",goods);
+    }
+
 
 }

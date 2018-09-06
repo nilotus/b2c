@@ -12,17 +12,30 @@
             margin-left: 80px;
             margin-top: 40px;
         }
-        .layui-logo a:link{
+
+        table {
+            margin-top: 15px;
+        }
+
+        .layui-logo a:link {
             color: #FFF;
         }
+
         .layui-logo a:visited {
             color: #FFF;
         }
-        .layui-logo a:hover{
+
+        .layui-logo a:hover {
             color: #FFF;
         }
-        .layui-logo a:active{
+
+        .layui-logo a:active {
             color: #FFF;
+        }
+
+        .layui-container img{
+            width:120px;
+            height:120px;
         }
     </style>
 </head>
@@ -47,7 +60,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="../loginaaa.html">退出</a>
+                <a onclick="logout()">退出</a>
             </li>
         </ul>
     </div>
@@ -85,16 +98,6 @@
 
                 </li>
             </ul>
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:">系统管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="#">用户管理</a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
         </div>
     </div>
 
@@ -128,10 +131,22 @@
 <script src="../../lib/layui/layui.all.js"></script>
 <script src="../../js/util/common.js"></script>
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='../login.html';
+
+            }
+        })
+    }
     $(function () {
         $.ajax({
             type:'get',
-            url:'/shop/browse',
+            url:'/shop/browseByUser',
             async:true,
             dataType:'json',
             success:function (d) {

@@ -151,4 +151,13 @@ public class OrderController {
     public MSG cancelorder3(@PathVariable("order_id") int order_id) throws IOException{
         return orderService.cancelorder3(order_id);
     }
+    /**
+     * Created by ZhouLiangWei
+     *查看店铺所有订单
+     */
+    @RequestMapping("/orderBorwse/{shop_id}")
+    public MSG orderBorwse(@PathVariable("shop_id") int shop_id) throws IOException{
+        return orderService.ordersShop(shop_id);
+    }
+
 }

@@ -12,13 +12,77 @@
             font-family: 'Karla', sans-serif;
             color:#FFF;
             height:100%;
+            background:url("../img/100.jpg") no-repeat center;
+            background-attachment: fixed;
+            background-size: 1200px;
+            /*background-size: cover;*/
 
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .btn:focus,
+        .btn:active:focus,
+        .btn.active:focus,
+        .btn.focus,
+        .btn:active.focus,
+        .btn.active.focus {
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+        }
+        .btn:hover,
+        .btn:focus,
+        .btn.focus {
+            color: #333;
+            text-decoration: none;
+        }
+        .btn:active,
+        .btn.active {
+            background-image: none;
+            outline: 0;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        }
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        .btn-default:focus,
+        .btn-default.focus {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #8c8c8c;
+        }
+        .btn-default:hover {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
         }
 
     </style>
 </head>
 <body>
-<canvas></canvas>
+<!--<canvas></canvas>-->
     <div class="goods w">
         <h1>欢迎注册</h1>
     </div>
@@ -98,16 +162,16 @@
 
                 <div class="radio">
                     <div class="r_left">
-                        <a href="login.html">直接登录</a>
+                        <a href="login.html" class="btn btn-default" type="button">直接登录</a>
                     </div>
                     <div class="r_right">
-                        <button type="button" value="test" onclick="sendMessage()" >获取验证码</button>
+                        <button class="btn btn-default" type="button" value="test" onclick="sendMessage()" >获取验证码</button>
                     </div>
                 </div>
 
 
 
-                <div class="radio">
+                <div class="radio" style="font-size: 22px">
                     <div class="r_left">
                         <input type="radio"  id="buyer" name="role" checked="checked" value="1"><label for="buyer">买家</label>
                     </div>
@@ -116,19 +180,19 @@
                     </div>
                 </div>
 
-                <div class="arguement">
-                    <input type="checkbox" id="xieyi">
-                    阅读并同意
-                    <a href="">《天狗用户注册协议》</a>
-                    <a href="">《隐私政策》</a>
-                    <div class="tips">
+                <!--<div class="arguement">-->
+                    <!--<input type="checkbox" id="xieyi">-->
+                    <!--阅读并同意-->
+                    <!--<a>《天狗用户注册协议》</a>-->
+                    <!--<a>《隐私政策》</a>-->
+                    <!--<div class="tips">-->
 
-                    </div>
-                </div>
+                    <!--</div>-->
+                <!--</div>-->
 
 
                 <div class="submit_btn">
-                    <button type="submit" id="submit_btn" onclick="userRegister()">立 即 注 册</button>
+                    <button class="btn" type="submit" id="submit_btn" onclick="userRegister()">立 即 注 册</button>
                 </div>
             </form>
         </div>
@@ -140,7 +204,6 @@
     <script src="../js/form.js" type="text/javascript" charset="utf-8"></script>
 
     <script>
-        var receiveMessage;
 
         function sendMessage() {
             $.ajax({
@@ -163,7 +226,6 @@
         }
 
         function userRegister() {
-
             $.ajax({
                 type:'post',
                 url:'/user/register',

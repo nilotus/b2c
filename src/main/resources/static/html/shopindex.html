@@ -10,6 +10,17 @@
         body {
             background-color: #f7f7f7;
         }
+        .jumbotron img {
+            width:220px;
+            height:220px;
+            float: right;
+            margin-top: -10px;
+        }
+        .list img {
+            width:220px;
+            height:220px;
+            margin: 9px;
+        }
     </style>
 </head>
 <body>
@@ -60,11 +71,52 @@
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-</script>
 
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='login.html';
+
+            }
+        })
+    }
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    function shoucang() {
+        var user_id = getUrlParam('user_id');
+        console.log(user_id);
+        //接收URL中的参数good_id TODO user_id
+        var shop_id = getUrlParam('shop_id');
+        console.log('shop_id:' + shop_id);
+        $.ajax({
+            type: 'get',
+            url: '/usershop/user_add2',
+            async: true,
+            dataType: 'json',
+            data: {
+                user_id: user_id,
+                shop_id: shop_id,
+            },
+            success: function (data) {
+                console.log(data);
+                if(user_id === null) {
+                    return ;
+                }
+            },
+            error: function () {
+                alert("failed!");
+            }
+        });
+    }
     $(function () {
         $.ajax({
             type: 'post',
@@ -72,13 +124,36 @@
             async: true,
             dataType: 'json',
             success: function (data) {
+                window.userId = data.data.user_id;
                 if (data.code == -1) return;
                 var str;
-                str = 'Hi,' + data.data.name + '\
-                            <a href="#" class="user-info">\
-                            </a>\
-                            <a href="login.html" class="f10">退出登录</a>';
-                $('.login-t').html(str);
+                str = '<ul class="fl city">'+
+                    '<li>'+
+                    '<a href="../index.html?user_id='+userId+'">主页</a>'+
+                    '</ul>'+
+                    '<ul class="fr">'+
+                    '<li>'+
+                    '<div class="login-t">'+
+                    '<span style="color: #0a67fb">Hi,' + data.data.name + '</span>'+
+                    '<a href="#" class="user-info">'+
+                    '</a>'+
+                    '<a onclick="logout()" class="f10">退出登录</a>'+
+                    '</div>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="order.html?user_id='+userId+'">我的订单</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="shopping-cart.html?user_id='+userId+'">我的购物车</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="favourite1.html?user_id='+userId+'">我的收藏</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="personal.html?user_id='+userId+'">个人中心</a>'+
+                    '</ul>';
+
+                $('.shortcut').html(str);
             },
             error: function () {
                 alert("failed!");
@@ -87,25 +162,24 @@
     });
     $(function () {
         //获取url中的参数
-        function getUrlParam(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg); //匹配目标参数
-            if (r != null) return unescape(r[2]);
-            return null; //返回参数值
-        }
+
 
         //接收URL中的参数shop_id
         var shop_id = getUrlParam('shop_id');
         console.log('shop_id:' + shop_id);
+        var user_id = getUrlParam('user_id');
+        console.log('user_id:' + user_id);
+
         $.ajax({
             type: "get",
             url: '/goods/shopinfo/' + shop_id,
             async: true,
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 var str = "<ul>";
                 $.each(data.data, function (index, val) {
-                    str += "<li><a href='goodsindex.html?good_id=" + val.good_id + "'><img src=" + val.img + "></a>"
+                    str += "<li><a href='goodsindex.html?user_id="+user_id+"&good_id=" + val.good_id + "'><img src=" + val.img + "></a>"
                         + "<p>" + val.name + "</p><p class='price'>" + val.price + "</p></li>";
                 })
 
@@ -115,6 +189,22 @@
             },
             error: function () {
                 alert("failed!");
+            }
+        });
+        $.ajax({
+            type:'get',
+            url:'/shop/enterShop/'+shop_id,
+            async:true,
+            dataType:'json',
+            success:function (data) {
+                var str1 = '<img src="'+data.data.img+'" alt="">'+
+                    '<h1>'+data.data.name+'</h1>'+
+                    '<p>'+data.data.describe+'</p>'+
+                    '<p><a class="btn btn-primary btn-lg" onclick="shoucang()" role="button" style="margin-left:550px ">加入收藏夹</a></p>';
+                $('.jumbotron').html(str1);
+            },
+            error:function () {
+                alert("failed");
             }
         })
     })

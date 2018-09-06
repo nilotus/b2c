@@ -14,5 +14,8 @@ public interface GoodsService {
       MSG goodsUpdate(Goods goods);
       MSG goodsSaleNum(int good_id);
       MSG findGoodInfo(int good_id);
+      MSG selectGoodShop(int good_id);
+      MSG goodsBrowseType(int type_id);
+
 
 }

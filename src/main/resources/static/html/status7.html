@@ -83,6 +83,18 @@
 </body>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='login.html';
+
+            }
+        })
+    }
     $(function () {
         $.ajax({
             type: 'post',
@@ -90,60 +102,96 @@
             async: true,
             dataType: 'json',
             success: function (data) {
+                window.userId = data.data.user_id;
+
                 if (data.code == -1) return;
+                var str1 = '<li><a href="order.html?user_id='+userId+'">全部</a></li>'+
+                    '<li><a href="status1.html?user_id='+userId+'">待付款</a></li>'+
+                    '<li><a href="status2.html?user_id='+userId+'">待收货</a></li>'+
+                    '<li><a href="status3.html?user_id='+userId+'">已收货</a></li>'+
+                    '<li><a href="status4.html?user_id='+userId+'">退货中</a></li>'+
+                    '<li><a href="status5.html?user_id='+userId+'">已退货</a></li>'+
+                    '<li><a href="status6.html?user_id='+userId+'">退款中</a></li>'+
+                    '<li><a href="status7.html?user_id='+userId+'">已退款</a></li>';
+                $('.dropdown-menu').html(str1);
+
                 var str;
-                str = 'Hi,' + data.data.name + '\
-                            <a href="#" class="user-info">\
-                            </a>\
-                            <a href="login.html" class="f10">退出登录</a>';
-                $('.login-t').html(str);
+                str = '<ul class="fl city">'+
+                    '<li>'+
+                    '<a href="../index.html?user_id='+userId+'">主页</a>'+
+                    '</ul>'+
+                    '<ul class="fr">'+
+                    '<li>'+
+                    '<div class="login-t">'+
+                    '<span style="color: #0a67fb">Hi,' + data.data.name + '</span>'+
+                    '<a href="#" class="user-info">'+
+                    '</a>'+
+                    '<a onclick="logout()" class="f10">退出登录</a>'+
+                    '</div>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="order.html?user_id='+userId+'">我的订单</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="shopping-cart.html?user_id='+userId+'">我的购物车</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="favourite1.html?user_id='+userId+'">我的收藏</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="personal.html?user_id='+userId+'">个人中心</a>'+
+                    '</ul>';
+
+                $('.shortcut').html(str);
+
+                $.ajax({
+                    type: "post",
+                    url: "/order/lookorder7/" + userId,
+                    /* data: {order_id: 13},*/
+                    async: true,
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(status);
+                        if (data.code == 1) {
+                            var result = data.data;
+                            for (var i = 0; i < result.length; i++) {
+                                var str = '' +
+                                    '<p class="time" id="' + result[i].order_id + '" >' + formatLocalDate(result[i].time) + '</p>\n' +
+                                    '<div class="stuff" id="' + result[i].order_id + '">\n' +
+                                    '<a href="goodsindex.html?user_id='+userId+'&good_id=' + result[i].good_id + '"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
+                                    '<div class="dis">\n' +
+                                    '<a href="goodsindex.html?user_id='+userId+'&good_id=' + result[i].good_id + '">' + result[i].description + '</a>\n' +
+                                    '</div>\n' +
+                                    '<div class="user">\n' +
+                                    '<span class="name">' + result[i].username + '</span>\n' +
+                                    '</div>\n' +
+                                    '<div class="value">\n' +
+                                    '<label class="price">' + result[i].price + '</label>\n' +
+                                    '</div>\n' +
+                                    '<div class="num">\n' +
+                                    '<label class="number">' + result[i].good_num + '</label>\n' +
+                                    '</div>\n' +
+                                    '<div class="state">\n' +
+                                    '<label class="situation">' + result[i].status + '</label>\n' +
+                                    '</div>\n' +
+                                    '<div class="dele7">\n' +
+                                    '<button onclick="cancel1(' + result[i].order_id + ')">删除</button>\n' +
+                                    '</div>\n' +
+                                    '</div>'
+                                $('.mark').append(str);
+                            }
+                        } else {
+                            console.log(data.message);
+                        }
+                    }
+                });
             },
             error: function () {
                 alert("failed!");
             }
         })
     });
-    $.ajax({
-        type: "post",
-        url: "/order/lookorder7/" + 22,
-        /* data: {order_id: 13},*/
-        async: true,
-        dataType: "json",
-        success: function (data) {
-            console.log(status);
-            if (data.code == 1) {
-                var result = data.data;
-                for (var i = 0; i < result.length; i++) {
-                    var str = '' +
-                        '<p class="time" id="' + result[i].order_id + '" >' + formatLocalDate(result[i].time) + '</p>\n' +
-                        '<div class="stuff" id="' + result[i].order_id + '">\n' +
-                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '"><img src="' + result[i].img + '" usemap="#goods" class="pic"/></a>\n' +
-                        '<div class="dis">\n' +
-                        '<a href="goodsindex.html?good_id=' + result[i].good_id + '">' + result[i].description + '</a>\n' +
-                        '</div>\n' +
-                        '<div class="user">\n' +
-                        '<span class="name">' + result[i].username + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="value">\n' +
-                        '<label class="price">' + result[i].price + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="num">\n' +
-                        '<label class="number">' + result[i].good_num + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="state">\n' +
-                        '<label class="situation">' + result[i].status + '</label>\n' +
-                        '</div>\n' +
-                        '<div class="dele7">\n' +
-                        '<button onclick="cancel1(' + result[i].order_id + ')">删除</button>\n' +
-                        '</div>\n' +
-                        '</div>'
-                    $('.mark').append(str);
-                }
-            } else {
-                console.log(data.message);
-            }
-        }
-    });
+
     //转换时间
     function formatLocalDate(now) {
         if (!now)

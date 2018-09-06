@@ -10,31 +10,53 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * author : Mr.Chen
- *
  * 实现对字符串的MD5加密
- *
  */
 public class MD5Util {
-    public static String getMD5(String str) {
-        StringBuffer strbuf = new StringBuffer();
-        char[] chars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
-                'B', 'C', 'D', 'E', 'F' };
-        byte[] b = str.getBytes();
-        MessageDigest md = null;
+    /***
+     * MD5加码 生成32位md5码
+     */
+    public static String string2MD5(String inStr) {
+        MessageDigest md5 = null;
         try {
-            md = MessageDigest.getInstance("md5");
-        } catch (NoSuchAlgorithmException e) {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (Exception e) {
+            System.out.println(e.toString());
             e.printStackTrace();
+            return "";
         }
-        byte[] md5 = md.digest(b);
-        for (byte m : md5) {
-            strbuf.append(chars[(m >> 4) & 0x0f]);
-            strbuf.append(chars[m & 0x0f]);
+        char[] charArray = inStr.toCharArray();
+        byte[] byteArray = new byte[charArray.length];
+        for (int i = 0; i < charArray.length; i++)
+            byteArray[i] = (byte) charArray[i];
+        byte[] md5Bytes = md5.digest(byteArray);
+        StringBuffer hexValue = new StringBuffer();
+        for (int i = 0; i < md5Bytes.length; i++) {
+            int val = ((int) md5Bytes[i]) & 0xff;
+            if (val < 16)
+                hexValue.append("0");
+            hexValue.append(Integer.toHexString(val));
         }
-        return strbuf.toString();
+        return hexValue.toString();
     }
-    public static void main(String[] args) {
-        System.out.println(getMD5("admin"));
-        System.out.println(getMD5(getMD5("admin")));
+
+    /**
+     * 加密解密算法 执行一次加密，两次解密
+     */
+    public static String convertMD5(String inStr){
+        char[] a = inStr.toCharArray();
+        for (int i = 0; i < a.length; i++){
+            a[i] = (char) (a[i] ^ 't');
+        }
+        String s = new String(a);
+        return s;
+    }
+    // 测试主函数
+    public static void main(String args[]) {
+        String s = new String("123456");
+        System.out.println("原始：" + s);
+        System.out.println("MD5后：" + string2MD5(s));
+        System.out.println("加密的：" + convertMD5(s));
+        System.out.println("解密的：" + convertMD5(convertMD5(s)));
     }
 }

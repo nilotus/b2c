@@ -381,4 +381,18 @@ public class OrderServiceImpl implements OrderService{
         jsonOrder.setOrder_id(order.getOrder_id());
         return jsonOrder;
     }
+    /**
+     * Created by Mr.Chen
+     *查看店铺所有订单
+     */
+    @Override
+    public MSG ordersShop(int shop_id) {
+        List<Order> orderList = orderMapper.shop(shop_id);
+        for (int i = 0; i < orderList.size(); i++) {
+            System.out.println(orderList.get(i).getTime());
+        }
+        //orderList.
+        return new MSG(0,"success",orderList);
+    }
+
 }

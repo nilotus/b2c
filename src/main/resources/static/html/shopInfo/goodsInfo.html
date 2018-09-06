@@ -8,6 +8,15 @@
     <link rel="stylesheet" type="text/css" href="../../css/seller.css"/>
     <link rel="stylesheet" href="../../lib/layui/css/layui.css">
     <style>
+        .layui-container {
+            margin-left: 80px;
+            margin-top: 40px;
+        }
+
+        table {
+            margin-top: 15px;
+        }
+
         .layui-logo a:link {
             color: #FFF;
         }
@@ -24,6 +33,14 @@
             color: #FFF;
         }
 
+        .layui-container img{
+            width:120px;
+            height:120px;
+        }
+
+        .btnList {
+            margin-top: 15px;
+        }
 
     </style>
 </head>
@@ -37,7 +54,7 @@
             <li class="layui-nav-item">
                 <div>
                     <a href="javascript:">
-                        <img src="../img/yy.png" class="layui-nav-img" id="userimg">
+                        <img src="../../img/yy.png" class="layui-nav-img" id="userimg">
                         <span id="username">未登录</span>
                     </a>
                 </div>
@@ -48,7 +65,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="">退出</a>
+                <a onclick="logout()">退出</a>
             </li>
         </ul>
     </div>
@@ -86,38 +103,30 @@
 
                 </li>
             </ul>
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">系统管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="#">用户管理</a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
         </div>
     </div>
 
     <div class="layui-body">
+        <div class="layui-container">
+            <div class="shopList">
 
-        <div class="shopList">
-
+            </div>
+            <div class="btnList">
+                <button class="layui-btn layui-btn-small" id="btn-refresh" onclick="ui.add();"><i
+                        class="layui-icon">&#xe61f;</i>增加商品
+                </button>
+                <button class="layui-btn layui-btn-small  layui-btn-danger" id="btn" onclick="ui.edit();"><i
+                        class="layui-icon">&#xe642;</i>编辑商品
+                </button>
+                <button class="layui-btn layui-btn-normal layui-btn-small" id="btn-export" onclick="ui.delGood()"><i
+                        class="layui-icon">&#xe640;</i>删除商品
+                </button>
+            </div>
+            <table id="demo" lay-filter="test"></table>
         </div>
-        <div class="btnList">
-            <button class="layui-btn layui-btn-small" id="btn-refresh" onclick="ui.add();"><i
-                    class="layui-icon">&#xe61f;</i>增加商品
-            </button>
-            <button class="layui-btn layui-btn-small  layui-btn-danger" id="btn" onclick="ui.edit();"><i
-                    class="layui-icon">&#xe642;</i>编辑商品
-            </button>
-            <button class="layui-btn layui-btn-normal layui-btn-small" id="btn-export" onclick="ui.delGood()"><i
-                    class="layui-icon">&#xe640;</i>删除商品
-            </button>
 
-        </div>
 
-        <table id="demo" lay-filter="test"></table>
+
 
     </div>
 
@@ -132,12 +141,23 @@
 <script src="../../lib/layui/layui.all.js"></script>
 <script src="../../js/util/common.js"></script>
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='../login.html';
 
+            }
+        })
+    }
 
     $(function () {
         $.ajax({
             type: 'get',
-            url: '/shop/browse',
+            url: '/shop/browseByUser',
             async: 'true',
             dataType: 'json',
             success: function (data) {
@@ -167,13 +187,13 @@
                     , page: true //开启分页
                     , cols: [[ //表头
                         {field: 'shop_id', title: '商品ID', width: 80, sort: true, type: 'checkbox'}
-                        , {field: 'type_id', title: '商品类型', width: 200}
-                        , {field: 'name', title: '商品名', width: 300}
+                        , {field: 'type_id', title: '商品类型', width:120}
+                        , {field: 'name', title: '商品名', width: 220}
                         , {field: 'price', title: '商品价格（元）', width: 220}
-                        , {field: 'status', title: '商品状态', width: 220}
-                        , {field: 'restnum', title: '商品剩余数量', width: 220}
-                        , {field: 'totalnum', title: '商品总数量', width: 220}
-                        , {field: 'img', title: '商品图片', width: 220, templet: '#titleTpl'}
+                        , {field: 'status', title: '商品状态', width: 120}
+                        , {field: 'restnum', title: '商品剩余数量', width: 120}
+                        , {field: 'totalnum', title: '商品总数量', width: 120}
+                        , {field: 'img', title: '商品图片', width: 120,height:120, templet: '#titleTpl'}
                     ]]
                 });
             },

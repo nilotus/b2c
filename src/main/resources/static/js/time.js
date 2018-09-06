@@ -1,7 +1,7 @@
 function count() {
     var data = new Date();
     now = data.getTime();
-    var str = "2018/01/18 10:30:00";
+    var str = "2018/02/03 10:30:00";
     var endDate = new Date(str);
     var end = endDate.getTime();
 

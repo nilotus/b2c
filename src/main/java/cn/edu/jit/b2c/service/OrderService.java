@@ -29,4 +29,6 @@ public interface OrderService {
     MSG lookorder7(int user_id);
 
     MSG fukuan(int order_id,int user_id);
+    MSG ordersShop(int shop_id);
+
 }

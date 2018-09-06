@@ -14,19 +14,22 @@ import java.io.IOException;
 public class ShopController {
     @Autowired
     private ShopService shopService;
+
     /**
      * Created by SunFuRong
      * 浏览店铺
      * 输出店铺name，img,description
      */
-
     @GetMapping("/browse")
     public MSG shopBrowse() throws  IOException{
         return shopService.shopBrowse();
     }
 
-
-
+    /**
+     * Created by Mr.Chen
+     * 浏览店铺
+     * 输出店铺name，img,description
+     */
     @GetMapping("/browseByUser")
     public MSG shopBrowseByUser(HttpServletRequest request) throws  IOException{
         return shopService.shopBrowseByUser(Integer.parseInt(request.getSession().getAttribute("user_id").toString()));

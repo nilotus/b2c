@@ -59,6 +59,10 @@ public interface OrderMapper {
     @Update("UPDATE Orders SET status = 4 where order_id=#{order_id}")
     void tuihuo(@Param("order_id") int order_id);
 
+    @Select("SELECT Orders.order_id, Orders.time, Orders.user_id, Orders.description, Orders.status,Orders.good_id, Orders.good_num, Orders.price, Orders.delete \n" +
+            "from Shop, Orders, Goods\n" +
+            "WHERE Goods.shop_id = Shop.shop_id and Orders.good_id = Goods.good_id and Shop.shop_id = #{shop_id}")
+    List<Order> shop(@Param("shop_id") int shop_id);
 
 
 }

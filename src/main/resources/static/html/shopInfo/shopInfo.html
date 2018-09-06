@@ -32,6 +32,10 @@
         .layui-logo a:active {
             color: #FFF;
         }
+        .layui-container img{
+            width:120px;
+            height:120px;
+        }
     </style>
 </head>
 
@@ -55,7 +59,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="../loginaaa.html">退出</a>
+                <a onclick="logout()">退出</a>
             </li>
         </ul>
     </div>
@@ -84,16 +88,6 @@
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="orderInfo.html">订单管理</a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">系统管理</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="#">用户管理</a>
                         </dd>
                     </dl>
                 </li>
@@ -129,6 +123,18 @@
 <script src="../../js/util/common.js"></script>
 <script src="../../js/ajaxfileupload.js"></script>
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='../login.html';
+
+            }
+        })
+    }
     var ui = ui || {};
     (function () {
         $.extend(ui, {

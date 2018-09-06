@@ -71,7 +71,7 @@
 
 	<ul class="fl city">
 		<li>
-			<a href="#">南京</a>
+			<a href="#">主页</a>
 	</ul>
 	<ul class="fr">
 		<li>
@@ -95,7 +95,7 @@
 	</ul>
 </div>
 <div align="center">
-<img src="../img/5.png"/>
+	<img src="../img/5.png"/>
 </div>
 
 <div class="gwc" style=" margin:auto;">
@@ -113,6 +113,18 @@
 
 	<!----商品加减算总数---->
 	<script type="text/javascript">
+        function logout() {
+            $.ajax({
+                type:'get',
+                url:'/user/loginOut',
+                async:true,
+                dataType:'json',
+                success:function (d) {
+                    window.location.href='login.html';
+                }
+            })
+        }
+
         $(function () {
             $.ajax({
                 type: 'post',
@@ -120,13 +132,93 @@
                 async: true,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.code == -1) return;
                     var str;
                     str = 'Hi,' + data.data.name + '\
                             <a href="#" class="user-info">\
                             </a>\
                             <a href="login.html" class="f10">退出登录</a>';
                     $('.login-t').html(str);
+
+                    window.userId = data.data.user_id;
+
+                    var str1 = '<ul class="fl city">'+
+                        '<li>'+
+                        '<a href="../index.html?user_id='+userId+'">主页</a>'+
+                        '</ul>'+
+                        '<ul class="fr">'+
+                        '<li>'+
+                        '<div class="login-t">'+
+                        '<span style="color: #0a67fb">Hi,' + data.data.name
+                        + '</span>'+
+                        '<a href="#" class="user-info">'+
+                        '</a>'+
+                        '<a onclick="logout()" class="f10">退出登录</a>'+
+                        '</div>'+
+                        '<li class="space">'+
+                        '<li>'+
+                        '<a href="order.html?user_id='+userId+'">我的订单</a>'+
+                        '<li class="space">'+
+                        '<li>'+
+                        '<a href="shopping-cart.html?user_id='+userId+'">我的购物车</a>'+
+                        '<li class="space">'+
+                        '<li>'+
+                        '<a href="favourite1.html?user_id='+userId+'">我的收藏</a>'+
+                        '<li class="space">'+
+                        '<li>'+
+                        '<a href="personal.html?user_id='+userId+'">个人中心</a>'+
+                        '</ul>';
+                    $('.shortcut').html(str1);
+
+
+
+
+                    $(function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/cart/userlook/"+userId,
+                            async: true,
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == 1) {
+                                    var result = data.data;
+                                    for (var i = 0; i < result.length; i++) {
+                                        var str = '' +
+                                            '<tr id="'+result[i].cart_id+'">\n' +
+                                            '<td class="tb2_td1">' +
+                                            '<input type="checkbox" value="1" name="newslist" id="newslist'+i+'" /></td>\n' +
+                                            '<td class="tb2_td2">\n' +
+                                            '<a href="goodsindex.html?user_id'+userId+'&good_id='+result[i].good_id+'"><img src="'+result[i].img+'" /></a>\n' +
+                                            '</td>\n' +
+                                            '<td class="tb2_td3">\n' +
+                                            '<a href="goodsindex.html?user_id'+userId+'&good_id='+result[i].good_id+'">'+result[i].good_name+'</a>\n' +
+                                            '</td>\n' +
+                                            '<td class="tb1_td4">一件</td>\n' +
+                                            '<td class="tb1_td5">\n' +
+                                            '<input class="min" name="" type="button" value="-" />\n' +
+                                            '<input class="text_box" name="" type="text" value="0"/>\n' +
+                                            '<input class="add" name="" type="button" value="+" />\n' +
+                                            '</td>\n' +
+                                            '<td class="tb1_td6"><label class="price">'+result[i].price+'</label></td>\n' +
+                                            '<td class="tb1_td7">\n' +
+                                            '<button onclick="deleteCart('+result[i].cart_id+')">删除</button>\n' +
+                                            '</td>\n' +
+                                            '</tr>'
+                                        $('.gwc_tb2').append(str);
+
+
+                                        var str2 = '<button id="btn" onclick="addOrder()">'+
+                                            '<span id="jz1">结算</span>'+
+                                            '<a href="order.html?user_id='+userId+'" style=" display:none;" class="jz2" id="jz2">结算</a>'+
+                                            '</button>';
+                                        $('.tb3_td4').html(str2);
+
+                                    }
+                                }
+                                bindClick();
+                            }
+                        });
+                        //setTotal();
+                    });
                 },
                 error: function () {
                     alert("failed!");
@@ -167,46 +259,8 @@
             $("#total").html(s.toFixed(2));
         }
 		/*TODO user_id*/
-        $(function() {
-            $.ajax({
-                type: "post",
-                url: "/cart/userlook/"+22,
-                async: true,
-                dataType: "json",
-                success: function (data) {
-                    if (data.code == 1) {
-                        var result = data.data;
-                        for (var i = 0; i < result.length; i++) {
-                            var str = '' +
-                                '<tr id="'+result[i].cart_id+'">\n' +
-                                '<td class="tb2_td1">' +
-								'<input type="checkbox" value="1" name="newslist" id="newslist'+i+'" /></td>\n' +
-                                '<td class="tb2_td2">\n' +
-                                '<a href="goodsindex.html?good_id='+result[i].good_id+'"><img src="'+result[i].img+'" /></a>\n' +
-                                '</td>\n' +
-                                '<td class="tb2_td3">\n' +
-                                '<a href="goodsindex.html?good_id='+result[i].good_id+'">'+result[i].good_name+'</a>\n' +
-                                '</td>\n' +
-                                '<td class="tb1_td4">一件</td>\n' +
-                                '<td class="tb1_td5">\n' +
-                                '<input class="min" name="" type="button" value="-" />\n' +
-                                '<input class="text_box" name="" type="text" value="0"/>\n' +
-                                '<input class="add" name="" type="button" value="+" />\n' +
-                                '</td>\n' +
-                                '<td class="tb1_td6"><label class="price">'+result[i].price+'</label></td>\n' +
-                                '<td class="tb1_td7">\n' +
-                                '<button onclick="deleteCart('+result[i].cart_id+')">删除</button>\n' +
-                                '</td>\n' +
-                                '</tr>'
-                            $('.gwc_tb2').append(str);
-                        }
-                    }
-                    bindClick();
-                }
-            });
-            //setTotal();
-        });
-        /*删除商品*/
+
+		/*删除商品*/
         function deleteCart(id) {
             $.ajax({
                 type: "delete",
@@ -219,14 +273,14 @@
             });
         }
         //添加订单 TODO
-		function addOrder(){
-			//获取选中商品ID
-			var good_Id_Array = [];
-			var good_Num_Array = [];
-			console.log($('.tb2_td1').length);
-			for(var i = 0; i < $('.tb2_td1').length; i ++){
-			    var $checkbox = $($('.tb2_td1')[i]).find('input[name=newslist]');
-			    if($checkbox.is(':checked')){
+        function addOrder(){
+            //获取选中商品ID
+            var good_Id_Array = [];
+            var good_Num_Array = [];
+            console.log($('.tb2_td1').length);
+            for(var i = 0; i < $('.tb2_td1').length; i ++){
+                var $checkbox = $($('.tb2_td1')[i]).find('input[name=newslist]');
+                if($checkbox.is(':checked')){
                     var $parent = $($('.tb2_td1')[i]).parent();
                     var $a = $parent.find('.tb2_td2 a');
                     var href = $a.attr('href');
@@ -234,21 +288,21 @@
                     var good_id = href2[1];
                     good_Id_Array.push(parseInt(good_id));
                     var $input = $parent.find('.tb1_td5 input.text_box');
-					var good_num = $input.attr('value');
-					good_Num_Array.push(parseInt(good_num));
-				}
-			}
+                    var good_num = $input.attr('value');
+                    good_Num_Array.push(parseInt(good_num));
+                }
+            }
             $.ajax({
                 type: "post",
                 url: "/order/dirent/",
                 async: true,
                 dataType: "json",
-				contentType:"application/json",
-				data:JSON.stringify({
+                contentType:"application/json",
+                data:JSON.stringify({
                     user_id:22,
-					good_id:good_Id_Array,
-					good_num:good_Num_Array,
-				}),
+                    good_id:good_Id_Array,
+                    good_num:good_Num_Array,
+                }),
                 success:function(){
                     alert("success!");
                 },
@@ -256,7 +310,7 @@
                     alert("failed!");
                 }
             });
-		}
+        }
 	</script>
 
 	<table cellpadding="0" cellspacing="0" class="gwc_tb2">
@@ -270,10 +324,10 @@
 			<td class="tb3_td2">已选<label id="shuliang">0</label>种商品</td>
 			<td class="tb3_td3">合计(不含运费):<span>￥</span><span id="num"><label id="total"></label></span></td>
 			<td class="tb3_td4">
-					<button id="btn" onclick="addOrder()">
-						<span id="jz1">结算</span>
-						<a href="order.html" style=" display:none;" class="jz2" id="jz2">结算</a>
-					</button>
+				<button id="btn" onclick="addOrder()">
+					<span id="jz1">结算</span>
+					<a href="order.html" style=" display:none;" class="jz2" id="jz2">结算</a>
+				</button>
 			</td>
 		</tr>
 	</table>

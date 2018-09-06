@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>浏览店铺</title>
+    <title>二级联动</title>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/shopbrowse.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/goodsbrowse.css"/>
     <link rel="stylesheet" type="text/css" href="../css/shop.css">
     <style>
         body {
@@ -22,20 +22,17 @@
     </ul>
     <ul class="fr">
         <li>
-            <div class="login-t">
-                <a href="login.html">你好，请登录 </a>
-                <a href="register.html" class="f10">免费注册</a>
-            </div>
-
+            <a href="login.html">你好，请登录 </a>
+            <a href="register.html" class="f10">免费注册</a>
         <li class="space">
         <li>
-            <a href="../html/order.html">我的订单</a>
+            <a href="order.html">我的订单</a>
         <li class="space">
         <li>
-            <a href="../html/shopping-cart2.html">我的购物车</a>
+            <a href="shopping-cart.html">我的购物车</a>
         <li class="space">
         <li>
-            <a href="../html/favourite1.html">我的收藏</a>
+            <a href="favourite1.html">我的收藏</a>
         <li class="space">
         <li>
             <a href="personal.html">个人中心</a>
@@ -55,6 +52,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 
+
 <script>
     function logout() {
         $.ajax({
@@ -68,6 +66,13 @@
             }
         })
     }
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
     $(function () {
         $.ajax({
             type: 'post',
@@ -75,7 +80,9 @@
             async: true,
             dataType: 'json',
             success: function (data) {
+                window.userId = data.data.user_id;
                 if (data.code == -1) return;
+
                 var str;
                 str = '<ul class="fl city">'+
                     '<li>'+
@@ -104,6 +111,26 @@
                     '</ul>';
 
                 $('.shortcut').html(str);
+
+                var type_id = getUrlParam('type_id');
+                console.log('type_id:' + type_id);
+                $.ajax({
+                    type: 'get',
+                    url: '/goods/goodstypeinfo/'+type_id,
+                    async: true,
+                    dataType: 'json',
+                    success: function (data) {
+                        var str = "<ul>";
+                        $.each(data.data,function (index,val) {
+                            str += "<li><a href='goodsindex.html?user_id="+userId+"&good_id="+val.good_id+"'><img class='img' src="+val.img+"></a><p>"+val.name+"</p><p class='price'>"+val.price+"</p></li>";
+                        })
+                        str += "</ul>";
+                        $('.container').append(str);
+                    },
+                    error: function () {
+                        alert("failed!");
+                    }
+                })
             },
             error: function () {
                 alert("failed!");
@@ -111,34 +138,6 @@
         })
     });
 
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg); //匹配目标参数
-        if (r != null) return unescape(r[2]);
-        return null; //返回参数值
-    }
-    var user_id = getUrlParam('user_id');
-    console.log('user_id:' + user_id);
 
-    $(function () {
-        $.ajax({
-            type: 'get',
-            url: '/shop/browse',
-            async: true,
-            dataType: 'json',
-            success: function (data) {
-                var str = "<ul>";
-                $.each(data.data, function (index, val) {
-                    str += "<li><p>" + val.name + "</p><a href='shopindex2.html?user_id="+user_id+"&shop_id=" + val.shop_id + "'><img class='img' src=" + val.img + "></a> </li>";
-                })
-                str += "</ul>";
-                $('.container').append(str);
-
-            },
-            error: function () {
-                alert("failed!");
-            }
-        })
-    })
 </script>
 </html>

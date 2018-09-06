@@ -35,6 +35,15 @@ public class GoodsController {
     }
 
 
+    /**
+     * Created by Mr.Chen
+     * 输出特定商品的店铺
+     */
+    @GetMapping("/getShopName/{good_id}")
+    public MSG selectGoodShop(@PathVariable("good_id") int good_id) throws IOException {
+        return goodsService.selectGoodShop(good_id);
+    }
+
 
     /**
      * Created by SunFuRong
@@ -122,4 +131,13 @@ public class GoodsController {
         return goodsService.findGoodInfo(good_id);
     }
 
+    /**
+     * Created by SunFuRong
+     * 二级联动
+     * 输出name，price，img
+     */
+    @GetMapping("/goodstypeinfo/{type_id}")
+    public MSG goodsBrowseType(@PathVariable("type_id") int type_id) throws IOException {
+        return goodsService.goodsBrowseType(type_id);
+    }
 }

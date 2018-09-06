@@ -21,6 +21,10 @@
         width: 110px;
     }
 
+    .fr {
+        margin-right:15px;
+    }
+
 </style>
 
 <body>
@@ -40,7 +44,7 @@
 
         <li class="space">
         <li>
-            <a href="order1.html">我的订单</a>
+            <a href="order.html">我的订单</a>
         <li class="space">
         <li>
             <a href="shopping-cart.html">我的购物车</a>
@@ -184,6 +188,18 @@
 
 <!-- 展示信息ajax -->
 <script>
+    function logout() {
+        $.ajax({
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='login.html';
+
+            }
+        })
+    }
     window.userId;
     $(function () {
         $.ajax({
@@ -197,11 +213,34 @@
 //                console.log(userId);
                 if (data.code == -1) return;
                 var str;
-                str = 'Hi,' + data.data.name + '\
-                            <a href="#" class="user-info">\
-                            </a>\
-                            <a href="login.html" class="f10">退出登录</a>';
-                $('.login-t').html(str);
+                str = '<ul class="fl city">'+
+                    '<li>'+
+                    '<a href="../index.html?user_id='+userId+'">主页</a>'+
+                    '</ul>'+
+                    '<ul class="fr">'+
+                    '<li>'+
+                    '<div class="login-t">'+
+                    '<span style="color: #0a67fb">Hi,' + data.data.name + '</span>'+
+                    '<a href="#" class="user-info">'+
+                    '</a>'+
+                    '<a onclick="logout()" class="f10">退出登录</a>'+
+                    '</div>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="order.html?user_id='+userId+'">我的订单</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="shopping-cart.html?user_id='+userId+'">我的购物车</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="favourite1.html?user_id='+userId+'">我的收藏</a>'+
+                    '<li class="space">'+
+                    '<li>'+
+                    '<a href="personal.html?user_id='+userId+'">个人中心</a>'+
+                    '</ul>';
+
+                $('.shortcut').html(str);
+
                 $(function () {
                     //接收URL中的参数user_id
                     console.log('user_id:' + userId);

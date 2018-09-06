@@ -44,7 +44,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="login.html">退出</a>
+                <a onclick="logout()">退出</a>
             </li>
         </ul>
     </div>
@@ -82,12 +82,6 @@
 
                 </li>
             </ul>
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed shopList" >
-                    <a class="" href="javascript:;">店铺管理</a>
-
-                </li>
-            </ul>
         </div>
     </div>
 
@@ -109,10 +103,38 @@
 
                     </blockquote>
                 </div>
-                <div class="layui-tab-item">内容2</div>
-                <div class="layui-tab-item">内容3</div>
-                <div class="layui-tab-item">内容4</div>
-                <div class="layui-tab-item">内容5</div>
+                <div class="layui-tab-item">
+                    <br><br>
+                    <blockquote class="layui-elem-quote">
+                        一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                        三番四次精心修整 十分诚意还要加二
+
+                    </blockquote>
+                </div>
+                <div class="layui-tab-item">
+                    <br><br>
+                    <blockquote class="layui-elem-quote">
+                        一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                        三番四次精心修整 十分诚意还要加二
+
+                    </blockquote>
+                </div>
+                <div class="layui-tab-item">
+                    <br><br>
+                    <blockquote class="layui-elem-quote">
+                        一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                        三番四次精心修整 十分诚意还要加二
+
+                    </blockquote>
+                </div>
+                <div class="layui-tab-item">
+                    <br><br>
+                    <blockquote class="layui-elem-quote">
+                        一间芝麻大的小铺 八仙过海各抒己见 <br><br>两三个月煞费苦心 小九九咱向来不精<br><br>
+                        三番四次精心修整 十分诚意还要加二
+
+                    </blockquote>
+                </div>
             </div>
         </div>
     </div>
@@ -169,79 +191,19 @@
         var element = layui.element;
 
     });
-//
-//    $(function () {
-//        $.ajax({
-//            type: 'get',
-//            url: '/order/lookall',
-//            async: true,
-//            dataType: 'json',
-//            success: function (data) {
-//                var str = "";
-//                $.each(data.data, function (index, val) {
-//                    str += "<tr class='active'>"
-//                        + "<td>" + val.order_id + "</td>"
-//                        + "<td>" + val.time + "</td>"
-//                        + "<td>" + val.status + "</td>"
-//                        + "<td>" + val.user_id + "</td>"
-//                        + "<td>" + val.price + "</td>"
-//                        + "</tr>";
-//                });
-//
-//                $('.textbody').append(str);
-//            },
-//            error: function () {
-//                alert("failed!");
-//            }
-//        })
-//    });
 
-    $(function () {
+    function logout() {
         $.ajax({
-            type: 'get',
-            url: '/shop/browse',
-            async: 'true',
-            dataType: 'json',
-            success: function (data) {
-                var str = "";
-                $.each(data.data, function (index, val) {
-                    str += "<dl class='layui-nav-child'><dd><a href='shopInfo/goodsInfo.html?shop_id='"+val.shop_id+">" + val.name + "</a></dd></dl>";
-
-                });
-
-                $('.shopList').append(str);
+            type:'get',
+            url:'/user/loginOut',
+            async:true,
+            dataType:'json',
+            success:function (d) {
+                window.location.href='../login.html';
 
             }
-
         })
-    });
-
-//    $(function () {
-//        $.ajax({
-//            type: 'get',
-//            url: '/shop/browse',
-//            async: true,
-//            dataType: 'json',
-//            success: function (data) {
-//                var str = "";
-//                $.each(data.data, function (index, val) {
-//                    str += "<tr>"
-//                        + "<td>" + val.user_id + "</td>"
-//                        + "<td>" + val.description + "</td>"
-//                        + "<td>" + val.good_id + "</td>"
-//                        + "<td>" + val.img + "</td>"
-//                        + "</tr>";
-//                });
-//
-//                $('.buyers').append(str);
-//            },
-//            error: function () {
-//                alert("failed!");
-//            }
-//        })
-//    });
-
-
+    }
     $(function () {
         $.ajax({
             type:'get',
